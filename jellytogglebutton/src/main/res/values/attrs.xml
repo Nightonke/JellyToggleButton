@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="JellyToggleButton">
+
+        <attr name="jbtBackgroundColor" format="color|reference"/>
+        <attr name="jbtOnThumbColor" format="color|reference"/>
+        <attr name="jbtOffThumbColor" format="color|reference"/>
+        <attr name="jbtOnTextColor" format="color|reference"/>
+        <attr name="jbtOffTextColor" format="color|reference"/>
+        <attr name="jbtOnTextTypeface" format="string"/>
+        <attr name="jbtOffTextTypeface" format="string"/>
+        <attr name="jbtOnText" format="string|reference"/>
+        <attr name="jbtOffText" format="string|reference"/>
+        <attr name="jbtMarginLeft" format="dimension|reference"/>
+        <attr name="jbtMarginRight" format="dimension|reference"/>
+        <attr name="jbtMarginTop" format="dimension|reference"/>
+        <attr name="jbtMarginBottom" format="dimension|reference"/>
+        <attr name="jbtTextMarginLeft" format="dimension|reference"/>
+        <attr name="jbtTextMarginRight" format="dimension|reference"/>
+        <attr name="jbtTextMarginTop" format="dimension|reference"/>
+        <attr name="jbtTextMarginBottom" format="dimension|reference"/>
+        <attr name="jbtThumbAndBackgroundHorizontalMargin" format="dimension|reference"/>
+        <attr name="jbtOnTextAndOffTextMargin" format="dimension|reference"/>
+        <attr name="jbtThumbRadius" format="dimension|reference"/>
+        <attr name="jbtBackgroundRadius" format="dimension|reference"/>
+
+    </declare-styleable>
+
+</resources>
