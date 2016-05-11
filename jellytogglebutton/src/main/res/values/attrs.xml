@@ -3,27 +3,34 @@
 
     <declare-styleable name="JellyToggleButton">
 
-        <attr name="jbtBackgroundColor" format="color|reference"/>
-        <attr name="jbtOnThumbColor" format="color|reference"/>
-        <attr name="jbtOffThumbColor" format="color|reference"/>
-        <attr name="jbtOnTextColor" format="color|reference"/>
-        <attr name="jbtOffTextColor" format="color|reference"/>
-        <attr name="jbtOnTextTypeface" format="string"/>
-        <attr name="jbtOffTextTypeface" format="string"/>
-        <attr name="jbtOnText" format="string|reference"/>
-        <attr name="jbtOffText" format="string|reference"/>
-        <attr name="jbtMarginLeft" format="dimension|reference"/>
-        <attr name="jbtMarginRight" format="dimension|reference"/>
-        <attr name="jbtMarginTop" format="dimension|reference"/>
-        <attr name="jbtMarginBottom" format="dimension|reference"/>
+        <attr name="jbtLeftBackgroundColor" format="color|reference"/>
+        <attr name="jbtRightBackgroundColor" format="color|reference"/>
+        <attr name="jbtLeftThumbColor" format="color|reference"/>
+        <attr name="jbtRightThumbColor" format="color|reference"/>
+        <attr name="jbtLeftTextColor" format="color|reference"/>
+        <attr name="jbtRightTextColor" format="color|reference"/>
+        <attr name="jbtLeftTextTypeface" format="string"/>
+        <attr name="jbtRightTextTypeface" format="string"/>
+        <attr name="jbtLeftTextSize" format="dimension|reference"/>
+        <attr name="jbtRightTextSize" format="dimension|reference"/>
+        <attr name="jbtLeftText" format="string|reference"/>
+        <attr name="jbtRightText" format="string|reference"/>
+
         <attr name="jbtTextMarginLeft" format="dimension|reference"/>
         <attr name="jbtTextMarginRight" format="dimension|reference"/>
         <attr name="jbtTextMarginTop" format="dimension|reference"/>
         <attr name="jbtTextMarginBottom" format="dimension|reference"/>
-        <attr name="jbtThumbAndBackgroundHorizontalMargin" format="dimension|reference"/>
-        <attr name="jbtOnTextAndOffTextMargin" format="dimension|reference"/>
+        <attr name="jbtTextMarginCenter" format="dimension|reference"/>
+
         <attr name="jbtThumbRadius" format="dimension|reference"/>
         <attr name="jbtBackgroundRadius" format="dimension|reference"/>
+
+        <attr name="jbtColorChangeType" format="string|reference"/>
+        <attr name="jbtJelly" format="string|reference"/>
+
+        <attr name="jbtDuration" format="integer|reference"/>
+        <attr name="jbtBezierControlValue" format="float|reference"/>
+        <attr name="jbtBezierScaleRatioValue" format="float|reference"/>
 
     </declare-styleable>
 
