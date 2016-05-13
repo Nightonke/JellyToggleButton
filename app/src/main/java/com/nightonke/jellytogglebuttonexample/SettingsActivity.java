@@ -8,16 +8,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nightonke.jellytogglebutton.ColorChangeType;
 import com.nightonke.jellytogglebutton.JellyToggleButton;
 import com.nightonke.jellytogglebutton.State;
 
@@ -43,6 +46,17 @@ public class SettingsActivity extends AppCompatActivity
 
     private EditText leftText;
     private EditText rightText;
+
+    private TextView textMarginLeftRightText;
+    private SeekBar textMarginLeftRightSeekBar;
+
+    private TextView textMarginCenterText;
+    private SeekBar textMarginCenterSeekBar;
+
+    private TextView textMarginTopBottomText;
+    private SeekBar textMarginTopBottomSeekBar;
+
+    private RadioGroup colorChangeType;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +94,8 @@ public class SettingsActivity extends AppCompatActivity
         findView(R.id.font_light).setOnClickListener(this);
         findView(R.id.font_default).setOnClickListener(this);
 
-        durationText = (TextView)findViewById(R.id.duration_text);
-        durationSeekBar = (SeekBar)findViewById(R.id.duration);
+        durationText = findView(R.id.duration_text);
+        durationSeekBar = findView(R.id.duration);
         durationSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -101,8 +115,8 @@ public class SettingsActivity extends AppCompatActivity
         });
         durationSeekBar.setProgress((jtb.getDuration() - 500) / 500);
         
-        fontSizeText = (TextView)findViewById(R.id.font_size_text);
-        fontSizeSeekBar = (SeekBar)findViewById(R.id.font_size);
+        fontSizeText = findView(R.id.font_size_text);
+        fontSizeSeekBar = findView(R.id.font_size);
         fontSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -123,7 +137,7 @@ public class SettingsActivity extends AppCompatActivity
         });
         fontSizeSeekBar.setProgress((int) (jtb.getTextSize() - 15));
         
-        leftText = (EditText)findViewById(R.id.left_text);
+        leftText = findView(R.id.left_text);
         leftText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -142,7 +156,7 @@ public class SettingsActivity extends AppCompatActivity
         });
         leftText.setText(jtb.getLeftText());
 
-        rightText = (EditText)findViewById(R.id.right_text);
+        rightText = findView(R.id.right_text);
         rightText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -160,6 +174,87 @@ public class SettingsActivity extends AppCompatActivity
             }
         });
         rightText.setText(jtb.getRightText());
+
+        textMarginLeftRightText = findView(R.id.text_margin_left_right_text);
+        textMarginLeftRightSeekBar = findView(R.id.text_margin_left_right);
+        textMarginLeftRightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                jtb.setTextMarginLeft(dpToPx(progress));
+                jtb.setTextMarginRight(dpToPx(progress));
+                textMarginLeftRightText.setText("Margin Left and Margin Right: " + progress + "dp");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        textMarginLeftRightSeekBar.setProgress(pxToDp((int) jtb.getTextMarginLeft()));
+
+        textMarginCenterText = findView(R.id.text_margin_center_text);
+        textMarginCenterSeekBar = findView(R.id.text_margin_center);
+        textMarginCenterSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                jtb.setTextMarginCenter(dpToPx(progress));
+                textMarginCenterText.setText("Margin Center: " + progress + "dp");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        textMarginCenterSeekBar.setProgress(pxToDp((int) jtb.getTextMarginCenter()));
+
+        textMarginTopBottomText = findView(R.id.text_margin_top_bottom_text);
+        textMarginTopBottomSeekBar = findView(R.id.text_margin_top_bottom);
+        textMarginTopBottomSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                jtb.setTextMarginTop(dpToPx(progress));
+                jtb.setTextMarginBottom(dpToPx(progress));
+                textMarginTopBottomText.setText("Margin Top and Margin Bottom: " + progress + "dp");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        textMarginTopBottomSeekBar.setProgress(pxToDp((int) jtb.getTextMarginTop()));
+
+        colorChangeType = findView(R.id.color_change_type);
+        colorChangeType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.color_change_type_rgb:
+                        jtb.setColorChangeType(ColorChangeType.RGB);
+                        break;
+                    case R.id.color_change_type_hsv:
+                        jtb.setColorChangeType(ColorChangeType.HSV);
+                        break;
+                }
+            }
+        });
+        colorChangeType.check(R.id.color_change_type_rgb);
     }
 
     @Override
@@ -308,5 +403,17 @@ public class SettingsActivity extends AppCompatActivity
     @Override
     public void cancel() {
 
+    }
+
+    private int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
+    }
+
+    private int pxToDp(int px) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return dp;
     }
 }

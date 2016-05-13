@@ -1,5 +1,7 @@
 package com.nightonke.jellytogglebutton;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
@@ -49,12 +51,20 @@ public class JellyToggleButton extends CompoundButton {
     private static final float DEFAULT_TEXT_MARGIN_RIGHT_DP = 2;
     private static final float DEFAULT_TEXT_MARGIN_TOP_DP = 2;
     private static final float DEFAULT_TEXT_MARGIN_BOTTOM_DP = 2;
-    private static final float DEFAULT_TEXT_MARGIN_CENTER_DP = 5;
+    private static final float DEFAULT_TEXT_MARGIN_CENTER_DP = 3;
+
+    private static final float MIN_TEXT_MARGIN_CENTER_DP = 3;
+    private static final float MAX_TEXT_MARGIN_TOP_DP = 5;
+    private static final float MAX_TEXT_MARGIN_BOTTOM_DP = 5;
 
     private static final float DEFAULT_THUMB_RADIUS_DP = 15;
 
     private static final float DEFAULT_BACKGROUND_MEASURE_VALUE = 1.8f;
     private static final float DEFAULT_BACKGROUND_RADIUS_DP = 10;
+
+    private static final float MIN_THUMB_RADIUS_DP = 15;
+    private static final float MIN_BACKGROUND_MEASURE_VALUE = 1.8f;
+    private static final float MIN_BACKGROUND_RADIUS_DP = 10;
 
     private static final int DEFAULT_DURATION = 1000;
 
@@ -305,12 +315,16 @@ public class JellyToggleButton extends CompoundButton {
         int measuredWidth;
 
         int minWidth = (int) (mThumbRadius * 2 * mBackgroundMeasureRatio);
-        float onWidth = mLeftTextLayout != null ? mLeftTextLayout.getWidth() : 0;
-        float offWidth = mRightTextLayout != null ? mRightTextLayout.getWidth() : 0;
-        mTextWidth = Math.max(onWidth, offWidth);
-        float leftMaxThumbToText = mTextMarginCenter;
-        float rightMaxThumbToText = mTextMarginCenter;
-        minWidth = Math.max(minWidth, (int) (leftMaxThumbToText + mTextWidth + mTextMarginCenter + mTextWidth + rightMaxThumbToText));
+        float leftWidth = mLeftTextLayout != null ? mLeftTextLayout.getWidth() : 0;
+        float rightWidth = mRightTextLayout != null ? mRightTextLayout.getWidth() : 0;
+        float leftHeight = mLeftTextLayout != null ? mLeftTextLayout.getHeight() : 0;
+        float rightHeight = mRightTextLayout != null ? mRightTextLayout.getHeight() : 0;
+        mTextWidth = Math.max(leftWidth, rightWidth);
+        mTextHeight = Math.max(leftHeight, rightHeight);
+        float leftMaxThumbToText = Math.max(mTextMarginCenter, mTextMarginLeft);
+        float rightMaxThumbToText = Math.max(mTextMarginCenter, mTextMarginRight);
+        float centerMaxLength = Math.max(mTextMarginCenter, Math.max(leftMaxThumbToText, rightMaxThumbToText));
+        minWidth = Math.max(minWidth, (int) (leftMaxThumbToText + mTextWidth + centerMaxLength + mTextWidth + rightMaxThumbToText));
         minWidth = Math.max(minWidth, minWidth + getPaddingLeft() + getPaddingRight());
         minWidth = Math.max(minWidth, getSuggestedMinimumWidth());
 
@@ -323,14 +337,15 @@ public class JellyToggleButton extends CompoundButton {
             }
         }
 
-        if (onWidth != 0 || offWidth != 0) {
+        if (leftWidth != 0 || rightWidth != 0) {
             // if there are text on jelly
             // calculate the radius of the thumb
             mThumbMinRadius = Math.max(mTextWidth / 2 + mTextMarginLeft, mTextWidth / 2 + mTextMarginRight);
-            mThumbMaxRadius = mTextWidth / 2 + mTextMarginCenter;
+            mThumbMaxRadius = mTextWidth / 2 + Math.max(leftMaxThumbToText, rightMaxThumbToText);
 
             if (mThumbRadius < mThumbMinRadius) mThumbRadius = mThumbMinRadius;
             if (mThumbRadius > mThumbMaxRadius) mThumbRadius = mThumbMaxRadius;
+            mThumbRadius = Math.max(mThumbRadius, MIN_THUMB_RADIUS_DP * getResources().getDisplayMetrics().density);
         }
 
         return measuredWidth;
@@ -641,6 +656,14 @@ public class JellyToggleButton extends CompoundButton {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 setProcess((Float) animation.getAnimatedValue(), callListener);
+            }
+        });
+        mProcessAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (mProcess == 0) JellyToggleButton.super.setChecked(false);
+                if (mProcess == 1) JellyToggleButton.super.setChecked(true);
+                super.onAnimationEnd(animation);
             }
         });
         mProcessAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -977,7 +1000,7 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     public void setTextMarginTop(float margin) {
-        mTextMarginTop = margin;
+        mTextMarginTop = Math.min(margin, MAX_TEXT_MARGIN_TOP_DP * getResources().getDisplayMetrics().density);
         requestLayout();
     }
 
@@ -990,7 +1013,7 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     public void setTextMarginBottom(float margin) {
-        mTextMarginBottom = margin;
+        mTextMarginBottom = Math.min(margin, MAX_TEXT_MARGIN_BOTTOM_DP * getResources().getDisplayMetrics().density);
         requestLayout();
     }
 
@@ -1003,7 +1026,7 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     public void setTextMarginCenter(float margin) {
-        mTextMarginCenter = margin;
+        mTextMarginCenter = Math.max(margin, MIN_TEXT_MARGIN_CENTER_DP * getResources().getDisplayMetrics().density);
         requestLayout();
     }
 
@@ -1011,25 +1034,12 @@ public class JellyToggleButton extends CompoundButton {
         setTextMarginCenter(getContext().getResources().getDimension(res));
     }
 
-    public interface OnStateChangeListener {
-        void onStateChange(float process, State state, JellyToggleButton jbt);
-    }
-
-    @Override
-    public Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        SavedState ss = new SavedState(superState);
-        ss.leftText = mLeftText;
-        ss.rightText = mRightText;
-        return ss;
-    }
-
     public float getThumbRadius() {
         return mThumbRadius;
     }
 
     public void setThumbRadius(float radius) {
-        mThumbRadius = radius;
+        mThumbRadius = Math.max(radius, MIN_THUMB_RADIUS_DP * getResources().getDisplayMetrics().density);
         requestLayout();
     }
 
@@ -1043,6 +1053,7 @@ public class JellyToggleButton extends CompoundButton {
 
     public void setBackgroundMeasureRatio(float ratio) {
         mBackgroundMeasureRatio = ratio;
+        mBackgroundMeasureRatio = Math.max(ratio, MIN_BACKGROUND_MEASURE_VALUE);
         requestLayout();
     }
 
@@ -1058,6 +1069,7 @@ public class JellyToggleButton extends CompoundButton {
 
     public void setBackgroundRadius(float radius) {
         mBackgroundRadius = radius;
+        mBackgroundRadius = Math.max(radius, MIN_BACKGROUND_RADIUS_DP * getResources().getDisplayMetrics().density);
         requestLayout();
     }
 
@@ -1153,6 +1165,19 @@ public class JellyToggleButton extends CompoundButton {
 
     public void setOnStateChangeListener(OnStateChangeListener onStateChangeListener) {
         mOnStateChangeListener = onStateChangeListener;
+    }
+
+    public interface OnStateChangeListener {
+        void onStateChange(float process, State state, JellyToggleButton jbt);
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+        ss.leftText = mLeftText;
+        ss.rightText = mRightText;
+        return ss;
     }
 
     @Override

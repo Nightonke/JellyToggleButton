@@ -15,7 +15,7 @@ public class Utils {
                     Color.green(leftColor) + (int)((Color.green(rightColor) - Color.green(leftColor)) * process),
                     Color.blue(leftColor) + (int)((Color.blue(rightColor) - Color.blue(leftColor)) * process));
         } else if (colorChangeType.equals(ColorChangeType.HSV)) {
-            getHSVColor(toHsvVector(leftColor), toHsvVector(rightColor), process);
+            return getHSVColor(toHsvVector(leftColor), toHsvVector(rightColor), process);
         }
         return 0;
     }
