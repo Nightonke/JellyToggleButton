@@ -1,6 +1,6 @@
 package com.nightonke.jellytogglebutton;
 
-import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -10,10 +10,16 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -22,6 +28,7 @@ import android.widget.CompoundButton;
 /**
  * Created by Weiping on 2016/5/10.
  */
+
 public class JellyToggleButton extends CompoundButton {
 
     private static final int DEFAULT_LEFT_BACKGROUND_COLOR = Color.parseColor("#1E59AF");
@@ -36,7 +43,6 @@ public class JellyToggleButton extends CompoundButton {
     private static final String DEFAULT_RIGHT_TEXT = null;
     private static final int DEFAULT_LEFT_TEXT_SIZE = 15;
     private static final int DEFAULT_RIGHT_TEXT_SIZE = 15;
-    private static final int DEFAULT_DURATION = 500;
 
     private static final float DEFAULT_TEXT_MARGIN_LEFT_DP = 2;
     private static final float DEFAULT_TEXT_MARGIN_RIGHT_DP = 2;
@@ -45,14 +51,26 @@ public class JellyToggleButton extends CompoundButton {
     private static final float DEFAULT_TEXT_MARGIN_CENTER_DP = 5;
 
     private static final float DEFAULT_THUMB_RADIUS_DP = 15;
+
+    private static final float DEFAULT_BACKGROUND_MEASURE_VALUE = 1.8f;
     private static final float DEFAULT_BACKGROUND_RADIUS_DP = 10;
 
+    private static final int DEFAULT_DURATION = 500;
+
+    private static final float DEFAULT_TOUCH_MOVE_RATIO_VALUE = 5.0f;
     private static final float DEFAULT_BEZIER_CONTROL_VALUE = 0.551915024494f;
+    private static final float DEFAULT_STRETCH_DISTANCE_RATIO_VALUE = 1.0f;
     private static final float DEFAULT_BEZIER_SCALE_RATIO_VALUE = 0.45f;
 
     private static final ColorChangeType DEFAULT_COLOR_CHANGE_TYPE = ColorChangeType.RGB;
     private static final Jelly DEFAULT_JELLY = Jelly.PASSIVE_DAMPING_TAIL;
 
+    private static final boolean DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER = false;
+
+    /**
+     * The following values are used to draw the JBT.
+     * Library users can change these for some purposes.
+     */
     private int mLeftBackgroundColor = DEFAULT_LEFT_BACKGROUND_COLOR;
     private int mRightBackgroundColor = DEFAULT_RIGHT_BACKGROUND_COLOR;
     private int mLeftThumbColor = DEFAULT_LEFT_THUMB_COLOR;
@@ -73,21 +91,32 @@ public class JellyToggleButton extends CompoundButton {
     private float mTextMarginCenter;
 
     private float mThumbRadius;
-    private float mThumbMinRadius;
-    private float mThumbMaxRadius;
-    private float mThumbLeft;
-    private float mThumbRight;
 
-    private float mBackgroundMeasureRatio = 1.8f;
+    private float mBackgroundMeasureRatio = DEFAULT_BACKGROUND_MEASURE_VALUE;
     private float mBackgroundRadius;
 
-    private float mBezierControlValue;
-    private float mStretchDistance;
-    private float mBezierScaleRatioValue;
+    /**
+     * The following values are used to control the effect that JBT shows.
+     * Library users can change these for some purposes.
+     */
+    private int mDuration = DEFAULT_DURATION;
+
+    private float mTouchMoveRatioValue = DEFAULT_TOUCH_MOVE_RATIO_VALUE;
+    private float mBezierControlValue = DEFAULT_BEZIER_CONTROL_VALUE;
+    private float mStretchDistanceRatioValue = DEFAULT_STRETCH_DISTANCE_RATIO_VALUE;
+    private float mBezierScaleRatioValue = DEFAULT_BEZIER_SCALE_RATIO_VALUE;
 
     private ColorChangeType mColorChangeType = DEFAULT_COLOR_CHANGE_TYPE;
     private Jelly mJelly = DEFAULT_JELLY;
 
+    private OnStateChangeListener mOnStateChangeListener;
+
+    private boolean mMoveToSameStateCallListener = DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER;
+
+    /**
+     * The following values are used to calculate the position or just for convenience.
+     * Should not be modified by library users.
+     */
     private Paint mPaint;
     private TextPaint mLeftTextPaint;
     private TextPaint mRightTextPaint;
@@ -98,12 +127,18 @@ public class JellyToggleButton extends CompoundButton {
     private float mTextWidth;
     private float mTextHeight;
 
-    private float mProcess;
-    private ObjectAnimator mProcessAnimator;
-    private int mDuration;
+    private float mThumbMinRadius;
+    private float mThumbMaxRadius;
+    private float mThumbLeft;
+    private float mThumbRight;
 
+    private float mProcess;
+    private ValueAnimator mProcessAnimator;
+
+    private State lastState = null;
     private State mState;
 
+    private float mStartX, mStartY, mLastX;
     private int mTouchSlop;
     private int mClickTimeout;
 
@@ -148,71 +183,94 @@ public class JellyToggleButton extends CompoundButton {
         mOnTextRectF = new RectF();
         mOffTextRectF = new RectF();
 
-        mProcessAnimator = ObjectAnimator.ofFloat(this, "process", 0, 0)
-                .setDuration(DEFAULT_DURATION);
-        mProcessAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        setAnimator(0, true);
+//        mProcessAnimator = ValueAnimator.ofFloat(mProcess, 0, 0)
+//                .setDuration(mDuration);
+//        mProcessAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animation) {
+//                Log.d("Jelly", "Animating..." + mProcess);
+//                JellyToggleButton.this.invalidate();
+//            }
+//        });
+//        mProcessAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
 
         Resources res = getResources();
         float density = res.getDisplayMetrics().density;
 
+        mTextMarginLeft = DEFAULT_TEXT_MARGIN_LEFT_DP * density;
+        mTextMarginRight = DEFAULT_TEXT_MARGIN_RIGHT_DP * density;
+        mTextMarginTop = DEFAULT_TEXT_MARGIN_TOP_DP * density;
+        mTextMarginBottom = DEFAULT_TEXT_MARGIN_BOTTOM_DP * density;
+        mTextMarginCenter = DEFAULT_TEXT_MARGIN_CENTER_DP * density;
+        mThumbRadius = DEFAULT_THUMB_RADIUS_DP * density;
+        mBackgroundRadius = DEFAULT_BACKGROUND_RADIUS_DP * density;
+
         TypedArray ta = attrs == null ?
                 null : getContext().obtainStyledAttributes(attrs, R.styleable.JellyToggleButton);
         if (ta != null) {
-            mLeftBackgroundColor = ta.getColor(R.styleable.JellyToggleButton_jbtLeftBackgroundColor, DEFAULT_LEFT_BACKGROUND_COLOR);
-            mRightBackgroundColor = ta.getColor(R.styleable.JellyToggleButton_jbtRightBackgroundColor, DEFAULT_RIGHT_BACKGROUND_COLOR);
-            mLeftThumbColor = ta.getColor(R.styleable.JellyToggleButton_jbtLeftThumbColor, DEFAULT_LEFT_THUMB_COLOR);
-            mRightThumbColor = ta.getColor(R.styleable.JellyToggleButton_jbtRightThumbColor, DEFAULT_RIGHT_THUMB_COLOR);
-            mLeftTextColor = ta.getColor(R.styleable.JellyToggleButton_jbtLeftTextColor, DEFAULT_LEFT_TEXT_COLOR);
-            mRightTextColor = ta.getColor(R.styleable.JellyToggleButton_jbtLeftTextColor, DEFAULT_RIGHT_TEXT_COLOR);
+            mLeftBackgroundColor = ta.getColor(R.styleable.JellyToggleButton_jtbLeftBackgroundColor, mLeftBackgroundColor);
+            mRightBackgroundColor = ta.getColor(R.styleable.JellyToggleButton_jtbRightBackgroundColor, mRightBackgroundColor);
+            mLeftThumbColor = ta.getColor(R.styleable.JellyToggleButton_jtbLeftThumbColor, mLeftThumbColor);
+            mRightThumbColor = ta.getColor(R.styleable.JellyToggleButton_jtbRightThumbColor, mRightThumbColor);
+            mLeftTextColor = ta.getColor(R.styleable.JellyToggleButton_jtbLeftTextColor, mLeftTextColor);
+            mRightTextColor = ta.getColor(R.styleable.JellyToggleButton_jtbLeftTextColor, mRightTextColor);
 
-            String onTypefaceString = ta.getString(R.styleable.JellyToggleButton_jbtLeftTextTypeface);
+            String leftTypefaceString = ta.getString(R.styleable.JellyToggleButton_jtbLeftTextTypeface);
             try {
-                mLeftTextTypeface = Typeface.createFromAsset(getContext().getAssets(), onTypefaceString);
+                mLeftTextTypeface = Typeface.createFromAsset(getContext().getAssets(), leftTypefaceString);
             } catch (RuntimeException r) {
                 mLeftTextTypeface = Typeface.DEFAULT;
             }
             mLeftTextPaint.setTypeface(mLeftTextTypeface);
 
-            String offTypefaceString = ta.getString(R.styleable.JellyToggleButton_jbtRightTextTypeface);
+            String rightTypefaceString = ta.getString(R.styleable.JellyToggleButton_jtbRightTextTypeface);
             try {
-                mRightTextTypeface = Typeface.createFromAsset(getContext().getAssets(), offTypefaceString);
+                mRightTextTypeface = Typeface.createFromAsset(getContext().getAssets(), rightTypefaceString);
             } catch (RuntimeException r) {
                 mRightTextTypeface = Typeface.DEFAULT;
             }
             mRightTextPaint.setTypeface(mRightTextTypeface);
 
-            mLeftTextSize = ta.getDimensionPixelSize(R.styleable.JellyToggleButton_jbtLeftTextSize, DEFAULT_LEFT_TEXT_SIZE);
+            mLeftTextSize = ta.getDimensionPixelSize(R.styleable.JellyToggleButton_jtbLeftTextSize, DEFAULT_LEFT_TEXT_SIZE);
             mLeftTextPaint.setTextSize(mLeftTextSize);
-            mRightTextSize = ta.getDimensionPixelSize(R.styleable.JellyToggleButton_jbtRightTextSize, DEFAULT_RIGHT_TEXT_SIZE);
+            mRightTextSize = ta.getDimensionPixelSize(R.styleable.JellyToggleButton_jtbRightTextSize, DEFAULT_RIGHT_TEXT_SIZE);
             mRightTextPaint.setTextSize(mRightTextSize);
 
-            mLeftText = ta.getString(R.styleable.JellyToggleButton_jbtLeftText);
-            mRightText = ta.getString(R.styleable.JellyToggleButton_jbtRightText);
-            mTextMarginLeft = ta.getDimension(R.styleable.JellyToggleButton_jbtTextMarginLeft, DEFAULT_TEXT_MARGIN_LEFT_DP);
-            mTextMarginRight = ta.getDimension(R.styleable.JellyToggleButton_jbtTextMarginRight, DEFAULT_TEXT_MARGIN_RIGHT_DP);
-            mTextMarginTop = ta.getDimension(R.styleable.JellyToggleButton_jbtTextMarginTop, DEFAULT_TEXT_MARGIN_TOP_DP);
-            mTextMarginBottom = ta.getDimension(R.styleable.JellyToggleButton_jbtTextMarginBottom, DEFAULT_TEXT_MARGIN_BOTTOM_DP);
-            mTextMarginCenter = ta.getDimension(R.styleable.JellyToggleButton_jbtTextMarginCenter, DEFAULT_TEXT_MARGIN_CENTER_DP);
+            mLeftText = ta.getString(R.styleable.JellyToggleButton_jtbLeftText);
+            mRightText = ta.getString(R.styleable.JellyToggleButton_jtbRightText);
 
-            mDuration = ta.getInteger(R.styleable.JellyToggleButton_jbtDuration, DEFAULT_DURATION);
+            mTextMarginLeft = ta.getDimension(R.styleable.JellyToggleButton_jtbTextMarginLeft, mTextMarginLeft);
+            mTextMarginRight = ta.getDimension(R.styleable.JellyToggleButton_jtbTextMarginRight, mTextMarginRight);
+            mTextMarginTop = ta.getDimension(R.styleable.JellyToggleButton_jtbTextMarginTop, mTextMarginTop);
+            mTextMarginBottom = ta.getDimension(R.styleable.JellyToggleButton_jtbTextMarginBottom, mTextMarginBottom);
+            mTextMarginCenter = ta.getDimension(R.styleable.JellyToggleButton_jtbTextMarginCenter, mTextMarginCenter);
 
-            mThumbRadius = ta.getDimension(R.styleable.JellyToggleButton_jbtThumbRadius, DEFAULT_THUMB_RADIUS_DP * density);
-            mBackgroundRadius = ta.getDimension(R.styleable.JellyToggleButton_jbtBackgroundRadius, DEFAULT_BACKGROUND_RADIUS_DP * density);
+            mThumbRadius = ta.getDimension(R.styleable.JellyToggleButton_jtbThumbRadius, mThumbRadius);
 
-            String colorChangeTypeString = ta.getString(R.styleable.JellyToggleButton_jbtColorChangeType);
+            mBackgroundMeasureRatio = ta.getFloat(R.styleable.JellyToggleButton_jtbBackgroundMeasureRatioValue, mBackgroundMeasureRatio);
+            mBackgroundRadius = ta.getDimension(R.styleable.JellyToggleButton_jtbBackgroundRadius, DEFAULT_BACKGROUND_RADIUS_DP * density);
+
+            mDuration = ta.getInteger(R.styleable.JellyToggleButton_jtbDuration, DEFAULT_DURATION);
+
+            mTouchMoveRatioValue = ta.getFloat(R.styleable.JellyToggleButton_jtbTouchMoveRatioValue, DEFAULT_TOUCH_MOVE_RATIO_VALUE);
+            mBezierControlValue = ta.getFloat(R.styleable.JellyToggleButton_jtbBezierControlValue, mBezierControlValue);
+            mStretchDistanceRatioValue = ta.getFloat(R.styleable.JellyToggleButton_jtbStretchDistanceRatioValue, mStretchDistanceRatioValue);
+            mBezierScaleRatioValue = ta.getFloat(R.styleable.JellyToggleButton_jtbBezierScaleRatioValue, DEFAULT_BEZIER_SCALE_RATIO_VALUE);
+
+            mMoveToSameStateCallListener = ta.getBoolean(R.styleable.JellyToggleButton_jtbMoveToSameStateCallListener, DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER);
+
+            String colorChangeTypeString = ta.getString(R.styleable.JellyToggleButton_jtbColorChangeType);
             if ("rgb".equals(colorChangeTypeString)) {
                 mColorChangeType = ColorChangeType.RGB;
             } else if ("hsv".equals(colorChangeTypeString)) {
                 mColorChangeType = ColorChangeType.HSV;
             }
 
-            String jellyString = ta.getString(R.styleable.JellyToggleButton_jbtJelly);
+            String jellyString = ta.getString(R.styleable.JellyToggleButton_jtbJelly);
             if (jellyString != null) mJelly = Jelly.valueOf(jellyString);
             else mJelly = DEFAULT_JELLY;
 
-            mBezierControlValue = ta.getFloat(R.styleable.JellyToggleButton_jbtBezierControlValue, DEFAULT_BEZIER_CONTROL_VALUE);
-            mStretchDistance = mThumbRadius;
-            mBezierScaleRatioValue = ta.getFloat(R.styleable.JellyToggleButton_jbtBezierScaleRatioValue, DEFAULT_BEZIER_SCALE_RATIO_VALUE);
             ta.recycle();
         }
 
@@ -223,10 +281,11 @@ public class JellyToggleButton extends CompoundButton {
         setClickable(true);
 
         if (isChecked()) {
-            setProcess(1);
-            mState = State.ON;
+            setProcess(1, false);
+            mState = State.RIGHT;
         } else {
-            mState = State.OFF;
+            setProcess(0, false);
+            mState = State.LEFT;
         }
     }
 
@@ -372,10 +431,9 @@ public class JellyToggleButton extends CompoundButton {
         // thumb
         setStartProcessPoints();
 
-        mJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistance, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess);
+        mJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
 
-        float totalLength = mThumbRight - mThumbLeft - 2 * mThumbRadius - mJelly.extraceLength(mStretchDistance, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
-        mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, totalLength, mProcess);
+        mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState);
 
         mThumbPath.reset();
         mThumbPath.moveTo(mThumbP1.x,mThumbP1.y);
@@ -409,19 +467,60 @@ public class JellyToggleButton extends CompoundButton {
             mRightTextLayout.draw(canvas);
             canvas.restore();
         }
+    }
 
-//        Paint mRectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-//        mRectPaint.setStyle(Paint.Style.STROKE);
-//        mRectPaint.setStrokeWidth(getResources().getDisplayMetrics().density);
-//        mRectPaint.setColor(Color.parseColor("#AA0000"));
-//        canvas.drawRect(mBackgroundRectF, mRectPaint);
-//        mRectPaint.setColor(Color.parseColor("#0000FF"));
-//        canvas.drawRect(mThumbP4.x, mThumbP3.y, mThumbP2.x, mThumbP1.y, mRectPaint);
-//        mRectPaint.setColor(Color.parseColor("#00CC00"));
-//        canvas.drawRect(mOnTextRectF, mRectPaint);
-//        canvas.drawRect(mOffTextRectF, mRectPaint);
-//        mRectPaint.setColor(Color.parseColor("#000000"));
-//        canvas.drawRect(0, 0, getMeasuredWidth() - getPaddingLeft() - getPaddingRight(), getMeasuredHeight(), mRectPaint);
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if (!isEnabled() || !isClickable()) {
+            return false;
+        }
+
+        int action = event.getAction();
+
+        float deltaX = event.getX() - mStartX;
+        float deltaY = event.getY() - mStartY;
+
+        // status the view going to change to when finger released
+        boolean nextStatus;
+
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                catchView();
+                mStartX = event.getX();
+                mStartY = event.getY();
+                mLastX = mStartX;
+                setPressed(true);
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                float x = event.getX();
+                setProcess(getProcess() + (x - mLastX) / (getNoExtractTotalLength() * mTouchMoveRatioValue), true);
+                mLastX = x;
+                break;
+
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                setPressed(false);
+                nextStatus = getStatusBasedOnPos();
+                float time = event.getEventTime() - event.getDownTime();
+                if (deltaX < mTouchSlop && deltaY < mTouchSlop && time < mClickTimeout) {
+                    performClick();
+                } else {
+                    if (nextStatus != isChecked()) {
+                        playSoundEffect(SoundEffectConstants.CLICK);
+//                        setChecked(nextStatus);
+                        animateToState(nextStatus, true);
+                    } else {
+                        animateToState(nextStatus, mMoveToSameStateCallListener);
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+        return true;
     }
 
     private void setStartProcessPoints() {
@@ -448,26 +547,43 @@ public class JellyToggleButton extends CompoundButton {
         mThumbP4.bottom.y = mThumbP4.y + mThumbRadius * mBezierControlValue;
     }
 
-    @Override
-    protected void drawableStateChanged() {
-        super.drawableStateChanged();
-
-        // Maybe Todo
+    private float getNoExtractTotalLength() {
+        return mThumbRight - mThumbLeft - 2 * mThumbRadius - mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
     }
 
-    public final float getProcess() {
+    private boolean getStatusBasedOnPos() {
+        return getProcess() > 0.5f;
+    }
+
+    private final float getProcess() {
         return mProcess;
     }
 
-
-    public final void setProcess(final float process) {
+    private void setProcess(float process, boolean callListener) {
         float tp = process;
-        if (tp > 1) {
+        if (tp >= 1) {
             tp = 1;
-        } else if (tp < 0) {
+            mState = State.RIGHT;
+        } else if (tp <= 0) {
             tp = 0;
+            mState = State.LEFT;
+        } else {
+            if (mState.equals(State.RIGHT)) {
+                mState = State.RIGHT_TO_LEFT;
+            } else if (mState.equals(State.LEFT)) {
+                mState = State.LEFT_TO_RIGHT;
+            }
         }
         this.mProcess = tp;
+        if (callListener && mOnStateChangeListener != null) {
+            if (mState.equals(State.LEFT) || mState.equals(State.RIGHT)) {
+                // at this time, we don't need to call the listener
+                if (!mState.equals(lastState)) mOnStateChangeListener.onStateChange(mProcess, mState, this);
+            } else {
+                mOnStateChangeListener.onStateChange(mProcess, mState, this);
+            }
+        }
+        lastState = mState;
         invalidate();
     }
 
@@ -476,7 +592,7 @@ public class JellyToggleButton extends CompoundButton {
         return super.performClick();
     }
 
-    protected void animateToState(boolean checked) {
+    private void animateToState(boolean checked, boolean callListener) {
         if (mProcessAnimator == null) {
             return;
         }
@@ -485,9 +601,9 @@ public class JellyToggleButton extends CompoundButton {
         }
         mProcessAnimator.setDuration(mDuration);
         if (checked) {
-            mProcessAnimator.setFloatValues(mProcess, 1);
+            setAnimator(1, callListener);
         } else {
-            mProcessAnimator.setFloatValues(mProcess, 0);
+            setAnimator(0, callListener);
         }
         mProcessAnimator.start();
     }
@@ -500,25 +616,574 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     @Override
-    public void setChecked(final boolean checked) {
-        // animate before super.setChecked() because user may call setChecked again in OnCheckedChangedListener
-        if (isChecked() != checked) {
-            animateToState(checked);
-        }
+    public void setChecked(boolean checked) {
+        setChecked(checked, true);
+    }
+
+    public void setChecked(boolean checked, boolean callListener) {
+        mProcess = checked ? 0 : 1;
+        if (callListener) lastState = checked ? State.LEFT : State.RIGHT;
+        animateToState(checked, callListener);
+//        if (isChecked() != checked) {
+//        }
         super.setChecked(checked);
     }
 
     public void setCheckedImmediately(boolean checked) {
+        setCheckedImmediately(checked, true);
+    }
+
+    public void setCheckedImmediately(boolean checked, boolean callListener) {
         super.setChecked(checked);
         if (mProcessAnimator != null && mProcessAnimator.isRunning()) {
             mProcessAnimator.cancel();
         }
-        setProcess(checked ? 1 : 0);
-        invalidate();
+        if (callListener) lastState = null;
+        setProcess(checked ? 1 : 0, callListener);
+    }
+
+    public void setAnimator(float target, final boolean callListener) {
+        mProcessAnimator = ValueAnimator.ofFloat(mProcess, target).setDuration(mDuration);
+        mProcessAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                setProcess((Float) animation.getAnimatedValue(), callListener);
+            }
+        });
+        mProcessAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+    }
+
+    public void toggle() {
+        toggle(true);
+    }
+
+    public void toggle(boolean callListener) {
+        setChecked(!isChecked(), callListener);
     }
 
     public void toggleImmediately() {
-        setCheckedImmediately(!isChecked());
+        toggleImmediately(true);
     }
 
+    public void toggleImmediately(boolean callListener) {
+        setCheckedImmediately(!isChecked(), callListener);
+    }
+
+    public int getLeftBackgroundColor() {
+        return mLeftBackgroundColor;
+    }
+
+    public void setLeftBackgroundColor(int color) {
+        this.mLeftBackgroundColor = color;
+        invalidate();
+    }
+
+    public void setLeftBackgroundColor(String color) {
+        setLeftBackgroundColor(Color.parseColor(color));
+    }
+    
+    public void setLeftBackgroundColorRes(int res) {
+        setLeftBackgroundColor(ContextCompat.getColor(getContext(), res));
+    }
+    
+    public int getRightBackgroundColor() {
+        return mRightBackgroundColor;
+    }
+
+    public void setRightBackgroundColor(int color) {
+        this.mRightBackgroundColor = color;
+        invalidate();
+    }
+
+    public void setRightBackgroundColor(String color) {
+        setRightBackgroundColor(Color.parseColor(color));
+    }
+
+    public void setRightBackgroundColorRes(int res) {
+        setRightBackgroundColor(ContextCompat.getColor(getContext(), res));
+    }
+    
+    public void setBackgroundColor(int color) {
+        setLeftBackgroundColor(color);
+        setRightBackgroundColor(color);
+    }
+    
+    public void setBackgroundColor(String color) {
+        setBackgroundColor(Color.parseColor(color));
+    }
+
+    public void setBackgroundColorRes(int res) {
+        setBackgroundColor(ContextCompat.getColor(getContext(), res));
+    }
+    
+    public int getLeftThumbColor() {
+        return mLeftThumbColor;
+    }
+
+    public void setLeftThumbColor(int color) {
+        this.mLeftThumbColor = color;
+        invalidate();
+    }
+    
+    public void setLeftThumbColor(String color) {
+        setLeftThumbColor(Color.parseColor(color));
+    }
+    
+    public void setLeftThumbColorRes(int res) {
+        setLeftThumbColor(ContextCompat.getColor(getContext(), res));
+    }
+
+    public int getRightThumbColor() {
+        return mRightThumbColor;
+    }
+
+    public void setRightThumbColor(int color) {
+        this.mRightThumbColor = color;
+        invalidate();
+    }
+    
+    public void setRightThumbColor(String color) {
+        setRightThumbColor(Color.parseColor(color));
+    }
+    
+    public void setRightThumbColorRes(int res) {
+        setRightThumbColor(ContextCompat.getColor(getContext(), res));
+    }
+
+    public void setThumbColor(int color) {
+        setLeftThumbColor(color);
+        setRightThumbColor(color);
+    }
+
+    public void setThumbColor(String color) {
+        setThumbColor(Color.parseColor(color));
+    }
+
+    public void setThumbColorRes(int res) {
+        setThumbColor(ContextCompat.getColor(getContext(), res));
+    }
+
+    public int getLeftTextColor() {
+        return mLeftTextColor;
+    }
+
+    public void setLeftTextColor(int color) {
+        this.mLeftTextColor = mLeftTextColor;
+        invalidate();
+    }
+    
+    public void setLeftTextColor(String color) {
+        setLeftTextColor(Color.parseColor(color));
+    }
+    
+    public void setLeftTextColorRes(int res) {
+        setLeftTextColor(ContextCompat.getColor(getContext(), res));
+    }
+
+    public int getRightTextColor() {
+        return mRightTextColor;
+    }
+
+    public void setRightTextColor(int color) {
+        this.mRightTextColor = mRightTextColor;
+        invalidate();
+    }
+
+    public void setRightTextColor(String color) {
+        setRightTextColor(Color.parseColor(color));
+    }
+
+    public void setRightTextColorRes(int res) {
+        setRightTextColor(ContextCompat.getColor(getContext(), res));
+    }
+
+    public void setTextColor(int color) {
+        setLeftTextColor(color);
+        setRightTextColor(color);
+    }
+
+    public void setTextColor(String color) {
+        setTextColor(Color.parseColor(color));
+    }
+
+    public void setTextColorRes(int res) {
+        setTextColor(ContextCompat.getColor(getContext(), res));
+    }
+
+    public Typeface getLeftTextTypeface() {
+        return mLeftTextTypeface;
+    }
+
+    public void setLeftTextTypeface(Typeface typeface) {
+        this.mLeftTextTypeface = typeface;
+        mLeftTextPaint.setTypeface(typeface);
+
+        mLeftTextLayout = null;
+        requestLayout();
+    }
+
+    public void setLeftTextTypeface(String typefaceString) {
+        try {
+            mLeftTextTypeface = Typeface.createFromAsset(getContext().getAssets(), typefaceString);
+        } catch (RuntimeException r) {
+            mLeftTextTypeface = Typeface.DEFAULT;
+        }
+        mLeftTextPaint.setTypeface(mLeftTextTypeface);
+
+        mLeftTextLayout = null;
+        requestLayout();
+    }
+
+    public Typeface getRightTextTypeface() {
+        return mRightTextTypeface;
+    }
+
+    public void setRightTextTypeface(Typeface typeface) {
+        this.mRightTextTypeface = typeface;
+        mRightTextPaint.setTypeface(typeface);
+
+        mRightTextLayout = null;
+        requestLayout();
+    }
+
+    public void setRightTextTypeface(String typefaceString) {
+        try {
+            mRightTextTypeface = Typeface.createFromAsset(getContext().getAssets(), typefaceString);
+        } catch (RuntimeException r) {
+            mRightTextTypeface = Typeface.DEFAULT;
+        }
+        mRightTextPaint.setTypeface(mRightTextTypeface);
+
+        mRightTextLayout = null;
+        requestLayout();
+    }
+    
+    public void setTextTypeface(Typeface typeface) {
+        setLeftTextTypeface(typeface);
+        setRightTextTypeface(typeface);
+    }
+
+    public void setTextTypeface(String typefaceString) {
+        setLeftTextTypeface(typefaceString);
+        setRightTextTypeface(typefaceString);
+    }
+
+    public int getLeftTextSize() {
+        return mLeftTextSize;
+    }
+
+    public void setLeftTextSize(int textSize) {
+        this.mLeftTextSize = textSize;
+
+        mLeftTextLayout = null;
+        requestLayout();
+    }
+
+    public void setLeftTextSizeRes(int res) {
+        setLeftTextSize(getContext().getResources().getDimensionPixelSize(res));
+    }
+
+    public int getRightTextSize() {
+        return mRightTextSize;
+    }
+
+    public void setRightTextSize(int textSize) {
+        this.mRightTextSize = textSize;
+
+        mRightTextLayout = null;
+        requestLayout();
+    }
+
+    public void setRightTextSizeRes(int res) {
+        setRightTextSize(getContext().getResources().getDimensionPixelSize(res));
+    }
+
+    public String getLeftText() {
+        return mLeftText;
+    }
+
+    public void setLeftText(String text) {
+        this.mLeftText = text;
+
+        mLeftTextLayout = null;
+        requestLayout();
+    }
+    
+    public void setLeftTextRes(int res) {
+        setLeftText(getContext().getResources().getString(res));
+    }
+
+    public String getRightText() {
+        return mRightText;
+    }
+
+    public void setRightText(String text) {
+        this.mRightText = text;
+
+        mLeftTextLayout = null;
+        requestLayout();
+    }
+    
+    public void setRightTextRes(int res) {
+        setRightText(getContext().getResources().getString(res));
+    }
+
+    public void setText(String leftText, String rightText) {
+        setLeftText(leftText);
+        setRightText(rightText);
+    }
+
+    public void setTextRes(int leftRes, int rightRes) {
+        setLeftText(getContext().getResources().getString(leftRes));
+        setRightText(getContext().getResources().getString(rightRes));
+    }
+
+    public float getTextMarginLeft() {
+        return mTextMarginLeft;
+    }
+    
+    public void setTextMarginLeft(float margin) {
+        mTextMarginLeft = margin;
+        requestLayout();
+    }
+
+    public void setTextMarginLeftRes(int res) {
+        setTextMarginLeft(getContext().getResources().getDimension(res));
+    }
+
+    public float getTextMarginRight() {
+        return mTextMarginRight;
+    }
+
+    public void setTextMarginRight(float margin) {
+        mTextMarginRight = margin;
+        requestLayout();
+    }
+
+    public void setTextMarginRightRes(int res) {
+        setTextMarginRight(getContext().getResources().getDimension(res));
+    }
+
+    public float getTextMarginTop() {
+        return mTextMarginTop;
+    }
+
+    public void setTextMarginTop(float margin) {
+        mTextMarginTop = margin;
+        requestLayout();
+    }
+
+    public void setTextMarginTopRes(int res) {
+        setTextMarginTop(getContext().getResources().getDimension(res));
+    }
+
+    public float getTextMarginBottom() {
+        return mTextMarginBottom;
+    }
+
+    public void setTextMarginBottom(float margin) {
+        mTextMarginBottom = margin;
+        requestLayout();
+    }
+
+    public void setTextMarginBottomRes(int res) {
+        setTextMarginBottom(getContext().getResources().getDimension(res));
+    }
+
+    public float getTextMarginCenter() {
+        return mTextMarginCenter;
+    }
+
+    public void setTextMarginCenter(float margin) {
+        mTextMarginCenter = margin;
+        requestLayout();
+    }
+
+    public void setTextMarginCenterRes(int res) {
+        setTextMarginCenter(getContext().getResources().getDimension(res));
+    }
+
+    public interface OnStateChangeListener {
+        void onStateChange(float process, State state, JellyToggleButton jbt);
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+        ss.leftText = mLeftText;
+        ss.rightText = mRightText;
+        return ss;
+    }
+
+    public float getThumbRadius() {
+        return mThumbRadius;
+    }
+
+    public void setThumbRadius(float radius) {
+        mThumbRadius = radius;
+        requestLayout();
+    }
+
+    public void setThumbRadiusRes(int res) {
+        setThumbRadius(getContext().getResources().getDimension(res));
+    }
+
+    public float getBackgroundMeasureRatio() {
+        return mBackgroundMeasureRatio;
+    }
+
+    public void setBackgroundMeasureRatio(float ratio) {
+        mBackgroundMeasureRatio = ratio;
+        requestLayout();
+    }
+
+    public void setBackgroundMeasureRatioRes(int res) {
+        TypedValue outValue = new TypedValue();
+        getResources().getValue(res, outValue, true);
+        setBackgroundMeasureRatio(outValue.getFloat());
+    }
+
+    public float getBackgroundRadius() {
+        return mBackgroundRadius;
+    }
+
+    public void setBackgroundRadius(float radius) {
+        mBackgroundRadius = radius;
+        requestLayout();
+    }
+
+    public void setBackgroundRadiusRes(int res) {
+        TypedValue outValue = new TypedValue();
+        getResources().getValue(res, outValue, true);
+        setBackgroundRadius(outValue.getFloat());
+    }
+
+    public int getDuration() {
+        return mDuration;
+    }
+
+    public void setDuration(int duration) {
+        mDuration = duration;
+        mProcessAnimator.setDuration(duration);
+    }
+
+    public void setDurationRes(int res) {
+        setDuration(getResources().getInteger(res));
+    }
+
+    public float getTouchMoveRatioValue() {
+        return mTouchMoveRatioValue;
+    }
+
+    public void setTouchMoveRatioValue(float ratio) {
+        mTouchMoveRatioValue = ratio;
+    }
+
+    public void setTouchMoveRatioValueRes(int res) {
+        TypedValue outValue = new TypedValue();
+        getResources().getValue(res, outValue, true);
+        setTouchMoveRatioValue(outValue.getFloat());
+    }
+
+    public float getBezierControlValue() {
+        return mBezierControlValue;
+    }
+
+    public void setBezierControlValue(float value) {
+        mBezierControlValue = value;
+        requestLayout();
+    }
+
+    public void setBezierControlValueRes(int res) {
+        TypedValue outValue = new TypedValue();
+        getResources().getValue(res, outValue, true);
+        setBezierControlValue(outValue.getFloat());
+    }
+
+    public float getStretchDistanceRatioValue() {
+        return mStretchDistanceRatioValue;
+    }
+
+    public void setStretchDistanceRatioValue(float value) {
+        mStretchDistanceRatioValue = value;
+    }
+
+    public float getBezierScaleRatioValue() {
+        return mBezierScaleRatioValue;
+    }
+
+    public void setBezierScaleRatioValue(float value) {
+        mBezierScaleRatioValue = value;
+    }
+
+    public void setBezierScaleRatioValueRes(int res) {
+        TypedValue outValue = new TypedValue();
+        getResources().getValue(res, outValue, true);
+        setBezierScaleRatioValue(outValue.getFloat());
+    }
+
+    public ColorChangeType getColorChangeType() {
+        return mColorChangeType;
+    }
+
+    public void setColorChangeType(ColorChangeType colorChangeType) {
+        mColorChangeType = colorChangeType;
+    }
+
+    public Jelly getJelly() {
+        return mJelly;
+    }
+
+    public void setJelly(Jelly jelly) {
+        mJelly = jelly;
+    }
+
+    public OnStateChangeListener getOnStateChangeListener() {
+        return mOnStateChangeListener;
+    }
+
+    public void setOnStateChangeListener(OnStateChangeListener onStateChangeListener) {
+        mOnStateChangeListener = onStateChangeListener;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        SavedState ss = (SavedState) state;
+        setText(ss.leftText, ss.rightText);
+        super.onRestoreInstanceState(ss.getSuperState());
+    }
+
+    static class SavedState extends BaseSavedState {
+        String leftText;
+        String rightText;
+
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        private SavedState(Parcel in) {
+            super(in);
+            leftText = in.readString();
+            rightText = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeString(leftText);
+            out.writeString(rightText);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
 }

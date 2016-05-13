@@ -14,7 +14,8 @@ public abstract class JellyStyle {
             float bezierControlValue,
             float bezierScaleRatioValue,
             float thumbRadius,
-            float process);
+            float process,
+            State state);
 
     public abstract void changeOffset(
             PointWithHorizontalPoints p1,
@@ -22,7 +23,9 @@ public abstract class JellyStyle {
             PointWithHorizontalPoints p3,
             PointWithVerticalPoints p4,
             float totalLength,
-            float process);
+            float extractLength,
+            float process,
+            State state);
 
     public abstract float extractLength(
             float stretchDistance,

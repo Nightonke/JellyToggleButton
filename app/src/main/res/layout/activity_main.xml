@@ -13,28 +13,43 @@
     tools:context="com.nightonke.jellytogglebuttonexample.MainActivity">
 
     <com.nightonke.jellytogglebutton.JellyToggleButton
-        android:id="@+id/jelly_toggle_button"
+        android:id="@+id/jtb_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         />
 
     <com.nightonke.jellytogglebutton.JellyToggleButton
+        android:id="@+id/jtb_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        app:jbtLeftText="Male"
-        app:jbtRightText="Female"
+        app:jtbLeftText="Male"
+        app:jtbRightText="Female"
         />
 
     <com.nightonke.jellytogglebutton.JellyToggleButton
+        android:id="@+id/jtb_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        app:jbtLeftText=""
-        app:jbtRightText=""
+        app:jtbLeftText=""
+        app:jtbRightText=""
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Style"
         />
 
 </LinearLayout>

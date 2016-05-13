@@ -3,34 +3,41 @@
 
     <declare-styleable name="JellyToggleButton">
 
-        <attr name="jbtLeftBackgroundColor" format="color|reference"/>
-        <attr name="jbtRightBackgroundColor" format="color|reference"/>
-        <attr name="jbtLeftThumbColor" format="color|reference"/>
-        <attr name="jbtRightThumbColor" format="color|reference"/>
-        <attr name="jbtLeftTextColor" format="color|reference"/>
-        <attr name="jbtRightTextColor" format="color|reference"/>
-        <attr name="jbtLeftTextTypeface" format="string"/>
-        <attr name="jbtRightTextTypeface" format="string"/>
-        <attr name="jbtLeftTextSize" format="dimension|reference"/>
-        <attr name="jbtRightTextSize" format="dimension|reference"/>
-        <attr name="jbtLeftText" format="string|reference"/>
-        <attr name="jbtRightText" format="string|reference"/>
+        <attr name="jtbLeftBackgroundColor" format="color|reference"/>
+        <attr name="jtbRightBackgroundColor" format="color|reference"/>
+        <attr name="jtbLeftThumbColor" format="color|reference"/>
+        <attr name="jtbRightThumbColor" format="color|reference"/>
+        <attr name="jtbLeftTextColor" format="color|reference"/>
+        <attr name="jtbRightTextColor" format="color|reference"/>
+        <attr name="jtbLeftTextTypeface" format="string"/>
+        <attr name="jtbRightTextTypeface" format="string"/>
+        <attr name="jtbLeftTextSize" format="dimension|reference"/>
+        <attr name="jtbRightTextSize" format="dimension|reference"/>
+        <attr name="jtbLeftText" format="string|reference"/>
+        <attr name="jtbRightText" format="string|reference"/>
 
-        <attr name="jbtTextMarginLeft" format="dimension|reference"/>
-        <attr name="jbtTextMarginRight" format="dimension|reference"/>
-        <attr name="jbtTextMarginTop" format="dimension|reference"/>
-        <attr name="jbtTextMarginBottom" format="dimension|reference"/>
-        <attr name="jbtTextMarginCenter" format="dimension|reference"/>
+        <attr name="jtbTextMarginLeft" format="dimension|reference"/>
+        <attr name="jtbTextMarginRight" format="dimension|reference"/>
+        <attr name="jtbTextMarginTop" format="dimension|reference"/>
+        <attr name="jtbTextMarginBottom" format="dimension|reference"/>
+        <attr name="jtbTextMarginCenter" format="dimension|reference"/>
 
-        <attr name="jbtThumbRadius" format="dimension|reference"/>
-        <attr name="jbtBackgroundRadius" format="dimension|reference"/>
+        <attr name="jtbThumbRadius" format="dimension|reference"/>
 
-        <attr name="jbtColorChangeType" format="string|reference"/>
-        <attr name="jbtJelly" format="string|reference"/>
+        <attr name="jtbBackgroundMeasureRatioValue" format="float|reference"/>
+        <attr name="jtbBackgroundRadius" format="dimension|reference"/>
 
-        <attr name="jbtDuration" format="integer|reference"/>
-        <attr name="jbtBezierControlValue" format="float|reference"/>
-        <attr name="jbtBezierScaleRatioValue" format="float|reference"/>
+        <attr name="jtbColorChangeType" format="string|reference"/>
+        <attr name="jtbJelly" format="string|reference"/>
+
+        <attr name="jtbDuration" format="integer|reference"/>
+
+        <attr name="jtbTouchMoveRatioValue" format="float|reference"/>
+        <attr name="jtbBezierControlValue" format="float|reference"/>
+        <attr name="jtbStretchDistanceRatioValue" format="float|reference"/>
+        <attr name="jtbBezierScaleRatioValue" format="float|reference"/>
+
+        <attr name="jtbMoveToSameStateCallListener" format="boolean|reference"/>
 
     </declare-styleable>
 

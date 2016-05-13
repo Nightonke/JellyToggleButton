@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/colorChooserCustomFrame"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textColor="#1E88E5"
+        android:textSize="25sp"
+        android:text="Title"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        />
+
+    <View
+        android:id="@+id/colorIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        tools:background="#1E88E5" />
+
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="#123123"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <!-- Red -->
+
+        <TextView
+            android:id="@+id/colorRLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/colorR"
+            android:layout_alignTop="@+id/colorR"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="R"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+        <com.nightonke.jellytogglebuttonexample.MySeekBar
+            android:id="@+id/colorR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/colorRLabel"
+            android:layout_toLeftOf="@+id/colorRValue"
+            android:layout_toRightOf="@+id/colorRLabel"
+            android:layout_toStartOf="@+id/colorRValue"
+            android:max="255" />
+
+        <TextView
+            android:id="@+id/colorRValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/colorR"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/colorR"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:minWidth="24dp"
+            android:text="0"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Green -->
+
+        <TextView
+            android:id="@+id/colorGLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/colorG"
+            android:layout_alignTop="@+id/colorG"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="G"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+        <com.nightonke.jellytogglebuttonexample.MySeekBar
+            android:id="@+id/colorG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/colorR"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/colorGLabel"
+            android:layout_toLeftOf="@+id/colorGValue"
+            android:layout_toRightOf="@+id/colorGLabel"
+            android:layout_toStartOf="@+id/colorGValue"
+            android:max="255" />
+
+        <TextView
+            android:id="@+id/colorGValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/colorG"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/colorG"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:minWidth="24dp"
+            android:text="0"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Blue -->
+
+        <TextView
+            android:id="@+id/colorBLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/colorB"
+            android:layout_alignTop="@+id/colorB"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="B"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+        <com.nightonke.jellytogglebuttonexample.MySeekBar
+            android:id="@+id/colorB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/colorG"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/colorBLabel"
+            android:layout_toLeftOf="@+id/colorBValue"
+            android:layout_toRightOf="@+id/colorBLabel"
+            android:layout_toStartOf="@+id/colorBValue"
+            android:max="255" />
+
+        <TextView
+            android:id="@+id/colorBValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/colorB"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/colorB"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:minWidth="24dp"
+            android:text="0"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <View
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:text="Cancel"
+            android:layout_gravity="right|center_vertical"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            />
+
+        <TextView
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:text="OK"
+            android:layout_gravity="right|center_vertical"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

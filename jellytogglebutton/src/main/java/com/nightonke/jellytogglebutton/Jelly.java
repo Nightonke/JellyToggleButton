@@ -22,25 +22,26 @@ public enum Jelly {
             float bezierControlValue,
             float bezierScaleRatioValue,
             float thumbRadius,
-            float process) {
+            float process,
+            State state) {
         try {
-            ((JellyStyle) c.getConstructor().newInstance()).changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, process);
+            ((JellyStyle) c.getConstructor().newInstance()).changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, process, state);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Jelly style init error.");
         }
     }
 
-    public void changeOffset(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float totalLength, float process) {
+    public void changeOffset(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float totalLength, float extractLength, float process, State state) {
         try {
-            ((JellyStyle) c.getConstructor().newInstance()).changeOffset(p1, p2, p3, p4, totalLength, process);
+            ((JellyStyle) c.getConstructor().newInstance()).changeOffset(p1, p2, p3, p4, totalLength, extractLength, process, state);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Jelly style init error.");
         }
     }
 
-    public float extraceLength(float stretchDistance, float bezierControlValue, float bezierScaleRatioValue, float thumbRadius) {
+    public float extractLength(float stretchDistance, float bezierControlValue, float bezierScaleRatioValue, float thumbRadius) {
         try {
             return ((JellyStyle) c.getConstructor().newInstance()).extractLength(stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius);
         } catch (Exception e) {

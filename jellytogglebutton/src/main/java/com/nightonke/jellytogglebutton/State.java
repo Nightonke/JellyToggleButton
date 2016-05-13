@@ -5,10 +5,10 @@ package com.nightonke.jellytogglebutton;
  */
 public enum State {
 
-    OFF(0),
-    OFF_TO_ON(1),
-    ON(2),
-    ON_TO_OFF(3);
+    LEFT(0),
+    LEFT_TO_RIGHT(1),
+    RIGHT(2),
+    RIGHT_TO_LEFT(3);
 
     int v;
 

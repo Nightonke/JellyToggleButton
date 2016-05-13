@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.nightonke.jellytogglebuttonexample.SettingsActivity">
+
+    <LinearLayout
+        android:id="@+id/base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#4085EE"
+        >
+
+        <com.nightonke.jellytogglebutton.JellyToggleButton
+            android:id="@+id/jtb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            app:jtbLeftText="Male"
+            app:jtbRightText="Female"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="false"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Listener"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Check"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <Button
+                    android:id="@+id/set_check_with_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="With Listener"
+                    />
+
+                <Button
+                    android:id="@+id/set_check_without_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Without Listener"
+                    />
+
+                <Button
+                    android:id="@+id/set_check_immediately_with_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Immediately With Listener"
+                    />
+
+                <Button
+                    android:id="@+id/set_check_immediately_without_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Immediately Without Listener"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Toggle"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <Button
+                    android:id="@+id/toggle_with_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="With Listener"
+                    />
+
+                <Button
+                    android:id="@+id/toggle_without_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Without Listener"
+                    />
+
+                <Button
+                    android:id="@+id/toggle_immediately_with_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Immediately With Listener"
+                    />
+
+                <Button
+                    android:id="@+id/toggle_immediately_without_listener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Immediately Without Listener"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Color"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <Button
+                    android:id="@+id/color_left_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left Background"
+                    />
+
+                <Button
+                    android:id="@+id/color_right_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right Background"
+                    />
+
+                <Button
+                    android:id="@+id/color_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left &amp; Right Background"
+                    />
+
+                <Button
+                    android:id="@+id/color_left_thumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left Thumb"
+                    />
+
+                <Button
+                    android:id="@+id/color_right_thumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right Thumb"
+                    />
+
+                <Button
+                    android:id="@+id/color_thumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left &amp; Right Thumb"
+                    />
+
+                <Button
+                    android:id="@+id/color_activity_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Activity Background"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>
