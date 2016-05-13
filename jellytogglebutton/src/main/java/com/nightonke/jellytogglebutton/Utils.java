@@ -51,6 +51,23 @@ public class Utils {
         return Color.HSVToColor(hsv);
     }
 
+    /**
+     * Notice that x is in (0, 1].
+     * Should firstly, x = totalLength * x.
+     * Then get y = A * e ^ (- B * x) * sin(C * x + D).
+     *
+     * @param x
+     * @param totalLength
+     * @param A
+     * @param B
+     * @param C
+     * @param D
+     * @return
+     */
+    public static float vibration(float x, float totalLength, float A, float B, float C, float D) {
+        x *= totalLength;
+        return (float) (A * Math.exp(-B * x) * Math.sin(C * x + D));
+    }
 
     private static Utils ourInstance = new Utils();
 

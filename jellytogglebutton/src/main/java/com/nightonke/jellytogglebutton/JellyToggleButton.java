@@ -17,6 +17,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -55,7 +56,7 @@ public class JellyToggleButton extends CompoundButton {
     private static final float DEFAULT_BACKGROUND_MEASURE_VALUE = 1.8f;
     private static final float DEFAULT_BACKGROUND_RADIUS_DP = 10;
 
-    private static final int DEFAULT_DURATION = 500;
+    private static final int DEFAULT_DURATION = 1000;
 
     private static final float DEFAULT_TOUCH_MOVE_RATIO_VALUE = 5.0f;
     private static final float DEFAULT_BEZIER_CONTROL_VALUE = 0.551915024494f;
@@ -121,7 +122,7 @@ public class JellyToggleButton extends CompoundButton {
     private TextPaint mLeftTextPaint;
     private TextPaint mRightTextPaint;
     private Path mThumbPath;
-    
+
     private Layout mLeftTextLayout;
     private Layout mRightTextLayout;
     private float mTextWidth;
@@ -184,16 +185,6 @@ public class JellyToggleButton extends CompoundButton {
         mOffTextRectF = new RectF();
 
         setAnimator(0, true);
-//        mProcessAnimator = ValueAnimator.ofFloat(mProcess, 0, 0)
-//                .setDuration(mDuration);
-//        mProcessAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator animation) {
-//                Log.d("Jelly", "Animating..." + mProcess);
-//                JellyToggleButton.this.invalidate();
-//            }
-//        });
-//        mProcessAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
 
         Resources res = getResources();
         float density = res.getDisplayMetrics().density;
@@ -277,6 +268,9 @@ public class JellyToggleButton extends CompoundButton {
         if (mLeftText == null) mLeftText = DEFAULT_LEFT_TEXT;
         if (mRightText == null) mRightText = DEFAULT_RIGHT_TEXT;
 
+        mLeftTextPaint.setTextSize(mLeftTextSize);
+        mRightTextPaint.setTextSize(mRightTextSize);
+
         setFocusable(true);
         setClickable(true);
 
@@ -302,6 +296,7 @@ public class JellyToggleButton extends CompoundButton {
             mRightTextLayout = makeLayout(mRightText, mRightTextPaint);
         }
         setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
+        setup();
     }
 
     private int measureWidth(int widthMeasureSpec) {
@@ -365,13 +360,14 @@ public class JellyToggleButton extends CompoundButton {
         return measuredHeight;
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (w != oldw || h != oldh) {
-            setup();
-        }
-    }
+//    @Override
+//    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+//        Log.d("Jelly", "onSizeChanged");
+//        super.onSizeChanged(w, h, oldw, oldh);
+//        if (w != oldw || h != oldh) {
+//            setup();
+//        }
+//    }
 
     private void setup() {
         float backgroundLeft = mThumbRadius + getPaddingLeft() - (mTextWidth / 2 + mTextMarginLeft);
@@ -509,7 +505,6 @@ public class JellyToggleButton extends CompoundButton {
                 } else {
                     if (nextStatus != isChecked()) {
                         playSoundEffect(SoundEffectConstants.CLICK);
-//                        setChecked(nextStatus);
                         animateToState(nextStatus, true);
                     } else {
                         animateToState(nextStatus, mMoveToSameStateCallListener);
@@ -624,8 +619,6 @@ public class JellyToggleButton extends CompoundButton {
         mProcess = checked ? 0 : 1;
         if (callListener) lastState = checked ? State.LEFT : State.RIGHT;
         animateToState(checked, callListener);
-//        if (isChecked() != checked) {
-//        }
         super.setChecked(checked);
     }
 
@@ -681,11 +674,11 @@ public class JellyToggleButton extends CompoundButton {
     public void setLeftBackgroundColor(String color) {
         setLeftBackgroundColor(Color.parseColor(color));
     }
-    
+
     public void setLeftBackgroundColorRes(int res) {
         setLeftBackgroundColor(ContextCompat.getColor(getContext(), res));
     }
-    
+
     public int getRightBackgroundColor() {
         return mRightBackgroundColor;
     }
@@ -702,12 +695,12 @@ public class JellyToggleButton extends CompoundButton {
     public void setRightBackgroundColorRes(int res) {
         setRightBackgroundColor(ContextCompat.getColor(getContext(), res));
     }
-    
+
     public void setBackgroundColor(int color) {
         setLeftBackgroundColor(color);
         setRightBackgroundColor(color);
     }
-    
+
     public void setBackgroundColor(String color) {
         setBackgroundColor(Color.parseColor(color));
     }
@@ -715,7 +708,7 @@ public class JellyToggleButton extends CompoundButton {
     public void setBackgroundColorRes(int res) {
         setBackgroundColor(ContextCompat.getColor(getContext(), res));
     }
-    
+
     public int getLeftThumbColor() {
         return mLeftThumbColor;
     }
@@ -724,11 +717,11 @@ public class JellyToggleButton extends CompoundButton {
         this.mLeftThumbColor = color;
         invalidate();
     }
-    
+
     public void setLeftThumbColor(String color) {
         setLeftThumbColor(Color.parseColor(color));
     }
-    
+
     public void setLeftThumbColorRes(int res) {
         setLeftThumbColor(ContextCompat.getColor(getContext(), res));
     }
@@ -741,11 +734,11 @@ public class JellyToggleButton extends CompoundButton {
         this.mRightThumbColor = color;
         invalidate();
     }
-    
+
     public void setRightThumbColor(String color) {
         setRightThumbColor(Color.parseColor(color));
     }
-    
+
     public void setRightThumbColorRes(int res) {
         setRightThumbColor(ContextCompat.getColor(getContext(), res));
     }
@@ -768,14 +761,14 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     public void setLeftTextColor(int color) {
-        this.mLeftTextColor = mLeftTextColor;
+        this.mLeftTextColor = color;
         invalidate();
     }
-    
+
     public void setLeftTextColor(String color) {
         setLeftTextColor(Color.parseColor(color));
     }
-    
+
     public void setLeftTextColorRes(int res) {
         setLeftTextColor(ContextCompat.getColor(getContext(), res));
     }
@@ -785,7 +778,7 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     public void setRightTextColor(int color) {
-        this.mRightTextColor = mRightTextColor;
+        this.mRightTextColor = color;
         invalidate();
     }
 
@@ -857,7 +850,7 @@ public class JellyToggleButton extends CompoundButton {
         mRightTextLayout = null;
         requestLayout();
     }
-    
+
     public void setTextTypeface(Typeface typeface) {
         setLeftTextTypeface(typeface);
         setRightTextTypeface(typeface);
@@ -875,7 +868,10 @@ public class JellyToggleButton extends CompoundButton {
     public void setLeftTextSize(int textSize) {
         this.mLeftTextSize = textSize;
 
+        if (mLeftTextPaint != null) mLeftTextPaint.setTextSize(mLeftTextSize);
+
         mLeftTextLayout = null;
+        mRightTextLayout = null;
         requestLayout();
     }
 
@@ -890,12 +886,24 @@ public class JellyToggleButton extends CompoundButton {
     public void setRightTextSize(int textSize) {
         this.mRightTextSize = textSize;
 
+        if (mRightTextPaint != null) mRightTextPaint.setTextSize(mRightTextSize);
+
+        mLeftTextLayout = null;
         mRightTextLayout = null;
         requestLayout();
     }
 
     public void setRightTextSizeRes(int res) {
         setRightTextSize(getContext().getResources().getDimensionPixelSize(res));
+    }
+
+    public void setTextSize(int textSize) {
+        setLeftTextSize(textSize);
+        setRightTextSize(textSize);
+    }
+
+    public void setTextSizeRes(int res) {
+        setTextSize(getContext().getResources().getDimensionPixelSize(res));
     }
 
     public String getLeftText() {
@@ -908,7 +916,7 @@ public class JellyToggleButton extends CompoundButton {
         mLeftTextLayout = null;
         requestLayout();
     }
-    
+
     public void setLeftTextRes(int res) {
         setLeftText(getContext().getResources().getString(res));
     }
@@ -920,10 +928,10 @@ public class JellyToggleButton extends CompoundButton {
     public void setRightText(String text) {
         this.mRightText = text;
 
-        mLeftTextLayout = null;
+        mRightTextLayout = null;
         requestLayout();
     }
-    
+
     public void setRightTextRes(int res) {
         setRightText(getContext().getResources().getString(res));
     }
@@ -941,7 +949,7 @@ public class JellyToggleButton extends CompoundButton {
     public float getTextMarginLeft() {
         return mTextMarginLeft;
     }
-    
+
     public void setTextMarginLeft(float margin) {
         mTextMarginLeft = margin;
         requestLayout();

@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity
         JellyToggleButton.OnStateChangeListener,
         View.OnClickListener {
 
+    private Toast lastToast;
+
     private JellyToggleButton jtb0;
     private JellyToggleButton jtb1;
     private JellyToggleButton jtb2;
@@ -40,8 +42,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onStateChange(float process, State state, JellyToggleButton jbt) {
-        if (state.equals(State.LEFT)) Toast.makeText(this, "Left!", Toast.LENGTH_SHORT).show();
-        if (state.equals(State.RIGHT)) Toast.makeText(this, "Right!", Toast.LENGTH_SHORT).show();
+        if (state.equals(State.LEFT)) {
+            if (lastToast != null) lastToast.cancel();
+            lastToast = Toast.makeText(this, "Left!", Toast.LENGTH_SHORT);
+            lastToast.show();
+        }
+        if (state.equals(State.RIGHT)) {
+            if (lastToast != null) lastToast.cancel();
+            lastToast = Toast.makeText(this, "Right!", Toast.LENGTH_SHORT);
+            lastToast.show();
+        }
     }
 
     @Override

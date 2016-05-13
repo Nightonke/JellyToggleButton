@@ -195,11 +195,146 @@
                     />
 
                 <Button
+                    android:id="@+id/color_left_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left Text"
+                    />
+
+                <Button
+                    android:id="@+id/color_right_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right Text"
+                    />
+
+                <Button
+                    android:id="@+id/color_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left &amp; Right Text"
+                    />
+
+                <Button
                     android:id="@+id/color_activity_background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Activity Background"
                     />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Duration"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/duration_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="500ms"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@android:color/black"
+                    />
+
+                <SeekBar
+                    android:id="@+id/duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="9"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Font"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <Button
+                    android:id="@+id/font_hairline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lato Hairline"
+                    />
+
+                <Button
+                    android:id="@+id/font_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lato Light"
+                    />
+
+                <Button
+                    android:id="@+id/font_default"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Default"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Font Size"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/font_size_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@android:color/black"
+                    />
+
+                <SeekBar
+                    android:id="@+id/font_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Text"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <EditText
+                        android:id="@+id/left_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Left Text"
+                        />
+
+                    <EditText
+                        android:id="@+id/right_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Right Text"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 
