@@ -1,4 +1,9 @@
-package com.nightonke.jellytogglebutton;
+package com.nightonke.jellytogglebutton.JellyTypes;
+
+import com.nightonke.jellytogglebutton.EaseTypes.EaseType;
+import com.nightonke.jellytogglebutton.PointWithHorizontalPoints;
+import com.nightonke.jellytogglebutton.PointWithVerticalPoints;
+import com.nightonke.jellytogglebutton.State;
 
 /**
  * Created by Weiping on 2016/5/11.
@@ -25,7 +30,8 @@ public abstract class JellyStyle {
             float totalLength,
             float extractLength,
             float process,
-            State state);
+            State state,
+            EaseType easeType);
 
     public abstract float extractLength(
             float stretchDistance,

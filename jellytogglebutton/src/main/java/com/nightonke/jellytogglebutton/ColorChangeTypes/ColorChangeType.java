@@ -1,4 +1,4 @@
-package com.nightonke.jellytogglebutton;
+package com.nightonke.jellytogglebutton.ColorChangeTypes;
 
 /**
  * Created by Weiping on 2016/5/11.

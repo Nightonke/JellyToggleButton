@@ -27,6 +27,7 @@
         android:layout_marginTop="30dp"
         app:jtbLeftText="Male"
         app:jtbRightText="Female"
+        app:jtbEaseType="ease_in_back"
         />
 
     <com.nightonke.jellytogglebutton.JellyToggleButton

@@ -22,6 +22,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:paddingEnd="20dp"
             app:jtbLeftText="Male"
             app:jtbRightText="Female"
             />
@@ -48,7 +52,6 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
                 >
 
                 <TextView
@@ -424,6 +427,43 @@
                         />
 
                 </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ease Type"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <Spinner
+                    android:id="@+id/ease_types"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:entries="@array/ease_types"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jelly"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <Spinner
+                    android:id="@+id/jellys"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:entries="@array/jellys"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    />
 
             </LinearLayout>
 

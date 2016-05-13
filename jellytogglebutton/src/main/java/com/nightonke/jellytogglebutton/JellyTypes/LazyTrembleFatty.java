@@ -1,10 +1,16 @@
-package com.nightonke.jellytogglebutton;
+package com.nightonke.jellytogglebutton.JellyTypes;
+
+import com.nightonke.jellytogglebutton.EaseTypes.EaseType;
+import com.nightonke.jellytogglebutton.PointWithHorizontalPoints;
+import com.nightonke.jellytogglebutton.PointWithVerticalPoints;
+import com.nightonke.jellytogglebutton.State;
+import com.nightonke.jellytogglebutton.Utils;
 
 /**
  * Created by Weiping on 2016/5/11.
  */
 
-public class PassiveDampingTail extends JellyStyle {
+public class LazyTrembleFatty extends JellyStyle {
 
     private static final float TOTAL_LENGTH = (float) (7 * Math.PI / 4);
     private static final float B = 0.4f;
@@ -92,9 +98,9 @@ public class PassiveDampingTail extends JellyStyle {
     }
 
     @Override
-    public void changeOffset(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float totalLength, float extractLength, float process, State state) {
+    public void changeOffset(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float totalLength, float extractLength, float process, State state, EaseType easeType) {
         if (state.equals(State.LEFT_TO_RIGHT)) {
-            float offset = totalLength * (process - T1) / (T5 - T1);
+            float offset = totalLength * easeType.getOffset((process - T1) / (T5 - T1));
             offset = offset > 0 ? offset : 0;
             p1.moveX(offset);
             p2.moveX(offset);
@@ -102,7 +108,7 @@ public class PassiveDampingTail extends JellyStyle {
             p4.moveX(offset);
         } else if (state.equals(State.RIGHT_TO_LEFT)) {
             float rProcess = 1 - process;
-            float offset = totalLength * (rProcess - T1) / (T5 - T1);
+            float offset = totalLength * easeType.getOffset((rProcess - T1) / (T5 - T1));
             offset = offset > 0 ? offset : 0;
             p1.moveX(totalLength + extractLength - offset);
             p2.moveX(totalLength + extractLength - offset);

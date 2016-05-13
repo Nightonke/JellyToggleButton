@@ -2,6 +2,8 @@ package com.nightonke.jellytogglebutton;
 
 import android.graphics.Color;
 
+import com.nightonke.jellytogglebutton.ColorChangeTypes.ColorChangeType;
+
 /**
  * Created by Weiping on 2016/5/11.
  */

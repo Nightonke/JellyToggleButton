@@ -27,8 +27,49 @@
         <attr name="jtbBackgroundMeasureRatioValue" format="float|reference"/>
         <attr name="jtbBackgroundRadius" format="dimension|reference"/>
 
-        <attr name="jtbColorChangeType" format="string|reference"/>
-        <attr name="jtbJelly" format="string|reference"/>
+        <attr name="jtbColorChangeType" format="enum">
+            <enum name="rgb" value="0"/>
+            <enum name="hsv" value="1"/>
+        </attr>
+
+        <attr name="jtbJelly" format="enum">
+            <enum name="itself" value="0"/>
+            <enum name="lazy_tremble_fatty" value="1"/>
+        </attr>
+
+        <attr name="jtbEaseType" format="enum">
+            <enum name="ease_in_sine" value="0"/>
+            <enum name="ease_out_sine" value="1"/>
+            <enum name="ease_in_out_sine" value="2"/>
+            <enum name="ease_in_quad" value="3"/>
+            <enum name="ease_out_quad" value="4"/>
+            <enum name="ease_in_out_quad" value="5"/>
+            <enum name="ease_in_cubic" value="6"/>
+            <enum name="ease_out_cubic" value="7"/>
+            <enum name="ease_in_out_cubic" value="8"/>
+            <enum name="ease_in_quart" value="9"/>
+            <enum name="ease_out_quart" value="10"/>
+            <enum name="ease_in_out_quart" value="11"/>
+            <enum name="ease_in_quint" value="12"/>
+            <enum name="ease_out_quint" value="13"/>
+            <enum name="ease_in_out_quint" value="14"/>
+            <enum name="ease_in_expo" value="15"/>
+            <enum name="ease_out_expo" value="16"/>
+            <enum name="ease_in_out_expo" value="17"/>
+            <enum name="ease_in_circ" value="18"/>
+            <enum name="ease_out_circ" value="19"/>
+            <enum name="ease_in_out_circ" value="20"/>
+            <enum name="ease_in_back" value="21"/>
+            <enum name="ease_out_back" value="22"/>
+            <enum name="ease_in_out_back" value="23"/>
+            <enum name="ease_in_elastic" value="24"/>
+            <enum name="ease_out_elastic" value="25"/>
+            <enum name="ease_in_out_elastic" value="26"/>
+            <enum name="ease_in_bounce" value="27"/>
+            <enum name="ease_out_bounce" value="28"/>
+            <enum name="ease_in_out_bounce" value="29"/>
+            <enum name="linear" value="30"/>
+        </attr>
 
         <attr name="jtbDuration" format="integer|reference"/>
 

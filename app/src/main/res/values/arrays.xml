@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ease_types">
+        <item>Ease In Sine</item>
+        <item>Ease Out Sine</item>
+        <item>Ease In Out Sine</item>
+        <item>Ease In Quad</item>
+        <item>Ease Out Quad</item>
+        <item>Ease In Out Quad</item>
+        <item>Ease In Cubic</item>
+        <item>Ease Out Cubic</item>
+        <item>Ease In Out Cubic</item>
+        <item>Ease In Quart</item>
+        <item>Ease Out Quart</item>
+        <item>Ease In Out Quart</item>
+        <item>Ease In Quint</item>
+        <item>Ease Out Quint</item>
+        <item>Ease In Out Quint</item>
+        <item>Ease In Expo</item>
+        <item>Ease Out Expo</item>
+        <item>Ease In Out Expo</item>
+        <item>Ease In Circ</item>
+        <item>Ease Out Circ</item>
+        <item>Ease In Out Circ</item>
+        <item>Ease In Back</item>
+        <item>Ease Out Back</item>
+        <item>Ease In Out Back</item>
+        <item>Ease In Elastic</item>
+        <item>Ease Out Elastic</item>
+        <item>Ease In Out Elastic</item>
+        <item>Ease In Bounce</item>
+        <item>Ease Out Bounce</item>
+        <item>Ease In Out Bounce</item>
+        <item>Linear</item>
+    </string-array>
+
+    <string-array name="jellys">
+        <item>Itself</item>
+        <item>Lazy Tremble Fatty</item>
+    </string-array>
+
+</resources>

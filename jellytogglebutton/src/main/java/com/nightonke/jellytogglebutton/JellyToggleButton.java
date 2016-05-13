@@ -19,7 +19,6 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -27,6 +26,10 @@ import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.CompoundButton;
+
+import com.nightonke.jellytogglebutton.ColorChangeTypes.ColorChangeType;
+import com.nightonke.jellytogglebutton.EaseTypes.EaseType;
+import com.nightonke.jellytogglebutton.JellyTypes.Jelly;
 
 /**
  * Created by Weiping on 2016/5/10.
@@ -74,7 +77,8 @@ public class JellyToggleButton extends CompoundButton {
     private static final float DEFAULT_BEZIER_SCALE_RATIO_VALUE = 0.45f;
 
     private static final ColorChangeType DEFAULT_COLOR_CHANGE_TYPE = ColorChangeType.RGB;
-    private static final Jelly DEFAULT_JELLY = Jelly.PASSIVE_DAMPING_TAIL;
+    private static final Jelly DEFAULT_JELLY = Jelly.LAZY_TREMBLE_FATTY;
+    private static final EaseType DEFAULT_EASE_TYPE = EaseType.Linear;
 
     private static final boolean DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER = false;
 
@@ -119,6 +123,7 @@ public class JellyToggleButton extends CompoundButton {
 
     private ColorChangeType mColorChangeType = DEFAULT_COLOR_CHANGE_TYPE;
     private Jelly mJelly = DEFAULT_JELLY;
+    private EaseType mEaseType = DEFAULT_EASE_TYPE;
 
     private OnStateChangeListener mOnStateChangeListener;
 
@@ -261,16 +266,17 @@ public class JellyToggleButton extends CompoundButton {
 
             mMoveToSameStateCallListener = ta.getBoolean(R.styleable.JellyToggleButton_jtbMoveToSameStateCallListener, DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER);
 
-            String colorChangeTypeString = ta.getString(R.styleable.JellyToggleButton_jtbColorChangeType);
-            if ("rgb".equals(colorChangeTypeString)) {
-                mColorChangeType = ColorChangeType.RGB;
-            } else if ("hsv".equals(colorChangeTypeString)) {
-                mColorChangeType = ColorChangeType.HSV;
-            }
+            int colorChangeTypeInteger = ta.getInteger(R.styleable.JellyToggleButton_jtbColorChangeType, -1);
+            if (colorChangeTypeInteger != -1) mColorChangeType = ColorChangeType.values()[colorChangeTypeInteger];
+            else mColorChangeType = DEFAULT_COLOR_CHANGE_TYPE;
 
-            String jellyString = ta.getString(R.styleable.JellyToggleButton_jtbJelly);
-            if (jellyString != null) mJelly = Jelly.valueOf(jellyString);
+            int jellyInteger = ta.getInteger(R.styleable.JellyToggleButton_jtbJelly, -1);
+            if (jellyInteger != -1) mJelly = Jelly.values()[jellyInteger];
             else mJelly = DEFAULT_JELLY;
+
+            int easeTypeInteger = ta.getInteger(R.styleable.JellyToggleButton_jtbEaseType, -1);
+            if (easeTypeInteger != -1) mEaseType = EaseType.values()[easeTypeInteger];
+            else mEaseType = DEFAULT_EASE_TYPE;
 
             ta.recycle();
         }
@@ -444,7 +450,7 @@ public class JellyToggleButton extends CompoundButton {
 
         mJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
 
-        mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState);
+        mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
 
         mThumbPath.reset();
         mThumbPath.moveTo(mThumbP1.x,mThumbP1.y);
@@ -535,23 +541,24 @@ public class JellyToggleButton extends CompoundButton {
 
     private void setStartProcessPoints() {
         float thumbTop = getPaddingTop();
+        float thumbLeft = getPaddingLeft();
 
         mThumbP1.setY(thumbTop + 2 * mThumbRadius);
-        mThumbP1.x = mThumbRadius;
+        mThumbP1.x = thumbLeft + mThumbRadius;
         mThumbP1.left.x = mThumbP1.x - mThumbRadius * mBezierControlValue;
         mThumbP1.right.x = mThumbP1.x + mThumbRadius * mBezierControlValue;
 
-        mThumbP2.setX(2 * mThumbRadius);
+        mThumbP2.setX(thumbLeft + 2 * mThumbRadius);
         mThumbP2.y = thumbTop + mThumbRadius;
         mThumbP2.top.y = mThumbP2.y - mThumbRadius * mBezierControlValue;
         mThumbP2.bottom.y = mThumbP2.y + mThumbRadius * mBezierControlValue;
 
         mThumbP3.setY(thumbTop);
-        mThumbP3.x = mThumbRadius;
+        mThumbP3.x = thumbLeft + mThumbRadius;
         mThumbP3.left.x = mThumbP3.x - mThumbRadius * mBezierControlValue;
         mThumbP3.right.x = mThumbP3.x + mThumbRadius * mBezierControlValue;
 
-        mThumbP4.setX(0);
+        mThumbP4.setX(thumbLeft + 0);
         mThumbP4.y = thumbTop + mThumbRadius;
         mThumbP4.top.y = mThumbP4.y - mThumbRadius * mBezierControlValue;
         mThumbP4.bottom.y = mThumbP4.y + mThumbRadius * mBezierControlValue;
@@ -1157,6 +1164,14 @@ public class JellyToggleButton extends CompoundButton {
 
     public void setJelly(Jelly jelly) {
         mJelly = jelly;
+    }
+
+    public EaseType getEaseType() {
+        return mEaseType;
+    }
+
+    public void setEaseType(EaseType easeType) {
+        mEaseType = easeType;
     }
 
     public OnStateChangeListener getOnStateChangeListener() {

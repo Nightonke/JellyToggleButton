@@ -12,16 +12,20 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nightonke.jellytogglebutton.ColorChangeType;
+import com.nightonke.jellytogglebutton.ColorChangeTypes.ColorChangeType;
+import com.nightonke.jellytogglebutton.EaseTypes.EaseType;
 import com.nightonke.jellytogglebutton.JellyToggleButton;
+import com.nightonke.jellytogglebutton.JellyTypes.Jelly;
 import com.nightonke.jellytogglebutton.State;
 
 public class SettingsActivity extends AppCompatActivity
@@ -57,7 +61,11 @@ public class SettingsActivity extends AppCompatActivity
     private SeekBar textMarginTopBottomSeekBar;
 
     private RadioGroup colorChangeType;
-    
+
+    private Spinner easeTypes;
+
+    private Spinner jellys;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -255,6 +263,34 @@ public class SettingsActivity extends AppCompatActivity
             }
         });
         colorChangeType.check(R.id.color_change_type_rgb);
+
+        easeTypes = findView(R.id.ease_types);
+        easeTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                jtb.setEaseType(EaseType.values()[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        easeTypes.setSelection(30);
+
+        jellys = findView(R.id.jellys);
+        jellys.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                jtb.setJelly(Jelly.values()[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        jellys.setSelection(1);
     }
 
     @Override
