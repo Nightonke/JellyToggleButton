@@ -10,7 +10,7 @@ import com.nightonke.jellytogglebutton.Utils;
  * Created by Weiping on 2016/5/11.
  */
 
-public class LazyTrembleSlimJim extends JellyStyle {
+public class LazyTrembleTailSlimJim extends JellyStyle {
 
     private static final float TOTAL_LENGTH = (float) (7 * Math.PI / 4);
     private static final float B = 0.4f;

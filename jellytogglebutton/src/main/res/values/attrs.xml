@@ -34,10 +34,14 @@
 
         <attr name="jtbJelly" format="enum">
             <enum name="itself" value="0"/>
-            <enum name="lazy_tremble_fatty" value="1"/>
-            <enum name="lazy_tremble_slim_jim" value="2"/>
-            <enum name="lazy_stiff_fatty" value="3"/>
-            <enum name="lazy_stiff_slim_jim" value="4"/>
+            <enum name="lazy_tremble_head_fatty" value="1"/>
+            <enum name="lazy_tremble_head_slim_jim" value="2"/>
+            <enum name="lazy_tremble_tail_fatty" value="3"/>
+            <enum name="lazy_tremble_tail_slim_jim" value="4"/>
+            <enum name="lazy_tremble_body_fatty" value="5"/>
+            <enum name="lazy_tremble_body_slim_jim" value="6"/>
+            <enum name="lazy_stiff_fatty" value="7"/>
+            <enum name="lazy_stiff_slim_jim" value="8"/>
         </attr>
 
         <attr name="jtbEaseType" format="enum">

@@ -19,7 +19,6 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -78,11 +77,11 @@ public class JellyToggleButton extends CompoundButton {
     private static final float DEFAULT_BEZIER_SCALE_RATIO_VALUE = 0.45f;
 
     private static final ColorChangeType DEFAULT_COLOR_CHANGE_TYPE = ColorChangeType.RGB;
-    private static final Jelly DEFAULT_JELLY = Jelly.LAZY_TREMBLE_FATTY;
+    private static final Jelly DEFAULT_JELLY = Jelly.LAZY_TREMBLE_TAIL_FATTY;
     private static final EaseType DEFAULT_EASE_TYPE = EaseType.Linear;
 
     private static final boolean DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER = false;
-    private static final boolean DERAULT_DRAGGABLE = true;
+    private static final boolean DEFAULT_DRAGGABLE = true;
 
     /**
      * The following values are used to draw the JBT.
@@ -130,7 +129,7 @@ public class JellyToggleButton extends CompoundButton {
     private OnStateChangeListener mOnStateChangeListener;
 
     private boolean mMoveToSameStateCallListener = DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER;
-    private boolean mDraggable = DERAULT_DRAGGABLE;
+    private boolean mDraggable = DEFAULT_DRAGGABLE;
 
     /**
      * The following values are used to calculate the position or just for convenience.
@@ -268,7 +267,7 @@ public class JellyToggleButton extends CompoundButton {
             mBezierScaleRatioValue = ta.getFloat(R.styleable.JellyToggleButton_jtbBezierScaleRatioValue, DEFAULT_BEZIER_SCALE_RATIO_VALUE);
 
             mMoveToSameStateCallListener = ta.getBoolean(R.styleable.JellyToggleButton_jtbMoveToSameStateCallListener, DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER);
-            mDraggable = ta.getBoolean(R.styleable.JellyToggleButton_jtbDraggable, DERAULT_DRAGGABLE);
+            mDraggable = ta.getBoolean(R.styleable.JellyToggleButton_jtbDraggable, DEFAULT_DRAGGABLE);
 
             int colorChangeTypeInteger = ta.getInteger(R.styleable.JellyToggleButton_jtbColorChangeType, -1);
             if (colorChangeTypeInteger != -1) mColorChangeType = ColorChangeType.values()[colorChangeTypeInteger];

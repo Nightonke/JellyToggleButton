@@ -10,12 +10,12 @@ import com.nightonke.jellytogglebutton.Utils;
  * Created by Weiping on 2016/5/11.
  */
 
-public class LazyTrembleFatty extends JellyStyle {
+public class LazyTrembleHeadFatty extends JellyStyle {
 
     private static final float TOTAL_LENGTH = (float) (7 * Math.PI / 4);
     private static final float B = 0.4f;
     private static final float C = 2.0f;
-    private static final float D = (float) (Math.PI / 2);
+    private static final float D = 0.0f;
 
     private static final float T0 = 0.000f;
     private static final float T1 = 0.135f;
@@ -24,7 +24,7 @@ public class LazyTrembleFatty extends JellyStyle {
     private static final float T4 = 0.612f;
     private static final float T5 = 1.000f;
 
-    private static final float VIBRATION_STRETCH_RATIO = 2f;
+    private static final float VIBRATION_STRETCH_RATIO = 3f;
 
     @Override
     public void changeShape(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float stretchDistance, float bezierControlValue, float bezierScaleRatioValue, float thumbRadius, float process, State state) {
@@ -49,7 +49,7 @@ public class LazyTrembleFatty extends JellyStyle {
                 p4.moveX(stretchDistance / 2 * (process - T3) / (T4 - T3));
             } else if (T4 < process && process <= T5) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, T4, state);
-                p4.moveX(-Utils.vibration(
+                p2.moveX(Utils.vibration(
                         (process - T4) / (T5 - T4),
                         TOTAL_LENGTH,
                         stretchDistance / VIBRATION_STRETCH_RATIO,
@@ -79,7 +79,7 @@ public class LazyTrembleFatty extends JellyStyle {
                 p2.moveX(-stretchDistance / 2 * (rProcess - T3) / (T4 - T3));
             } else if (T4 < rProcess && rProcess <= T5) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, 1 - T4, state);
-                p2.moveX(Utils.vibration(
+                p4.moveX(-Utils.vibration(
                         (rProcess - T4) / (T5 - T4),
                         TOTAL_LENGTH,
                         stretchDistance / VIBRATION_STRETCH_RATIO,
@@ -100,16 +100,18 @@ public class LazyTrembleFatty extends JellyStyle {
     @Override
     public void changeOffset(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float totalLength, float extractLength, float process, State state, EaseType easeType) {
         if (state.equals(State.LEFT_TO_RIGHT)) {
-            float offset = totalLength * easeType.getOffset((process - T1) / (T5 - T1));
+            float offset = totalLength * easeType.getOffset((process - T1) / (T4 - T1));
             offset = offset > 0 ? offset : 0;
+            offset = offset > totalLength ? totalLength : offset;
             p1.moveX(offset);
             p2.moveX(offset);
             p3.moveX(offset);
             p4.moveX(offset);
         } else if (state.equals(State.RIGHT_TO_LEFT)) {
             float rProcess = 1 - process;
-            float offset = totalLength * easeType.getOffset((rProcess - T1) / (T5 - T1));
+            float offset = totalLength * easeType.getOffset((rProcess - T1) / (T4 - T1));
             offset = offset > 0 ? offset : 0;
+            offset = offset > totalLength ? totalLength : offset;
             p1.moveX(totalLength + extractLength - offset);
             p2.moveX(totalLength + extractLength - offset);
             p3.moveX(totalLength + extractLength - offset);
