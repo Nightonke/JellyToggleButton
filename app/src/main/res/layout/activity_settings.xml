@@ -327,6 +327,30 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Custom Jelly"
+                    android:textSize="22sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@android:color/black"
+                    />
+
+                <Button
+                    android:id="@+id/custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Use Custom Jelly"
+                    />
+
+                <Button
+                    android:id="@+id/remove_custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Remove Custom Jelly"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Text"
                     android:textSize="22sp"
                     android:layout_marginTop="20dp"

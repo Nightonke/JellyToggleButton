@@ -42,6 +42,7 @@
             <enum name="lazy_tremble_body_slim_jim" value="6"/>
             <enum name="lazy_stiff_fatty" value="7"/>
             <enum name="lazy_stiff_slim_jim" value="8"/>
+            <enum name="active_stiff_fatty" value="9"/>
         </attr>
 
         <attr name="jtbEaseType" format="enum">

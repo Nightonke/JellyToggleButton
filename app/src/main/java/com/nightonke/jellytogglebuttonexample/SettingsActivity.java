@@ -67,8 +67,6 @@ public class SettingsActivity extends AppCompatActivity
 
     private Spinner jellys;
 
-    private Button draggable;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +103,8 @@ public class SettingsActivity extends AppCompatActivity
         findView(R.id.font_light).setOnClickListener(this);
         findView(R.id.font_default).setOnClickListener(this);
         findView(R.id.draggable).setOnClickListener(this);
+        findView(R.id.custom).setOnClickListener(this);
+        findView(R.id.remove_custom).setOnClickListener(this);
 
         durationText = findView(R.id.duration_text);
         durationSeekBar = findView(R.id.duration);
@@ -380,6 +380,12 @@ public class SettingsActivity extends AppCompatActivity
                 break;
             case R.id.draggable:
                 jtb.setDraggable(!jtb.isDraggable());
+                break;
+            case R.id.custom:
+                jtb.setCustomJelly(new CustomJelly());
+                break;
+            case R.id.remove_custom:
+                jtb.removeCustomJelly();
                 break;
         }
     }

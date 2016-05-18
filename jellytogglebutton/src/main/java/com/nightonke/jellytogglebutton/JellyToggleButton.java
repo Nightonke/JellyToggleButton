@@ -30,6 +30,7 @@ import android.widget.CompoundButton;
 import com.nightonke.jellytogglebutton.ColorChangeTypes.ColorChangeType;
 import com.nightonke.jellytogglebutton.EaseTypes.EaseType;
 import com.nightonke.jellytogglebutton.JellyTypes.Jelly;
+import com.nightonke.jellytogglebutton.JellyTypes.JellyStyle;
 
 /**
  * Created by Weiping on 2016/5/10.
@@ -130,6 +131,8 @@ public class JellyToggleButton extends CompoundButton {
 
     private boolean mMoveToSameStateCallListener = DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER;
     private boolean mDraggable = DEFAULT_DRAGGABLE;
+
+    private JellyStyle mCustomJelly = null;
 
     /**
      * The following values are used to calculate the position or just for convenience.
@@ -451,9 +454,11 @@ public class JellyToggleButton extends CompoundButton {
         // thumb
         setStartProcessPoints();
 
-        mJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
+        if (mCustomJelly != null) mCustomJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
+        else mJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
 
-        mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
+        if (mCustomJelly != null) mCustomJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mCustomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
+        else mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
 
         mThumbPath.reset();
         mThumbPath.moveTo(mThumbP1.x,mThumbP1.y);
@@ -535,9 +540,9 @@ public class JellyToggleButton extends CompoundButton {
                 } else {
                     if (nextStatus != isChecked()) {
                         playSoundEffect(SoundEffectConstants.CLICK);
-                        animateToState(nextStatus, true);
+                        animateToState(nextStatus, true, true);
                     } else {
-                        animateToState(nextStatus, mMoveToSameStateCallListener);
+                        animateToState(nextStatus, mMoveToSameStateCallListener, true);
                     }
                 }
                 break;
@@ -574,7 +579,8 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     private float getNoExtractTotalLength() {
-        return mThumbRight - mThumbLeft - 2 * mThumbRadius - mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
+        if (mCustomJelly != null) return mThumbRight - mThumbLeft - 2 * mThumbRadius - mCustomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
+        else return mThumbRight - mThumbLeft - 2 * mThumbRadius - mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
     }
 
     private boolean getStatusBasedOnPos() {
@@ -622,19 +628,26 @@ public class JellyToggleButton extends CompoundButton {
         return super.performClick();
     }
 
-    private void animateToState(boolean checked, boolean callListener) {
+    private void animateToState(boolean checked, boolean callListener, boolean resetToTarget) {
         if (mProcessAnimator == null) {
             return;
         }
         if (mProcessAnimator.isRunning()) {
             return;
         }
-        mProcessAnimator.setDuration(mDuration);
         if (checked) {
             setAnimator(1, callListener);
         } else {
             setAnimator(0, callListener);
         }
+        int duration = mDuration;
+        if (resetToTarget) {
+            // this situation happens when user drag the thumb to target,
+            // but then leave the target for a bit.
+            if (checked) duration *= 1 - mProcess;
+            else duration *= mProcess - 0;
+        }
+        mProcessAnimator.setDuration(duration);
         mProcessAnimator.start();
     }
 
@@ -653,7 +666,7 @@ public class JellyToggleButton extends CompoundButton {
     public void setChecked(boolean checked, boolean callListener) {
         mProcess = checked ? 0 : 1;
         if (callListener) lastState = checked ? State.LEFT : State.RIGHT;
-        animateToState(checked, callListener);
+        animateToState(checked, callListener, false);
         super.setChecked(checked);
     }
 
@@ -671,7 +684,7 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     public void setAnimator(float target, final boolean callListener) {
-        mProcessAnimator = ValueAnimator.ofFloat(mProcess, target).setDuration(mDuration);
+        mProcessAnimator = ValueAnimator.ofFloat(mProcess, target);
         mProcessAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -1201,6 +1214,18 @@ public class JellyToggleButton extends CompoundButton {
 
     public void setOnStateChangeListener(OnStateChangeListener onStateChangeListener) {
         mOnStateChangeListener = onStateChangeListener;
+    }
+
+    public JellyStyle getCustomJelly() {
+        return mCustomJelly;
+    }
+
+    public void setCustomJelly(JellyStyle customJelly) {
+        mCustomJelly = customJelly;
+    }
+
+    public void removeCustomJelly() {
+        mCustomJelly = null;
     }
 
     public interface OnStateChangeListener {
