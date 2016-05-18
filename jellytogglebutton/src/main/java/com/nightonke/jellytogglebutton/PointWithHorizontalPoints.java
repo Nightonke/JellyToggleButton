@@ -27,4 +27,10 @@ public class PointWithHorizontalPoints {
         left.x += offset;
         right.x += offset;
     }
+
+    public void moveY(float offset) {
+        this.y += offset;
+        left.y += offset;
+        right.y += offset;
+    }
 }

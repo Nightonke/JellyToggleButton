@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -66,6 +67,8 @@ public class SettingsActivity extends AppCompatActivity
 
     private Spinner jellys;
 
+    private Button draggable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,7 @@ public class SettingsActivity extends AppCompatActivity
         findView(R.id.font_hairline).setOnClickListener(this);
         findView(R.id.font_light).setOnClickListener(this);
         findView(R.id.font_default).setOnClickListener(this);
+        findView(R.id.draggable).setOnClickListener(this);
 
         durationText = findView(R.id.duration_text);
         durationSeekBar = findView(R.id.duration);
@@ -373,6 +377,9 @@ public class SettingsActivity extends AppCompatActivity
                 break;
             case R.id.font_default:
                 jtb.setTextTypeface(Typeface.DEFAULT);
+                break;
+            case R.id.draggable:
+                jtb.setDraggable(!jtb.isDraggable());
                 break;
         }
     }

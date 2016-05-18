@@ -19,6 +19,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -81,6 +82,7 @@ public class JellyToggleButton extends CompoundButton {
     private static final EaseType DEFAULT_EASE_TYPE = EaseType.Linear;
 
     private static final boolean DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER = false;
+    private static final boolean DERAULT_DRAGGABLE = true;
 
     /**
      * The following values are used to draw the JBT.
@@ -128,6 +130,7 @@ public class JellyToggleButton extends CompoundButton {
     private OnStateChangeListener mOnStateChangeListener;
 
     private boolean mMoveToSameStateCallListener = DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER;
+    private boolean mDraggable = DERAULT_DRAGGABLE;
 
     /**
      * The following values are used to calculate the position or just for convenience.
@@ -265,6 +268,7 @@ public class JellyToggleButton extends CompoundButton {
             mBezierScaleRatioValue = ta.getFloat(R.styleable.JellyToggleButton_jtbBezierScaleRatioValue, DEFAULT_BEZIER_SCALE_RATIO_VALUE);
 
             mMoveToSameStateCallListener = ta.getBoolean(R.styleable.JellyToggleButton_jtbMoveToSameStateCallListener, DEFAULT_MOVE_TO_SAME_STATE_CALL_LISTENER);
+            mDraggable = ta.getBoolean(R.styleable.JellyToggleButton_jtbDraggable, DERAULT_DRAGGABLE);
 
             int colorChangeTypeInteger = ta.getInteger(R.styleable.JellyToggleButton_jtbColorChangeType, -1);
             if (colorChangeTypeInteger != -1) mColorChangeType = ColorChangeType.values()[colorChangeTypeInteger];
@@ -487,6 +491,11 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     @Override
+    public boolean isChecked() {
+        return super.isChecked();
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if (!isEnabled() || !isClickable()) {
@@ -511,6 +520,7 @@ public class JellyToggleButton extends CompoundButton {
                 break;
 
             case MotionEvent.ACTION_MOVE:
+                if (!mDraggable) return true;
                 float x = event.getX();
                 setProcess(getProcess() + (x - mLastX) / (getNoExtractTotalLength() * mTouchMoveRatioValue), true);
                 mLastX = x;
@@ -592,10 +602,14 @@ public class JellyToggleButton extends CompoundButton {
             }
         }
         this.mProcess = tp;
+        if (mState.equals(State.LEFT)) super.setChecked(false);
+        if (mState.equals(State.RIGHT)) super.setChecked(true);
         if (callListener && mOnStateChangeListener != null) {
             if (mState.equals(State.LEFT) || mState.equals(State.RIGHT)) {
                 // at this time, we don't need to call the listener
-                if (!mState.equals(lastState)) mOnStateChangeListener.onStateChange(mProcess, mState, this);
+                if (!mState.equals(lastState)) {
+                    mOnStateChangeListener.onStateChange(mProcess, mState, this);
+                }
             } else {
                 mOnStateChangeListener.onStateChange(mProcess, mState, this);
             }
@@ -614,7 +628,7 @@ public class JellyToggleButton extends CompoundButton {
             return;
         }
         if (mProcessAnimator.isRunning()) {
-            mProcessAnimator.cancel();
+            return;
         }
         mProcessAnimator.setDuration(mDuration);
         if (checked) {
@@ -1072,6 +1086,14 @@ public class JellyToggleButton extends CompoundButton {
 
     public float getBackgroundRadius() {
         return mBackgroundRadius;
+    }
+
+    public boolean isDraggable() {
+        return mDraggable;
+    }
+
+    public void setDraggable(boolean draggable) {
+        this.mDraggable = draggable;
     }
 
     public void setBackgroundRadius(float radius) {

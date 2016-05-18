@@ -11,7 +11,10 @@ import com.nightonke.jellytogglebutton.State;
 public enum Jelly {
 
     ITSELF(Itself.class),
-    LAZY_TREMBLE_FATTY(LazyTrembleFatty.class);
+    LAZY_TREMBLE_FATTY(LazyTrembleFatty.class),
+    LAZY_TREMBLE_SLIM_JIM(LazyTrembleSlimJim.class),
+    LAZY_STIFF_FATTY(LazyStiffFatty.class),
+    LAZY_STIFF_SLIM_JIM(LazyStiffSlimJim.class);
 
     public Class c;
 

@@ -38,6 +38,9 @@
     <string-array name="jellys">
         <item>Itself</item>
         <item>Lazy Tremble Fatty</item>
+        <item>Lazy Tremble Slim Jim</item>
+        <item>Lazy Stiff Fatty</item>
+        <item>Lazy Stiff Slim Jim</item>
     </string-array>
 
 </resources>

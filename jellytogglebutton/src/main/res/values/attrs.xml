@@ -35,6 +35,9 @@
         <attr name="jtbJelly" format="enum">
             <enum name="itself" value="0"/>
             <enum name="lazy_tremble_fatty" value="1"/>
+            <enum name="lazy_tremble_slim_jim" value="2"/>
+            <enum name="lazy_stiff_fatty" value="3"/>
+            <enum name="lazy_stiff_slim_jim" value="4"/>
         </attr>
 
         <attr name="jtbEaseType" format="enum">
@@ -79,6 +82,7 @@
         <attr name="jtbBezierScaleRatioValue" format="float|reference"/>
 
         <attr name="jtbMoveToSameStateCallListener" format="boolean|reference"/>
+        <attr name="jtbDraggable" format="boolean|reference"/>
 
     </declare-styleable>
 
