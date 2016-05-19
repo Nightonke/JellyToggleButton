@@ -507,11 +507,6 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     @Override
-    public boolean isChecked() {
-        return super.isChecked();
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if (!isEnabled() || !isClickable()) {
@@ -691,6 +686,11 @@ public class JellyToggleButton extends CompoundButton {
         if (parent != null) {
             parent.requestDisallowInterceptTouchEvent(true);
         }
+    }
+
+    @Override
+    public boolean isChecked() {
+        return super.isChecked();
     }
 
     @Override

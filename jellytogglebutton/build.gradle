@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'jellytogglebutton'
+
+    publishedGroupId = 'com.nightonke'
+    libraryName = 'jellytogglebutton'
+    artifact = 'jellytogglebutton'
+
+    libraryDescription = 'Toggle button with different jelly effects.'
+
+    siteUrl = 'https://github.com/Nightonke/JellyToggleButton'
+    gitUrl = 'https://github.com/Nightonke/JellyToggleButton.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'nightonke'
+    developerName = 'Weiping Huang'
+    developerEmail = 'nightonke@outlook.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -8,7 +32,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -23,3 +47,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
