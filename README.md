@@ -8,18 +8,18 @@
 [![GithubWidget](https://github.com/Nightonke/GithubWidget/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)](https://github.com/Nightonke/GithubWidget)
 [![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)](https://github.com/Nightonke/JellyToggleButton)
 
-![JellyToggleButton]()  
+![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/img/JellyToggleButton4.gif?raw=true)  
 JellyToggleButton(JTB) is a cute toggle button with 18 jelly types and 30 ease types.  
 You can also [define](https://github.com/Nightonke/JellyToggleButton#define-your-jelly) your own style and have your JTB custom-made.  
 Maybe the gif above can not show how cute JTB is. You can click to see the video of JTB below.  
-[![JellyToggleButton](http://img.youtube.com/vi/KCSeStDJfMI/0.jpg)](https://youtu.be/KCSeStDJfMI)
+[![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/img/youtobe_image.png?raw=true)](https://youtu.be/KCSeStDJfMI)
 
 # Guide
 
-1. [中文文档]()
+1. [中文文档](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md)
 2. [Gradle](https://github.com/Nightonke/JellyToggleButton#gradle)
 3. [Demo](https://github.com/Nightonke/JellyToggleButton#demo)
-4. [Use Guide](https://github.com/Nightonke/JellyToggleButton#user-guide)
+4. [Use Guide](https://github.com/Nightonke/JellyToggleButton#use-guide)
     1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton#18-jellys)
     2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)
     2. [Ease Types](https://github.com/Nightonke/JellyToggleButton#ease-types)
@@ -36,28 +36,40 @@ Maybe the gif above can not show how cute JTB is. You can click to see the video
 6. [Todo](https://github.com/Nightonke/JellyToggleButton#todo)
 7. [License](https://github.com/Nightonke/JellyToggleButton#license)
 
-### Gradle
+# Gradle
 
 ```
 dependencies {
     ...
-    compile 'com.nightonke:jellytogglebutton:1.0.1'
+    compile 'com.nightonke:jellytogglebutton:1.0.2'
     ...
 }
 ```
 
-### Demo
+# Demo
 
 ![Demo](https://github.com/Nightonke/JellyToggleButton/blob/master/img/demo_picture.png?raw=true)  
 Try the demo above to see how cute JTB is. Download the apk from:  
-1. [Github](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.apk?raw=true)  
+1. [Github](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.2.apk?raw=true)  
 2. [http://fir.im/jellytogglebutton](http://fir.im/jellytogglebutton)  
 3.   
-[![Qrcode](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.png?raw=true)](http://fir.im/jellytogglebutton)
+[![Qrcode](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.2.png?raw=true)](http://fir.im/jellytogglebutton)
 
-### User Guide
+# Use Guide
+1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton#18-jellys)
+2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)
+2. [Ease Types](https://github.com/Nightonke/JellyToggleButton#ease-types)
+3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton#setcheck-methods)
+4. [Colors](https://github.com/Nightonke/JellyToggleButton#colors)
+4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton#colorchangetype)
+5. [Fonts](https://github.com/Nightonke/JellyToggleButton#fonts)
+6. [Duration](https://github.com/Nightonke/JellyToggleButton#duration)
+7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton#text-text-size-and-margins)
+8. [Draggable](https://github.com/Nightonke/JellyToggleButton#draggable)
+9. [Listener](https://github.com/Nightonke/JellyToggleButton#listener)
+10. [Other Methods](https://github.com/Nightonke/JellyToggleButton#other-methods)
 
-#### 18 Jellys
+## 18 Jellys
 JTB provides 18 kinds of jelly types to show different effects of thumb. You can use different jelly types in xml or by ```setJelly()``` method.  
 Use in xml:  
 ```
@@ -73,28 +85,28 @@ jtb.setJelly(Jelly.ITSELF);
 ```
 |app:jtbJelly=""|setJelly()|Effect|
 |:---|:---|:---|
-|itself|ITSELF||
-|lazy_tremble_head_fatty|LAZY_TREMBLE_HEAD_FATTY||
-|lazy_tremble_head_slim_jim|LAZY_TREMBLE_HEAD_SLIM_JIM||
-|lazy_tremble_tail_fatty|LAZY_TREMBLE_TAIL_FATTY||
-|lazy_tremble_tail_slim_jim|LAZY_TREMBLE_TAIL_SLIM_JIM||
-|lazy_tremble_body_fatty|LAZY_TREMBLE_BODY_FATTY||
-|lazy_tremble_body_slim_jim|LAZY_TREMBLE_BODY_SLIM_JIM||
-|lazy_stiff_fatty|LAZY_STIFF_FATTY||
-|lazy_stiff_slim_jim|LAZY_STIFF_SLIM_JIM||
-|active_tremble_head_fatty|ACTIVE_TREMBLE_HEAD_FATTY||
-|active_tremble_head_slim_jim|ACTIVE_TREMBLE_HEAD_SLIM_JIM||
-|active_tremble_tail_fatty|ACTIVE_TREMBLE_TAIL_FATTY||
-|active_tremble_tail_slim_jim|ACTIVE_TREMBLE_TAIL_SLIM_JIM||
-|active_tremble_body_fatty|ACTIVE_TREMBLE_BODY_FATTY||
-|active_tremble_body_slim_jim|ACTIVE_TREMBLE_BODY_SLIM_JIM||
-|active_stiff_fatty|ACTIVE_STIFF_FATTY||
-|active_stiff_slim_jim|ACTIVE_STIFF_SLIM_JIM||
-|random|RANDOM||
+|itself|ITSELF|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/Itself.gif?raw=true)|
+|lazy_tremble_head_fatty|LAZY_TREMBLE_HEAD_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyTrembleHeadFatty.gif?raw=true)|
+|lazy_tremble_head_slim_jim|LAZY_TREMBLE_HEAD_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyTrembleHeadSlimJim.gif?raw=true)|
+|lazy_tremble_tail_fatty|LAZY_TREMBLE_TAIL_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyTrembleTailFatty.gif?raw=true)|
+|lazy_tremble_tail_slim_jim|LAZY_TREMBLE_TAIL_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyTrembleTailSlimJim.gif?raw=true)|
+|lazy_tremble_body_fatty|LAZY_TREMBLE_BODY_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyTrembleBodyFatty.gif?raw=true)|
+|lazy_tremble_body_slim_jim|LAZY_TREMBLE_BODY_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyTrembleBodySlimJim.gif?raw=true)|
+|lazy_stiff_fatty|LAZY_STIFF_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyStiffFatty.gif?raw=true)|
+|lazy_stiff_slim_jim|LAZY_STIFF_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyStiffSlimJim.gif?raw=true)|
+|active_tremble_head_fatty|ACTIVE_TREMBLE_HEAD_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveTrembleHeadFatty.gif?raw=true)|
+|active_tremble_head_slim_jim|ACTIVE_TREMBLE_HEAD_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveTrembleHeadSlimJim.gif?raw=true)|
+|active_tremble_tail_fatty|ACTIVE_TREMBLE_TAIL_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveTrembleTailFatty.gif?raw=true)|
+|active_tremble_tail_slim_jim|ACTIVE_TREMBLE_TAIL_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveTrembleTailSlimJim.gif?raw=true)|
+|active_tremble_body_fatty|ACTIVE_TREMBLE_BODY_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveTrembleBodyFatty.gif?raw=true)|
+|active_tremble_body_slim_jim|ACTIVE_TREMBLE_BODY_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveTrembleBodySlimJim.gif?raw=true)|
+|active_stiff_fatty|ACTIVE_STIFF_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveStiffFatty.gif?raw=true)|
+|active_stiff_slim_jim|ACTIVE_STIFF_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveStiffSlimJim.gif?raw=true)|
+|random|RANDOM|All Above|
 
 Notice that random type will change the jelly among the other 17 types randomly.
 
-#### Define Your Jelly
+## Define Your Jelly
 You can define you own jelly easily. But you need sometime to understand what happens in the source code of [Jelly enum](https://github.com/Nightonke/JellyToggleButton/tree/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes). All the jelly type are the sub types of [JellyStyle.class](https://github.com/Nightonke/JellyToggleButton/blob/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes/JellyStyle.java).  
 To extend the abstract class, you have to override 3 methods:
 ```
@@ -120,7 +132,7 @@ public class MyJelly extends JellyStyle {
 ```
 After this, use ```setCustomJelly()``` to set your custom jelly. Notice that if you don't want to use the custom any more, you have to use ```removeCustomJelly()``` to reset.
 
-#### Ease Types
+## Ease Types
 Ease types are used to set the effect of movement of the thumb.    
 ![Ease](https://github.com/Nightonke/WoWoViewPager/blob/master/Pictures/ease.png)  
 Of course you can use linear function. 
@@ -173,7 +185,7 @@ Check all the ease types below.
 |ease_in_out_bounce|EaseType.EaseInOutBounce|
 |linear|EaseType.Linear|
 
-#### SetCheck Methods
+## SetCheck Methods
 You can control the state of the JTB of the following methods:  
 (When the thumb is to the end of right, we say the JTB is checked)
 
@@ -187,57 +199,57 @@ You can control the state of the JTB of the following methods:
 8. ```toggleImmediately()``` Toggle, without animation and call the listener.
 9. ```toggleImmediately(boolean callListener)``` Toggle, without animation and you can choose not to call the listener.
 
-#### Colors
+## Colors
 Let's make the JTB colorful.  
-##### Left Background Color  
+### Left Background Color  
 Change the background color when the thumb is to the end of left with:    
 1. ```setLeftBackgroundColor(int color)```  
 2. ```setLeftBackgroundColor(String color)```  
 3. ```setLeftBackgroundColorRes(int res)``  
 
-##### Right Background Color 
+### Right Background Color 
 Change the background color when the thumb is to the end of right with:  
 1. ```setRightBackgroundColor(int color)```  
 2. ```setRightBackgroundColor(String color)```  
 3. ```setRightBackgroundColorRes(int res)```  
 
-##### Both Left and Right Background Color
+### Both Left and Right Background Color
 Change left and right background color with:  
 1. ```setBackgroundColor(int color)```  
 2. ```setBackgroundColor(String color)```  
 3. ```setBackgroundColorRes(int res)```  
 
-##### Left Thumb Color  
+### Left Thumb Color  
 Change the thumb color when the thumb is to the end of left with:    
 1. ```setLeftThumbColor(int color)```  
 2. ```setLeftThumbColor(String color)```  
 3. ```setLeftThumbColorRes(int res)```  
 
-##### Right Thumb Color 
+### Right Thumb Color 
 Change the thumb color when the thumb is to the end of right with:  
 1. ```setRightThumbColor(int color)```  
 2. ```setRightThumbColor(String color)```  
 3. ```setRightThumbColorRes(int res)```  
 
-##### Both Left and Right Thumb Color  
+### Both Left and Right Thumb Color  
 Change left and right thumb color with:  
 1. ```setThumbColor(int color)```  
 2. ```setThumbColor(String color)```  
 3. ```setThumbColorRes(int res)```  
 
-##### Left Text Color  
+### Left Text Color  
 Change the left text color with:    
 1. ```setLeftTextColor(int color)```  
 2. ```setLeftTextColor(String color)```  
 3. ```setLeftTextColorRes(int res)```  
 
-##### Right Text Color 
+### Right Text Color 
 Change the right text color with:  
 1. ```setRightTextColor(int color)```  
 2. ```setRightTextColor(String color)```  
 3. ```setRightTextColorRes(int res)```  
 
-##### Both Left and Right Text Color  
+### Both Left and Right Text Color  
 Change left and right text color with:  
 1. ```setTextColor(int color)```  
 2. ```setTextColor(String color)```  
@@ -257,7 +269,7 @@ Or set colors in xml:
     />
 ```
 
-#### ColorChangeType
+# ColorChangeType
 
 There are 2 types to perform the color changing. Use ```setColorChangeType(ColorChangeType colorChangeType)``` to select ColorChangeType.RGB or ColorChangeType.HSV or set it in xml:  
 ```
@@ -269,7 +281,7 @@ There are 2 types to perform the color changing. Use ```setColorChangeType(Color
 ```
 For more information, check [here](https://github.com/Nightonke/WoWoViewPager#rgb-or-hsv).
 
-#### Fonts
+# Fonts
 
 Use ```setLeftTextTypeface(Typeface typeface)``` and ```setLeftTextTypeface(String typefaceString)``` to set the typeface of the left text. Notice that the ```typefaceString``` is in the assets directory.  Similarly, use ```setRightTextTypeface(Typeface typeface)``` and ```setRightTextTypeface(String typefaceString)``` to set the typeface of the right text.  
 Or in xml:  
@@ -282,7 +294,7 @@ Or in xml:
     />
 ```
 
-#### Duration
+# Duration
 
 Use ```setDuration(int duration)``` to set the duration when the thumb is animating(in ms). The default value is 1000(ms).  
 Or in xml:
@@ -294,7 +306,7 @@ Or in xml:
     />
 ```
 
-#### Text, Text Size and Margins
+# Text, Text Size and Margins
 
 1. Use ```setLeftText(String text)``` , ```setLeftTextRes(int res)``` , ```setRightText(String text)``` , ```setRightTextRes(int res)``` , ```setText(String leftText, String rightText)``` and ```setTextRes(int leftRes, int rightRes)``` to set the text.
 2. Use ```setTextSize(int textSize)``` and ```setTextSizeRes(int res)``` to set the text size.
@@ -321,7 +333,7 @@ Or in xml:
     />
 ```
 
-#### Draggable
+# Draggable
 
 If you want to forbid user to drag the JTB, just call ```setDraggable(boolean draggable)``` to false.  
 Or in xml:  
@@ -333,7 +345,7 @@ Or in xml:
     />
 ```
 
-#### Listener
+# Listener
 
 JTB use ```OnStateChangeListener``` to detech all the events of itself.  
 ```
@@ -357,7 +369,7 @@ Or in xml:
     />
 ```
 
-#### Other Methods
+# Other Methods
 
 There are some methods to modify some useless values. You can use them to fine-tone the JTB.
 
@@ -366,14 +378,16 @@ There are some methods to modify some useless values. You can use them to fine-t
 3. ```setStretchDistanceRatioValue(float value)``` Set the ratio of thumb-radius to the stretch distance.
 4. ```setBezierScaleRatioValue(float value)``` and ```setBezierScaleRatioValueRes(int res)``` Set the Bezier scale control value.
 
-### Versions
-##### [Jelly 1.0.1](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.apk?raw=true)
+# Versions
+### [Jelly 1.0.1](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.apk?raw=true)
 Test Version.
+### [Jelly 1.0.2](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.2.apk?raw=true)
+First Version.
 
-### Todo
+# Todo
 Todo list is in my todo list.
 
-### License
+# License
 
     Copyright 2016 Nightonke
 
