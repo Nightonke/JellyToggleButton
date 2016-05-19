@@ -719,7 +719,7 @@ public class JellyToggleButton extends CompoundButton {
         setProcess(checked ? 1 : 0, callListener);
     }
 
-    public void setAnimator(float target, final boolean callListener) {
+    private void setAnimator(float target, final boolean callListener) {
         mProcessAnimator = ValueAnimator.ofFloat(mProcess, target);
         mProcessAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -1264,8 +1264,16 @@ public class JellyToggleButton extends CompoundButton {
         mCustomJelly = null;
     }
 
+    public boolean getMoveToSameStateCallListener() {
+        return mMoveToSameStateCallListener;
+    }
+
+    public void setMoveToSameStateCallListener(boolean callListener) {
+        mMoveToSameStateCallListener = callListener;
+    }
+
     public interface OnStateChangeListener {
-        void onStateChange(float process, State state, JellyToggleButton jbt);
+        void onStateChange(float process, State state, JellyToggleButton jtb);
     }
 
     @Override

@@ -21,6 +21,7 @@
         app:jtbLeftText="Male"
         app:jtbRightText="Female"
         app:jtbTextMarginCenter="4dp"
+        app:jtbMoveToSameStateCallListener="true"
         />
 
 </RelativeLayout>
