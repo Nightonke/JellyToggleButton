@@ -9,7 +9,7 @@ import com.nightonke.jellytogglebutton.State;
  * Created by Weiping on 2016/5/11.
  */
 
-public class LazyStiffSlimJim extends JellyStyle {
+public class ActiveStiffSlimJim extends JellyStyle {
 
     private static final float T0 = 0.000f;
     private static final float T1 = 0.251f;
@@ -21,43 +21,40 @@ public class LazyStiffSlimJim extends JellyStyle {
     public void changeShape(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float stretchDistance, float bezierControlValue, float bezierScaleRatioValue, float thumbRadius, float process, State state) {
         if (state.equals(State.LEFT_TO_RIGHT)) {
             if (T0 <= process && process <= T1) {
+                p1.moveX(stretchDistance * (process - T0) / (T1 - T0));
                 p2.moveX(stretchDistance * (process - T0) / (T1 - T0));
+                p3.moveX(stretchDistance * (process - T0) / (T1 - T0));
                 p1.moveY(-stretchDistance / 4 * (process - T0) / (T1 - T0));
                 p3.moveY(stretchDistance / 4 * (process - T0) / (T1 - T0));
             } else if (T1 < process && process <= T2) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, T1, state);
-                p1.moveX(stretchDistance / 2 * (process - T1) / (T2 - T1));
-                p3.moveX(stretchDistance / 2 * (process - T1) / (T2 - T1));
+                p4.moveX(stretchDistance * 1 / 4 * (process - T1) / (T2 - T1));
             } else if (T2 < process && process <= T3) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, T2, state);
-                p1.moveX(stretchDistance / 2 * (process - T2) / (T3 - T2));
-                p3.moveX(stretchDistance / 2 * (process - T2) / (T3 - T2));
-                p4.moveX(stretchDistance / 2 * (process - T2) / (T3 - T2));
+                p4.moveX(stretchDistance * 1 / 4 * (process - T2) / (T3 - T2));
             } else if (T3 < process && process <= T4) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, T3, state);
-                p4.moveX(stretchDistance / 2 * (process - T3) / (T4 - T3));
+                p4.moveX(stretchDistance * 2 / 4 * (process - T3) / (T4 - T3));
                 p1.moveY(stretchDistance / 4 * (process - T3) / (T4 - T3));
                 p3.moveY(-stretchDistance / 4 * (process - T3) / (T4 - T3));
             }
-
         } else if (state.equals(State.RIGHT_TO_LEFT)) {
             float rProcess = 1 - process;
             if (T0 <= rProcess && rProcess <= T1) {
+                p1.moveX(-stretchDistance * (rProcess - T0) / (T1 - T0));
                 p4.moveX(-stretchDistance * (rProcess - T0) / (T1 - T0));
+                p3.moveX(-stretchDistance * (rProcess - T0) / (T1 - T0));
                 p1.moveY(-stretchDistance / 4 * (rProcess - T0) / (T1 - T0));
                 p3.moveY(stretchDistance / 4 * (rProcess - T0) / (T1 - T0));
             } else if (T1 < rProcess && rProcess <= T2) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, 1 - T1, state);
-                p1.moveX(-stretchDistance / 2 * (rProcess - T1) / (T2 - T1));
-                p3.moveX(-stretchDistance / 2 * (rProcess - T1) / (T2 - T1));
+                p2.moveX(-stretchDistance * 1 / 4 * (rProcess - T1) / (T2 - T1));
             } else if (T2 < rProcess && rProcess <= T3) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, 1 - T2, state);
-                p1.moveX(-stretchDistance / 2 * (rProcess - T2) / (T3 - T2));
-                p3.moveX(-stretchDistance / 2 * (rProcess - T2) / (T3 - T2));
-                p2.moveX(-stretchDistance / 2 * (rProcess - T2) / (T3 - T2));
+                p2.moveX(-stretchDistance * 1 / 4 * (rProcess - T2) / (T3 - T2));
             } else if (T3 < rProcess && rProcess <= T4) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, 1 - T3, state);
-                p2.moveX(-stretchDistance / 2 * (rProcess - T3) / (T4 - T3));
+                p2.moveX(-stretchDistance * 2 / 4 * (rProcess - T3) / (T4 - T3));
                 p1.moveY(stretchDistance / 4 * (rProcess - T3) / (T4 - T3));
                 p3.moveY(-stretchDistance / 4 * (rProcess - T3) / (T4 - T3));
             }

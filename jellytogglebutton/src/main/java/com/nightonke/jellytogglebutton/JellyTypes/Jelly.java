@@ -20,7 +20,15 @@ public enum Jelly {
     LAZY_TREMBLE_BODY_SLIM_JIM(LazyTrembleBodySlimJim.class),
     LAZY_STIFF_FATTY(LazyStiffFatty.class),
     LAZY_STIFF_SLIM_JIM(LazyStiffSlimJim.class),
-    ACTIVE_STIFF_FATTY(ActiveStiffFatty.class);
+    ACTIVE_TREMBLE_HEAD_FATTY(ActiveTrembleHeadFatty.class),
+    ACTIVE_TREMBLE_HEAD_SLIM_JIM(ActiveTrembleHeadSlimJim.class),
+    ACTIVE_TREMBLE_TAIL_FATTY(ActiveTrembleTailFatty.class),
+    ACTIVE_TREMBLE_TAIL_SLIM_JIM(ActiveTrembleTailSlimJim.class),
+    ACTIVE_TREMBLE_BODY_FATTY(ActiveTrembleBodyFatty.class),
+    ACTIVE_TREMBLE_BODY_SLIM_JIM(ActiveTrembleBodySlimJim.class),
+    ACTIVE_STIFF_FATTY(ActiveStiffFatty.class),
+    ACTIVE_STIFF_SLIM_JIM(ActiveStiffSlimJim.class),
+    RANDOM(Random.class);
 
     public Class c;
 

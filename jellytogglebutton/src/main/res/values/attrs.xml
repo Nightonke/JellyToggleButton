@@ -42,7 +42,15 @@
             <enum name="lazy_tremble_body_slim_jim" value="6"/>
             <enum name="lazy_stiff_fatty" value="7"/>
             <enum name="lazy_stiff_slim_jim" value="8"/>
-            <enum name="active_stiff_fatty" value="9"/>
+            <enum name="active_tremble_head_fatty" value="9"/>
+            <enum name="active_tremble_head_slim_jim" value="10"/>
+            <enum name="active_tremble_tail_fatty" value="11"/>
+            <enum name="active_tremble_tail_slim_jim" value="12"/>
+            <enum name="active_tremble_body_fatty" value="13"/>
+            <enum name="active_tremble_body_slim_jim" value="14"/>
+            <enum name="active_stiff_fatty" value="15"/>
+            <enum name="active_stiff_slim_jim" value="16"/>
+            <enum name="random" value="17"/>
         </attr>
 
         <attr name="jtbEaseType" format="enum">

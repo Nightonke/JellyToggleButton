@@ -49,7 +49,7 @@ public class LazyTrembleTailFatty extends JellyStyle {
                 p4.moveX(stretchDistance / 2 * (process - T3) / (T4 - T3));
             } else if (T4 < process && process <= T5) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, T4, state);
-                p4.moveX(-Utils.vibration(
+                p4.moveX(Utils.vibration(
                         (process - T4) / (T5 - T4),
                         TOTAL_LENGTH,
                         stretchDistance / VIBRATION_STRETCH_RATIO,
@@ -79,7 +79,7 @@ public class LazyTrembleTailFatty extends JellyStyle {
                 p2.moveX(-stretchDistance / 2 * (rProcess - T3) / (T4 - T3));
             } else if (T4 < rProcess && rProcess <= T5) {
                 changeShape(p1, p2, p3, p4, stretchDistance, bezierControlValue, bezierScaleRatioValue, thumbRadius, 1 - T4, state);
-                p2.moveX(Utils.vibration(
+                p2.moveX(-Utils.vibration(
                         (rProcess - T4) / (T5 - T4),
                         TOTAL_LENGTH,
                         stretchDistance / VIBRATION_STRETCH_RATIO,

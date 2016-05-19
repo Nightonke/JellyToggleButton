@@ -36,16 +36,24 @@
     </string-array>
 
     <string-array name="jellys">
-        <item>Itself</item>
-        <item>Lazy Tremble Head Fatty</item>
-        <item>Lazy Tremble Head Slim Jim</item>
-        <item>Lazy Tremble Tail Fatty</item>
-        <item>Lazy Tremble Tail Slim Jim</item>
-        <item>Lazy Tremble Body Fatty</item>
-        <item>Lazy Tremble Body Slim Jim</item>
-        <item>Lazy Stiff Fatty</item>
-        <item>Lazy Stiff Slim Jim</item>
-        <item>Active Stiff Fatty</item>
+        <item>&#160;&#160;1. Itself</item>
+        <item>&#160;&#160;2. Lazy Tremble Head Fatty</item>
+        <item>&#160;&#160;3. Lazy Tremble Head Slim Jim</item>
+        <item>&#160;&#160;4. Lazy Tremble Tail Fatty</item>
+        <item>&#160;&#160;5. Lazy Tremble Tail Slim Jim</item>
+        <item>&#160;&#160;6. Lazy Tremble Body Fatty</item>
+        <item>&#160;&#160;7. Lazy Tremble Body Slim Jim</item>
+        <item>&#160;&#160;8. Lazy Stiff Fatty</item>
+        <item>&#160;&#160;9. Lazy Stiff Slim Jim</item>
+        <item>10. Active Tremble Head Fatty</item>
+        <item>11. Active Tremble Head Slim Jim</item>
+        <item>12. Active Tremble Tail Fatty</item>
+        <item>13. Active Tremble Tail Slim Jim</item>
+        <item>14. Active Tremble Body Fatty</item>
+        <item>15. Active Tremble Body Slim Jim</item>
+        <item>16. Active Stiff Fatty</item>
+        <item>17. Active Stiff Slim Jim</item>
+        <item>18. Random</item>
     </string-array>
 
 </resources>

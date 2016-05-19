@@ -125,6 +125,7 @@ public class JellyToggleButton extends CompoundButton {
 
     private ColorChangeType mColorChangeType = DEFAULT_COLOR_CHANGE_TYPE;
     private Jelly mJelly = DEFAULT_JELLY;
+    private Jelly mRandomJelly = null;
     private EaseType mEaseType = DEFAULT_EASE_TYPE;
 
     private OnStateChangeListener mOnStateChangeListener;
@@ -169,6 +170,8 @@ public class JellyToggleButton extends CompoundButton {
     private RectF mBackgroundRectF;
     private RectF mOnTextRectF;
     private RectF mOffTextRectF;
+
+    private int mLastRandomValue = -1;
 
     public JellyToggleButton(Context context) {
         super(context);
@@ -454,11 +457,19 @@ public class JellyToggleButton extends CompoundButton {
         // thumb
         setStartProcessPoints();
 
-        if (mCustomJelly != null) mCustomJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
-        else mJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
-
-        if (mCustomJelly != null) mCustomJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mCustomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
-        else mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
+        if (mCustomJelly != null) {
+            // use custom jelly
+            mCustomJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
+            mCustomJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mCustomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
+        } else if (Jelly.RANDOM.equals(mJelly) && mRandomJelly != null) {
+            // use random jelly
+            mRandomJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
+            mRandomJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mRandomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
+        } else {
+            // use a certain jelly
+            mJelly.changeShape(mThumbP1, mThumbP2, mThumbP3, mThumbP4, mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius, mProcess, mState);
+            mJelly.changeOffset(mThumbP1, mThumbP2, mThumbP3, mThumbP4, getNoExtractTotalLength(), mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius), mProcess, mState, mEaseType);
+        }
 
         mThumbPath.reset();
         mThumbPath.moveTo(mThumbP1.x,mThumbP1.y);
@@ -579,8 +590,16 @@ public class JellyToggleButton extends CompoundButton {
     }
 
     private float getNoExtractTotalLength() {
-        if (mCustomJelly != null) return mThumbRight - mThumbLeft - 2 * mThumbRadius - mCustomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
-        else return mThumbRight - mThumbLeft - 2 * mThumbRadius - mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
+        if (mCustomJelly != null) {
+            // use custom jelly
+            return mThumbRight - mThumbLeft - 2 * mThumbRadius - mCustomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
+        } else if (Jelly.RANDOM.equals(mJelly) && mRandomJelly != null) {
+            // use random jelly
+            return mThumbRight - mThumbLeft - 2 * mThumbRadius - mRandomJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
+        } else {
+            // use a certain jelly
+            return mThumbRight - mThumbLeft - 2 * mThumbRadius - mJelly.extractLength(mStretchDistanceRatioValue * mThumbRadius, mBezierControlValue, mBezierScaleRatioValue, mThumbRadius);
+        }
     }
 
     private boolean getStatusBasedOnPos() {
@@ -607,8 +626,16 @@ public class JellyToggleButton extends CompoundButton {
             }
         }
         this.mProcess = tp;
-        if (mState.equals(State.LEFT)) super.setChecked(false);
-        if (mState.equals(State.RIGHT)) super.setChecked(true);
+        if (mState.equals(State.LEFT)) {
+            super.setChecked(false);
+            // if the jelly type is random, change it here
+            if (mJelly.equals(Jelly.RANDOM)) randomChangeJelly();
+        }
+        if (mState.equals(State.RIGHT)) {
+            super.setChecked(true);
+            // if the jelly type is random, change it here
+            if (mJelly.equals(Jelly.RANDOM)) randomChangeJelly();
+        }
         if (callListener && mOnStateChangeListener != null) {
             if (mState.equals(State.LEFT) || mState.equals(State.RIGHT)) {
                 // at this time, we don't need to call the listener
@@ -621,6 +648,13 @@ public class JellyToggleButton extends CompoundButton {
         }
         lastState = mState;
         invalidate();
+    }
+
+    private void randomChangeJelly() {
+        int r = (int) (Math.random() * 17);
+        while (r == mLastRandomValue) r = (int) (Math.random() * 17);
+        mLastRandomValue = r;
+        mRandomJelly = Jelly.values()[r];
     }
 
     @Override
