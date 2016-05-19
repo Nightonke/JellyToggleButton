@@ -15,24 +15,24 @@ JellyToggleButton(JTB)是一款拥有18种果冻动态效果和30种缓动类型
 # Guide
 
 1. [English Readme](https://github.com/Nightonke/JellyToggleButton)
-2. [Gradle](https://github.com/Nightonke/JellyToggleButton#gradle)
-3. [Demo](https://github.com/Nightonke/JellyToggleButton#demo)
-4. [Use Guide](https://github.com/Nightonke/JellyToggleButton#use-guide)
-    1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton#18-jellys)
-    2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)
-    2. [Ease Types](https://github.com/Nightonke/JellyToggleButton#ease-types)
-    3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton#setcheck-methods)
-    4. [Colors](https://github.com/Nightonke/JellyToggleButton#colors)
-    4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton#colorchangetype)
-    5. [Fonts](https://github.com/Nightonke/JellyToggleButton#fonts)
-    6. [Duration](https://github.com/Nightonke/JellyToggleButton#duration)
-    7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton#text-text-size-and-margins)
-    8. [Draggable](https://github.com/Nightonke/JellyToggleButton#draggable)
-    9. [Listener](https://github.com/Nightonke/JellyToggleButton#listener)
-    10. [Other Methods](https://github.com/Nightonke/JellyToggleButton#other-methods)
-5. [Versions](https://github.com/Nightonke/JellyToggleButton#versions)
-6. [Todo](https://github.com/Nightonke/JellyToggleButton#todo)
-7. [License](https://github.com/Nightonke/JellyToggleButton#license)
+2. [Gradle](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#gradle)
+3. [Demo](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#demo)
+4. [Use Guide](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#use-guide)
+    1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#18-jellys)
+    2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#define-your-jelly)
+    2. [Ease Types](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#ease-types)
+    3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#setcheck-methods)
+    4. [Colors](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colors)
+    4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colorchangetype)
+    5. [Fonts](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#fonts)
+    6. [Duration](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#duration)
+    7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#text-text-size-and-margins)
+    8. [Draggable](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#draggable)
+    9. [Listener](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#listener)
+    10. [Other Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#other-methods)
+5. [Versions](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#versions)
+6. [Todo](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#todo)
+7. [License](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#license)
 
 # Gradle
 
@@ -54,18 +54,18 @@ Demo里可以看到目前JTB支持的所有效果，可以从这下载Demo：
 [![Qrcode](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.2.png?raw=true)](http://fir.im/jellytogglebutton)
 
 # Use Guide
-1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton#18-jellys)
-2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)
-2. [Ease Types](https://github.com/Nightonke/JellyToggleButton#ease-types)
-3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton#setcheck-methods)
-4. [Colors](https://github.com/Nightonke/JellyToggleButton#colors)
-4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton#colorchangetype)
-5. [Fonts](https://github.com/Nightonke/JellyToggleButton#fonts)
-6. [Duration](https://github.com/Nightonke/JellyToggleButton#duration)
-7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton#text-text-size-and-margins)
-8. [Draggable](https://github.com/Nightonke/JellyToggleButton#draggable)
-9. [Listener](https://github.com/Nightonke/JellyToggleButton#listener)
-10. [Other Methods](https://github.com/Nightonke/JellyToggleButton#other-methods)
+1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#18-jellys)
+2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#define-your-jelly)
+2. [Ease Types](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#ease-types)
+3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#setcheck-methods)
+4. [Colors](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colors)
+4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colorchangetype)
+5. [Fonts](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#fonts)
+6. [Duration](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#duration)
+7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#text-text-size-and-margins)
+8. [Draggable](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#draggable)
+9. [Listener](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#listener)
+10. [Other Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#other-methods)
 
 ## 18 Jellys
 JTB提供18种果冻动态效果，可以在xml中轻松使用或者在代码中通过```setJelly()```方法来设置。  
@@ -185,7 +185,7 @@ jtb.setEaseType(EaseType.EaseInOutCirc);
 JTB提供全面的方法来方便使用者改变JTB的状态（当手柄在右边，我们说此时开关按钮处于打开，也就是checked状态）： 
 
 1. ```isChecked()``` 返回当前JTB是否处于打开状态。
-2. ```setChecked(boolean checked)``` 设置JTB当前的状态，并伴以动画。如果[监听器](https://github.com/Nightonke/JellyToggleButton#listener)被设置，那么它将会被调用。
+2. ```setChecked(boolean checked)``` 设置JTB当前的状态，并伴以动画。如果[监听器](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#listener)被设置，那么它将会被调用。
 3. ```setChecked(boolean checked, boolean callListener)``` 同上，但是可以选择是否调用监听器（如果它不为空）。
 4. ```setCheckedImmediately(boolean checked)``` 设置JTB的状态，不伴随动画，会调用监听器。
 5. ```setCheckedImmediately(boolean checked, boolean callListener)``` 同上，但是可以选择是否调用监听器。
