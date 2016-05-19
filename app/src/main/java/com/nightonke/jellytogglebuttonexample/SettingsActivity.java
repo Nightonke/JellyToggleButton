@@ -272,6 +272,7 @@ public class SettingsActivity extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 jtb.setEaseType(EaseType.values()[position]);
+                jtb.setEaseType(EaseType.EaseInOutCirc);
             }
 
             @Override
