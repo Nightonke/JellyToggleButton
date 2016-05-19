@@ -17,21 +17,21 @@ Maybe the gif above can not show how cute JTB is. You can click to see the video
 # Guide
 
 1. [中文文档]()
-2. [Gradle]()
-3. [Demo]()
-4. [Use Guide]()
-    1. [18 Jellys]()
-    2. [Define Your Jelly]()
-    2. [Ease Types]()
-    3. [SetCheck Methods]()
-    4. [Colors]()
-    4. [ColorChangeType]()
-    5. [Fonts]()
-    6. [Duration]()
-    7. [Text Size and Margins]()
-    8. [Draggable]()
-    9. [Listener]()
-    10. [Other Methods]()
+2. [Gradle](https://github.com/Nightonke/JellyToggleButton#gradle)
+3. [Demo](https://github.com/Nightonke/JellyToggleButton#demo)
+4. [Use Guide](https://github.com/Nightonke/JellyToggleButton#user-guide)
+    1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton#18-jellys)
+    2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)
+    2. [Ease Types](https://github.com/Nightonke/JellyToggleButton#ease-types)
+    3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton#setcheck-methods)
+    4. [Colors](https://github.com/Nightonke/JellyToggleButton#colors)
+    4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton#colorchangetype)
+    5. [Fonts](https://github.com/Nightonke/JellyToggleButton#fonts)
+    6. [Duration](https://github.com/Nightonke/JellyToggleButton#duration)
+    7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton#text-text-size-and-margins)
+    8. [Draggable](https://github.com/Nightonke/JellyToggleButton#draggable)
+    9. [Listener](https://github.com/Nightonke/JellyToggleButton#listener)
+    10. [Other Methods](https://github.com/Nightonke/JellyToggleButton#other-methods)
 5. [Versions]()
 6. [Todo]()
 7. [License]()
@@ -177,30 +177,142 @@ You can control the state of the JTB of the following methods:
 (When the thumb is to the end of right, we say the JTB is checked)
 
 1. ```isChecked()``` Whether the JTB is checked.
-2. ```setChecked(boolean checked)``` Set the JTB to checked with animation. If the [listener]() .
-3. ``````
+2. ```setChecked(boolean checked)``` Set the JTB to checked or not with animation. If the [listener](https://github.com/Nightonke/JellyToggleButton#listener) has been set, it will be called.
+3. ```setChecked(boolean checked, boolean callListener)``` Same as above, but you can choose whether call the listener(if not null).
+4. ```setCheckedImmediately(boolean checked)``` Set the JTB to checked or not immediately without animation. This method will call the listener if it's not null.
+5. ```setCheckedImmediately(boolean checked, boolean callListener)``` Same as above, and you can choose whether call the listener.
+6. ```toggle()``` Change the JTB to another state and call the listener.
+7. ```toggle(boolean callListener)``` Same as above and you can choose whether call the listener.
+8. ```toggleImmediately()``` Toggle, without animation and call the listener.
+9. ```toggleImmediately(boolean callListener)``` Toggle, without animation and you can choose not to call the listener.
 
 #### Colors
+Let's make the JTB colorful.  
+##### Left Background Color  
+Change the background color when the thumb is to the end of left with:    
+1. ```setLeftBackgroundColor(int color)```  
+2. ```setLeftBackgroundColor(String color)```  
+3. ```setLeftBackgroundColorRes(int res)``  
+
+##### Right Background Color 
+Change the background color when the thumb is to the end of right with:  
+1. ```setRightBackgroundColor(int color)```  
+2. ```setRightBackgroundColor(String color)```  
+3. ```setRightBackgroundColorRes(int res)```  
+
+##### Both Left and Right Background Color
+Change left and right background color with:  
+1. ```setBackgroundColor(int color)```  
+2. ```setBackgroundColor(String color)```  
+3. ```setBackgroundColorRes(int res)```  
+
+##### Left Thumb Color  
+Change the thumb color when the thumb is to the end of left with:    
+1. ```setLeftThumbColor(int color)```  
+2. ```setLeftThumbColor(String color)```  
+3. ```setLeftThumbColorRes(int res)```  
+
+##### Right Thumb Color 
+Change the thumb color when the thumb is to the end of right with:  
+1. ```setRightThumbColor(int color)```  
+2. ```setRightThumbColor(String color)```  
+3. ```setRightThumbColorRes(int res)```  
+
+##### Both Left and Right Thumb Color  
+Change left and right thumb color with:  
+1. ```setThumbColor(int color)```  
+2. ```setThumbColor(String color)```  
+3. ```setThumbColorRes(int res)```  
+
+##### Left Text Color  
+Change the left text color with:    
+1. ```setLeftTextColor(int color)```  
+2. ```setLeftTextColor(String color)```  
+3. ```setLeftTextColorRes(int res)```  
+
+##### Right Text Color 
+Change the right text color with:  
+1. ```setRightTextColor(int color)```  
+2. ```setRightTextColor(String color)```  
+3. ```setRightTextColorRes(int res)```  
+
+##### Both Left and Right Text Color  
+Change left and right text color with:  
+1. ```setTextColor(int color)```  
+2. ```setTextColor(String color)```  
+3. ```setTextColorRes(int res)``` 
+
+Or set colors in xml:  
+```
+<com.nightonke.jellytogglebutton.JellyToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:jtbLeftBackgroundColor="@android:color/black"
+    app:jtbRightBackgroundColor="@android:color/white"
+    app:jtbLeftThumbColor="@android:color/white"
+    app:jtbRightThumbColor="@android:color/black"
+    app:jtbLeftTextColor="@android:color/black"
+    app:jtbRightTextColor="@android:color/white"
+    />
+```
 
 #### ColorChangeType
 
+There are 2 types to perform the color changing. Use ```setColorChangeType(ColorChangeType colorChangeType)``` to select ColorChangeType.RGB or ColorChangeType.HSV or set it in xml:  
+```
+<com.nightonke.jellytogglebutton.JellyToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:jtbColorChangeType="hsv"
+    />
+```
+For more information, check [here](https://github.com/Nightonke/WoWoViewPager#rgb-or-hsv).
+
 #### Fonts
+
+Use ```setLeftTextTypeface(Typeface typeface)``` and ```setLeftTextTypeface(String typefaceString)``` to set the typeface of the left text. Notice that the ```typefaceString``` is in the assets directory.  Similarly, use ```setRightTextTypeface(Typeface typeface)``` and ```setRightTextTypeface(String typefaceString)``` to set the typeface of the right text.  
+Or in xml:  
+```
+<com.nightonke.jellytogglebutton.JellyToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:jtbLeftTextTypeface="fonts/Lato-Hairline.ttf"
+    app:jtbRightTextTypeface="fonts/Lato-Hairline.ttf"
+    />
+```
 
 #### Duration
 
-#### Text Size and Margins
+Use ```setDuration(int duration)``` to set the duration when the thumb is animating(in ms). The default value is 1000(ms).  
+Or in xml:
+```
+<com.nightonke.jellytogglebutton.JellyToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:jtbDuration="1000"
+    />
+```
+
+#### Text, Text Size and Margins
+
+1. Use ```setLeftText(String text)``` , ```setLeftTextRes(int res)``` , ```setRightText(String text)``` , ```setRightTextRes(int res)``` , ```setText(String leftText, String rightText)``` and ```setTextRes(int leftRes, int rightRes)``` to set the text.
+2. Use ```setTextSize(int textSize)``` and ```setTextSizeRes(int res)``` to set the text size.
+3. Use ```setTextMarginLeft(float margin)``` and ```setTextMarginLeftRes(int res)``` to set the margin between the left text and the left-end of background.
+4. Use ```setTextMarginRight(float margin)``` and ```setTextMarginRightRes(int res)``` to set the margin between the right text and the right-end of background.
+5. Use ```setTextMarginTop(float margin)``` and ```setTextMarginTopRes(int res)``` to set the margin between the text and the top of background.
+6. Use ```setTextMarginBottom(float margin)``` and ```setTextMarginBottomRes(int res)``` to set the margin between the text and the bottom of background.
+7. Use ```setTextMarginCenter(float margin)``` and ```setTextMarginCenterRes(int res)``` to set the margin between the left text and the right text.
 
 #### Draggable
+
+
 
 #### Listener
 
 #### Other Methods
 
+### Versions
 
+### Todo
 
-
-
-
-
-
-
+### License
