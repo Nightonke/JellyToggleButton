@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.nightonke.jellytogglebutton.JellyToggleButton
+        android:id="@+id/jtb_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingLeft="@dimen/jtb_start_padding"
+        android:paddingStart="@dimen/jtb_start_padding"
+        android:paddingRight="@dimen/jtb_end_padding"
+        android:paddingEnd="@dimen/jtb_end_padding"
+        app:jtbJelly="active_tremble_body_slim_jim"
+        app:jtbLeftTextTypeface="fonts/Lato-Hairline.ttf"
+        app:jtbRightTextTypeface="fonts/Lato-Hairline.ttf"
+        app:jtbLeftTextColor="@android:color/black"
+        app:jtbRightTextColor="@android:color/black"
+        app:jtbLeftBackgroundColor="#1eeeff"
+        app:jtbRightBackgroundColor="#1eeeff"
+        app:jtbLeftText="Male"
+        app:jtbRightText="Female"
+        app:jtbTextMarginCenter="4dp"
+        />
+
+</RelativeLayout>

@@ -229,7 +229,7 @@ public class JellyToggleButton extends CompoundButton {
             mLeftThumbColor = ta.getColor(R.styleable.JellyToggleButton_jtbLeftThumbColor, mLeftThumbColor);
             mRightThumbColor = ta.getColor(R.styleable.JellyToggleButton_jtbRightThumbColor, mRightThumbColor);
             mLeftTextColor = ta.getColor(R.styleable.JellyToggleButton_jtbLeftTextColor, mLeftTextColor);
-            mRightTextColor = ta.getColor(R.styleable.JellyToggleButton_jtbLeftTextColor, mRightTextColor);
+            mRightTextColor = ta.getColor(R.styleable.JellyToggleButton_jtbRightTextColor, mRightTextColor);
 
             String leftTypefaceString = ta.getString(R.styleable.JellyToggleButton_jtbLeftTextTypeface);
             try {

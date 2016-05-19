@@ -71,6 +71,12 @@ public class Utils {
         return (float) (A * Math.exp(-B * x) * Math.sin(C * x + D));
     }
 
+    public static float limitOffset(float offset, float totalLength) {
+        offset = offset > 0 ? offset : 0;
+        offset = offset > totalLength ? totalLength : offset;
+        return offset;
+    }
+
     private static Utils ourInstance = new Utils();
 
     public static Utils getInstance() {

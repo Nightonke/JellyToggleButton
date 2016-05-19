@@ -99,8 +99,7 @@ public class ActiveTrembleTailSlimJim extends JellyStyle {
     public void changeOffset(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float totalLength, float extractLength, float process, State state, EaseType easeType) {
         if (state.equals(State.LEFT_TO_RIGHT)) {
             float offset = totalLength * easeType.getOffset((process - T1) / (T4 - T1));
-            offset = offset > 0 ? offset : 0;
-            offset = offset > totalLength ? totalLength : offset;
+            offset = Utils.limitOffset(offset, totalLength);
             p1.moveX(offset);
             p2.moveX(offset);
             p3.moveX(offset);
@@ -108,8 +107,7 @@ public class ActiveTrembleTailSlimJim extends JellyStyle {
         } else if (state.equals(State.RIGHT_TO_LEFT)) {
             float rProcess = 1 - process;
             float offset = totalLength * easeType.getOffset((rProcess - T1) / (T4 - T1));
-            offset = offset > 0 ? offset : 0;
-            offset = offset > totalLength ? totalLength : offset;
+            offset = Utils.limitOffset(offset, totalLength);
             p1.moveX(totalLength + extractLength - offset);
             p2.moveX(totalLength + extractLength - offset);
             p3.moveX(totalLength + extractLength - offset);

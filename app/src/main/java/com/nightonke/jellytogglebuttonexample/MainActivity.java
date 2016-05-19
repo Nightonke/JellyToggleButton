@@ -18,6 +18,12 @@ public class MainActivity extends AppCompatActivity
             R.id.jtb_00, R.id.jtb_01, R.id.jtb_02,
             R.id.jtb_03, R.id.jtb_04, R.id.jtb_05,
             R.id.jtb_06, R.id.jtb_07, R.id.jtb_08,
+            R.id.jtb_09, R.id.jtb_10, R.id.jtb_11,
+            R.id.jtb_12, R.id.jtb_13, R.id.jtb_14,
+            R.id.jtb_15, R.id.jtb_16, R.id.jtb_17,
+            R.id.jtb_18, R.id.jtb_19, R.id.jtb_20,
+            R.id.jtb_21, R.id.jtb_22, R.id.jtb_23,
+            R.id.jtb_24, R.id.jtb_25, R.id.jtb_26,
     };
 
     private Toast lastToast;
