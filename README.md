@@ -48,11 +48,11 @@ dependencies {
 
 ### Demo
 
-![Demo]()  
+![Demo](https://github.com/Nightonke/JellyToggleButton/blob/master/img/demo_picture.png?raw=true)  
 Try the demo above to see how cute JTB is. Download the apk from:  
-1. [Github]()
+1. [Github](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.apk?raw=true)  
 2. [http://fir.im/jellytogglebutton](http://fir.im/jellytogglebutton)  
-3. [![Qrcode]()](http://fir.im/jellytogglebutton)
+3. [![Qrcode](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.png?raw=true)](http://fir.im/jellytogglebutton)
 
 ### User Guide
 
@@ -173,8 +173,28 @@ Check all the ease types below.
 |linear|EaseType.Linear|
 
 #### SetCheck Methods
-You can control the 
+You can control the state of the JTB of the following methods:  
+(When the thumb is to the end of right, we say the JTB is checked)
 
+1. ```isChecked()``` Whether the JTB is checked.
+2. ```setChecked(boolean checked)``` Set the JTB to checked with animation. If the [listener]() .
+3. ``````
+
+#### Colors
+
+#### ColorChangeType
+
+#### Fonts
+
+#### Duration
+
+#### Text Size and Margins
+
+#### Draggable
+
+#### Listener
+
+#### Other Methods
 
 
 
