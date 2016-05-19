@@ -13,7 +13,7 @@
         android:paddingStart="@dimen/jtb_start_padding"
         android:paddingRight="@dimen/jtb_end_padding"
         android:paddingEnd="@dimen/jtb_end_padding"
-        app:jtbJelly="active_tremble_tail_slim_jim"
+        app:jtbJelly="active_tremble_body_slim_jim"
         />
 
 </RelativeLayout>
