@@ -1,10 +1,9 @@
 package com.nightonke.jellytogglebuttonexample;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.nightonke.jellytogglebutton.JellyToggleButton;
@@ -15,29 +14,25 @@ public class MainActivity extends AppCompatActivity
         JellyToggleButton.OnStateChangeListener,
         View.OnClickListener {
 
+    private static final int[] JTB_ID = new int[]{
+            R.id.jtb_00, R.id.jtb_01, R.id.jtb_02,
+            R.id.jtb_03, R.id.jtb_04, R.id.jtb_05,
+            R.id.jtb_06, R.id.jtb_07, R.id.jtb_08,
+    };
+
     private Toast lastToast;
-
-    private JellyToggleButton jtb0;
-    private JellyToggleButton jtb1;
-    private JellyToggleButton jtb2;
-
-    private Button settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        jtb0 = (JellyToggleButton)findViewById(R.id.jtb_0);
-//        jtb0.setOnStateChangeListener(this);
-        jtb0.setChecked(true);
+        setTitle(R.string.app_title);
 
-        jtb1 = (JellyToggleButton)findViewById(R.id.jtb_1);
-        jtb1.setOnStateChangeListener(this);
-        jtb1.setChecked(true);
+        for (int id : JTB_ID) ((JellyToggleButton)findViewById(id)).setOnStateChangeListener(this);
 
-        settings = (Button)findViewById(R.id.settings_button);
-        settings.setOnClickListener(this);
+        findView(R.id.change_all).setOnClickListener(this);
+        findView(R.id.settings_button).setOnClickListener(this);
     }
 
     @Override
@@ -57,9 +52,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.change_all:
+                for (int id : JTB_ID) ((JellyToggleButton)findViewById(id)).toggle(false);
+                break;
             case R.id.settings_button:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
+    }
+
+    private <T extends View> T findView(int id) {
+        return (T) findViewById(id);
     }
 }

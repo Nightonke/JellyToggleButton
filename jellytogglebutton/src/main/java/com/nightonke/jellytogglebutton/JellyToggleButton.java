@@ -172,6 +172,7 @@ public class JellyToggleButton extends CompoundButton {
     private RectF mOffTextRectF;
 
     private int mLastRandomValue = -1;
+    private boolean mStopRestoreChecked = false;
 
     public JellyToggleButton(Context context) {
         super(context);
@@ -694,6 +695,7 @@ public class JellyToggleButton extends CompoundButton {
 
     @Override
     public void setChecked(boolean checked) {
+        if (mStopRestoreChecked) return;
         setChecked(checked, true);
     }
 
@@ -1272,6 +1274,7 @@ public class JellyToggleButton extends CompoundButton {
         SavedState ss = new SavedState(superState);
         ss.leftText = mLeftText;
         ss.rightText = mRightText;
+        ss.isChecked = isChecked();
         return ss;
     }
 
@@ -1279,12 +1282,16 @@ public class JellyToggleButton extends CompoundButton {
     public void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
         setText(ss.leftText, ss.rightText);
+        setCheckedImmediately(ss.isChecked, false);
+        mStopRestoreChecked = true;
         super.onRestoreInstanceState(ss.getSuperState());
+        mStopRestoreChecked = false;
     }
 
     static class SavedState extends BaseSavedState {
         String leftText;
         String rightText;
+        boolean isChecked = false;
 
         SavedState(Parcelable superState) {
             super(superState);
@@ -1294,6 +1301,7 @@ public class JellyToggleButton extends CompoundButton {
             super(in);
             leftText = in.readString();
             rightText = in.readString();
+            isChecked = in.readByte() != 0;
         }
 
         @Override
@@ -1301,6 +1309,7 @@ public class JellyToggleButton extends CompoundButton {
             super.writeToParcel(out, flags);
             out.writeString(leftText);
             out.writeString(rightText);
+            out.writeByte((byte) (isChecked ? 1 : 0));
         }
 
         public static final Parcelable.Creator<SavedState> CREATOR

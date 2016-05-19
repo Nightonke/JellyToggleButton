@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,38 +11,53 @@
     android:background="#4085EE"
     tools:context="com.nightonke.jellytogglebuttonexample.MainActivity">
 
-    <com.nightonke.jellytogglebutton.JellyToggleButton
-        android:id="@+id/jtb_0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        />
-
-    <com.nightonke.jellytogglebutton.JellyToggleButton
-        android:id="@+id/jtb_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        app:jtbLeftText="Male"
-        app:jtbRightText="Female"
-        app:jtbEaseType="ease_in_back"
-        />
-
-    <com.nightonke.jellytogglebutton.JellyToggleButton
-        android:id="@+id/jtb_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        app:jtbLeftText=""
-        app:jtbRightText=""
-        />
-
-    <View
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            >
+
+            <TableRow>
+
+                <include layout="@layout/jelly_layout_00" android:layout_height="50dp" android:layout_width="0dp" />
+                <include layout="@layout/jelly_layout_01" android:layout_height="50dp" android:layout_width="0dp" />
+                <include layout="@layout/jelly_layout_02" android:layout_height="50dp" android:layout_width="0dp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <include layout="@layout/jelly_layout_03" android:layout_height="50dp" android:layout_width="0dp" />
+                <include layout="@layout/jelly_layout_04" android:layout_height="50dp" android:layout_width="0dp" />
+                <include layout="@layout/jelly_layout_05" android:layout_height="50dp" android:layout_width="0dp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <include layout="@layout/jelly_layout_06" android:layout_height="50dp" android:layout_width="0dp" />
+                <include layout="@layout/jelly_layout_07" android:layout_height="50dp" android:layout_width="0dp" />
+                <include layout="@layout/jelly_layout_08" android:layout_height="50dp" android:layout_width="0dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/change_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toggle All"
         />
 
     <Button
