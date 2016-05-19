@@ -10,7 +10,7 @@
 
 ![JellyToggleButton]()  
 JellyToggleButton(JTB) is a cute toggle button with 18 jelly types and 30 ease types.  
-You can also [define]() your own style and have your JTB custom-made.  
+You can also [define](https://github.com/Nightonke/JellyToggleButton#define-your-jelly) your own style and have your JTB custom-made.  
 Maybe the gif above can not show how cute JTB is. You can click to see the video of JTB below.  
 [![JellyToggleButton](http://img.youtube.com/vi/KCSeStDJfMI/0.jpg)](https://youtu.be/KCSeStDJfMI)
 
@@ -32,9 +32,9 @@ Maybe the gif above can not show how cute JTB is. You can click to see the video
     8. [Draggable](https://github.com/Nightonke/JellyToggleButton#draggable)
     9. [Listener](https://github.com/Nightonke/JellyToggleButton#listener)
     10. [Other Methods](https://github.com/Nightonke/JellyToggleButton#other-methods)
-5. [Versions]()
-6. [Todo]()
-7. [License]()
+5. [Versions](https://github.com/Nightonke/JellyToggleButton#versions)
+6. [Todo](https://github.com/Nightonke/JellyToggleButton#todo)
+7. [License](https://github.com/Nightonke/JellyToggleButton#license)
 
 ### Gradle
 
@@ -52,7 +52,8 @@ dependencies {
 Try the demo above to see how cute JTB is. Download the apk from:  
 1. [Github](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.apk?raw=true)  
 2. [http://fir.im/jellytogglebutton](http://fir.im/jellytogglebutton)  
-3. [![Qrcode](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.png?raw=true)](http://fir.im/jellytogglebutton)
+3.   
+[![Qrcode](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.png?raw=true)](http://fir.im/jellytogglebutton)
 
 ### User Guide
 
@@ -71,7 +72,7 @@ Use in setter:
 jtb.setJelly(Jelly.ITSELF);
 ```
 |app:jtbJelly=""|setJelly()|Effect|
-|---|---|---|
+|:---|:---|:---|
 |itself|ITSELF||
 |lazy_tremble_head_fatty|LAZY_TREMBLE_HEAD_FATTY||
 |lazy_tremble_head_slim_jim|LAZY_TREMBLE_HEAD_SLIM_JIM||
@@ -139,7 +140,7 @@ jtb.setEaseType(EaseType.EaseInOutCirc);
 Check all the ease types below.  
 
 |app:jtbEaseType=""|setEaseType()|
-|---|---|
+|:---|:---|
 |ease_in_sine|EaseType.EaseInSine|
 |ease_out_sine|EaseType.EaseOutSine|
 |ease_in_out_sine|EaseType.EaseInOutSine|
@@ -303,16 +304,87 @@ Or in xml:
 6. Use ```setTextMarginBottom(float margin)``` and ```setTextMarginBottomRes(int res)``` to set the margin between the text and the bottom of background.
 7. Use ```setTextMarginCenter(float margin)``` and ```setTextMarginCenterRes(int res)``` to set the margin between the left text and the right text.
 
+Or in xml:  
+```
+<com.nightonke.jellytogglebutton.JellyToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:jtbLeftText="Male"
+    app:jtbRightText="Female"
+    app:jtbLeftTextSize="12sp"
+    app:jtbRightTextSize="12sp"
+    app:jtbTextMarginLeft="2dp"
+    app:jtbTextMarginRight="2dp"
+    app:jtbTextMarginBottom="2dp"
+    app:jtbTextMarginTop="2dp"
+    app:jtbTextMarginCenter="4dp"
+    />
+```
+
 #### Draggable
 
-
+If you want to forbid user to drag the JTB, just call ```setDraggable(boolean draggable)``` to false.  
+Or in xml:  
+```
+<com.nightonke.jellytogglebutton.JellyToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:jtbDraggable="false"
+    />
+```
 
 #### Listener
 
+JTB use ```OnStateChangeListener``` to detech all the events of itself.  
+```
+jtb.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
+    @Override
+    public void onStateChange(float process, State state, JellyToggleButton jtb) {
+        // process - current process of JTB, between [0, 1]
+        // state   - current state of JTB, it is one of State.LEFT, State.LEFT_TO_RIGHT, State.RIGHT and State.RIGHT_TO_LEFT
+        // jtb     - the JTB
+    }
+});
+```
+
+When the thumb is move to same state, for instance, you drag the thumb just a little bit and then let it go and the thumb will smoothly move to it's last state(left or right). You can use ```setMoveToSameStateCallListener(boolean callListener)``` to select whether call listener when the above situation happens.  
+Or in xml:  
+```
+<com.nightonke.jellytogglebutton.JellyToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:jtbMoveToSameStateCallListener="true"
+    />
+```
+
 #### Other Methods
 
+There are some methods to modify some useless values. You can use them to fine-tone the JTB.
+
+1. ```setTouchMoveRatioValue(float ratio)``` Set the ratio of distance of dragging to distance of the thumb-movement.
+2. ```setBezierControlValue(float value)``` and ```setBezierControlValueRes(int res)``` Set the Bezier control value.
+3. ```setStretchDistanceRatioValue(float value)``` Set the ratio of thumb-radius to the stretch distance.
+4. ```setBezierScaleRatioValue(float value)``` and ```setBezierScaleRatioValueRes(int res)``` Set the Bezier scale control value.
+
 ### Versions
+##### [Jelly 1.0.1](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.apk?raw=true)
+Test Version.
 
 ### Todo
+Todo list is in my todo list.
 
 ### License
+
+    Copyright 2016 Nightonke
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
