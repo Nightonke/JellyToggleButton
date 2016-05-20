@@ -354,6 +354,23 @@ jtb.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
 });
 ```
 
+举个例子，如果需要监听JTB的开关状态（开是指手柄达到最右）：    
+```
+@Override
+public void onStateChange(float process, State state, JellyToggleButton jbt) {
+    if (state.equals(State.LEFT)) {
+        if (lastToast != null) lastToast.cancel();
+        lastToast = Toast.makeText(this, "Left!", Toast.LENGTH_SHORT);
+        lastToast.show();
+    }
+    if (state.equals(State.RIGHT)) {
+        if (lastToast != null) lastToast.cancel();
+        lastToast = Toast.makeText(this, "Right!", Toast.LENGTH_SHORT);
+        lastToast.show();
+    }
+}
+```
+
 当手柄移动到相同的状态，比如，当用户只是稍微移动了一下手柄，然后就松开手，那么这个时候手柄会自己移动回它上次的终点状态（最左或最右），如果希望在移动到相同的终点状态时回调监听器，可以通过```setMoveToSameStateCallListener(boolean callListener)```来设置。  
 或者在xml中：  
 ```
