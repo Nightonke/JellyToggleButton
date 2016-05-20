@@ -12,7 +12,7 @@
 JellyToggleButton(JTB) is a cute toggle button with 18 jelly types and 30 ease types.  
 You can also [define](https://github.com/Nightonke/JellyToggleButton#define-your-jelly) your own style and have your JTB custom-made.  
 Maybe the gif above can not show how cute JTB is. You can click to see the video of JTB below.  
-[![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/img/youtobe_image.png?raw=true)](https://youtu.be/KCSeStDJfMI)
+[![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/img/youtobe_image.png?raw=true)](https://youtu.be/j9tpsuc5YFE)
 
 # Guide
 
