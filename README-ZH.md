@@ -196,6 +196,9 @@ JTB提供全面的方法来方便使用者改变JTB的状态（当手柄在右�
 
 ## Colors
 来填涂自己的JTB。  
+
+![Color](https://github.com/Nightonke/JellyToggleButton/blob/master/img/Color.gif?raw=true)
+
 ### Left Background Color  
 改变当手柄滑到最左的背景颜色：    
 1. ```setLeftBackgroundColor(int color)```  
