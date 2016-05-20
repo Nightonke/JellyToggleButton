@@ -201,6 +201,9 @@ You can control the state of the JTB of the following methods:
 
 ## Colors
 Let's make the JTB colorful.  
+
+![Color](https://github.com/Nightonke/JellyToggleButton/blob/master/img/Color.gif?raw=true)
+
 ### Left Background Color  
 Change the background color when the thumb is to the end of left with:    
 1. ```setLeftBackgroundColor(int color)```  
