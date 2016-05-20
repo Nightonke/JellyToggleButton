@@ -359,6 +359,23 @@ jtb.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
 });
 ```
 
+For example, if you want to detech when JTB is open or close(open means the thumb moves to the end of right):  
+```
+@Override
+public void onStateChange(float process, State state, JellyToggleButton jbt) {
+    if (state.equals(State.LEFT)) {
+        if (lastToast != null) lastToast.cancel();
+        lastToast = Toast.makeText(this, "Left!", Toast.LENGTH_SHORT);
+        lastToast.show();
+    }
+    if (state.equals(State.RIGHT)) {
+        if (lastToast != null) lastToast.cancel();
+        lastToast = Toast.makeText(this, "Right!", Toast.LENGTH_SHORT);
+        lastToast.show();
+    }
+}
+```
+
 When the thumb is move to same state, for instance, you drag the thumb just a little bit and then let it go and the thumb will smoothly move to it's last state(left or right). You can use ```setMoveToSameStateCallListener(boolean callListener)``` to select whether call listener when the above situation happens.  
 Or in xml:  
 ```
