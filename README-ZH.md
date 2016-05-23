@@ -7,6 +7,7 @@
 [![LeeCo](https://github.com/Nightonke/LeeCo/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)](https://github.com/Nightonke/LeeCo)
 [![GithubWidget](https://github.com/Nightonke/GithubWidget/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)](https://github.com/Nightonke/GithubWidget)
 [![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)](https://github.com/Nightonke/JellyToggleButton)
+[![FaceOffToggleButton](https://github.com/Nightonke/FaceOffToggleButton/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)](https://github.com/Nightonke/FaceOffToggleButton)
 
 ![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/img/JellyToggleButton4.gif?raw=true)  
 JellyToggleButton(JTB)是一款拥有18种果冻动态效果和30种缓动类型的开关按钮。你也可以自己[定制](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)属于自己的JTB。也许上面的gif不太清晰，点击下面的视频可以看到JTB的动态效果。  
