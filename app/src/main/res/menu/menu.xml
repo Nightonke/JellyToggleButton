@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group1">
+        <item
+            android:id="@+id/action_github"
+            android:title="Github"/>
+        <item
+            android:id="@+id/action_developer"
+            android:title="Developer"/>
+        <item
+            android:id="@+id/action_wowo"
+            android:title="WoWo"/>
+        <item
+            android:id="@+id/action_boom"
+            android:title="Boom"/>
+        <item
+            android:id="@+id/action_cocoin"
+            android:title="CoCoin"/>
+        <item
+            android:id="@+id/action_blur"
+            android:title="Blur-Lock"/>
+        <item
+            android:id="@+id/action_leeco"
+            android:title="LeeCo"/>
+        <item
+            android:id="@+id/action_gw"
+            android:title="G-Widget"/>
+        <item
+            android:id="@+id/action_face"
+            android:title="Face Off"/>
+    </group>
+
+
+</menu>
