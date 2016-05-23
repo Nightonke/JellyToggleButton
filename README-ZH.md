@@ -9,32 +9,30 @@
 [![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)](https://github.com/Nightonke/JellyToggleButton)
 
 ![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/img/JellyToggleButton4.gif?raw=true)  
-JellyToggleButton(JTB) is a cute toggle button with 18 jelly types and 30 ease types.  
-You can also [define](https://github.com/Nightonke/JellyToggleButton#define-your-jelly) your own style and have your JTB custom-made.  
-Maybe the gif above can not show how cute JTB is. You can click to see the video of JTB below.  
+JellyToggleButton(JTB)是一款拥有18种果冻动态效果和30种缓动类型的开关按钮。你也可以自己[定制](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)属于自己的JTB。也许上面的gif不太清晰，点击下面的视频可以看到JTB的动态效果。  
 [![JellyToggleButton](https://github.com/Nightonke/JellyToggleButton/blob/master/img/youtobe_image.png?raw=true)](https://youtu.be/j9tpsuc5YFE)
 
 # Guide
 
-1. [中文文档](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md)
-2. [Gradle](https://github.com/Nightonke/JellyToggleButton#gradle)
-3. [Demo](https://github.com/Nightonke/JellyToggleButton#demo)
-4. [Use Guide](https://github.com/Nightonke/JellyToggleButton#use-guide)
-    1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton#18-jellys)
-    2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)
-    2. [Ease Types](https://github.com/Nightonke/JellyToggleButton#ease-types)
-    3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton#setcheck-methods)
-    4. [Colors](https://github.com/Nightonke/JellyToggleButton#colors)
-    4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton#colorchangetype)
-    5. [Fonts](https://github.com/Nightonke/JellyToggleButton#fonts)
-    6. [Duration](https://github.com/Nightonke/JellyToggleButton#duration)
-    7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton#text-text-size-and-margins)
-    8. [Draggable](https://github.com/Nightonke/JellyToggleButton#draggable)
-    9. [Listener](https://github.com/Nightonke/JellyToggleButton#listener)
-    10. [Other Methods](https://github.com/Nightonke/JellyToggleButton#other-methods)
-5. [Versions](https://github.com/Nightonke/JellyToggleButton#versions)
-6. [Todo](https://github.com/Nightonke/JellyToggleButton#todo)
-7. [License](https://github.com/Nightonke/JellyToggleButton#license)
+1. [English Readme](https://github.com/Nightonke/JellyToggleButton)
+2. [Gradle](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#gradle)
+3. [Demo](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#demo)
+4. [Use Guide](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#use-guide)
+    1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#18-jellys)
+    2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#define-your-jelly)
+    2. [Ease Types](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#ease-types)
+    3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#setcheck-methods)
+    4. [Colors](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colors)
+    4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colorchangetype)
+    5. [Fonts](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#fonts)
+    6. [Duration](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#duration)
+    7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#text-text-size-and-margins)
+    8. [Draggable](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#draggable)
+    9. [Listener](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#listener)
+    10. [Other Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#other-methods)
+5. [Versions](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#versions)
+6. [Todo](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#todo)
+7. [License](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#license)
 
 # Gradle
 
@@ -49,29 +47,29 @@ dependencies {
 # Demo
 
 ![Demo](https://github.com/Nightonke/JellyToggleButton/blob/master/img/demo_picture.png?raw=true)  
-Try the demo above to see how cute JTB is. Download the apk from:  
+Demo里可以看到目前JTB支持的所有效果，可以从这下载Demo：    
 1. [Github](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.2.apk?raw=true)  
 2. [http://fir.im/jellytogglebutton](http://fir.im/jellytogglebutton)  
 3.   
 [![Qrcode](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.2.png?raw=true)](http://fir.im/jellytogglebutton)
 
 # Use Guide
-1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton#18-jellys)
-2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton#define-your-jelly)
-2. [Ease Types](https://github.com/Nightonke/JellyToggleButton#ease-types)
-3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton#setcheck-methods)
-4. [Colors](https://github.com/Nightonke/JellyToggleButton#colors)
-4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton#colorchangetype)
-5. [Fonts](https://github.com/Nightonke/JellyToggleButton#fonts)
-6. [Duration](https://github.com/Nightonke/JellyToggleButton#duration)
-7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton#text-text-size-and-margins)
-8. [Draggable](https://github.com/Nightonke/JellyToggleButton#draggable)
-9. [Listener](https://github.com/Nightonke/JellyToggleButton#listener)
-10. [Other Methods](https://github.com/Nightonke/JellyToggleButton#other-methods)
+1. [18 Jellys](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#18-jellys)
+2. [Define Your Jelly](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#define-your-jelly)
+2. [Ease Types](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#ease-types)
+3. [SetCheck Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#setcheck-methods)
+4. [Colors](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colors)
+4. [ColorChangeType](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#colorchangetype)
+5. [Fonts](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#fonts)
+6. [Duration](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#duration)
+7. [Text, Text Size and Margins](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#text-text-size-and-margins)
+8. [Draggable](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#draggable)
+9. [Listener](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#listener)
+10. [Other Methods](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#other-methods)
 
 ## 18 Jellys
-JTB provides 18 kinds of jelly types to show different effects of thumb. You can use different jelly types in xml or by ```setJelly()``` method.  
-Use in xml:  
+JTB提供18种果冻动态效果，可以在xml中轻松使用或者在代码中通过```setJelly()```方法来设置。  
+xml中：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -79,11 +77,11 @@ Use in xml:
     app:jtbJelly="itself"
     />
 ```
-Use in setter:  
+JAVA代码中：  
 ```
 jtb.setJelly(Jelly.ITSELF);
 ```
-|app:jtbJelly=""|setJelly()|Effect|
+|app:jtbJelly=""|setJelly()|效果|
 |:---|:---|:---|
 |itself|ITSELF|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/Itself.gif?raw=true)|
 |lazy_tremble_head_fatty|LAZY_TREMBLE_HEAD_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/LazyTrembleHeadFatty.gif?raw=true)|
@@ -102,42 +100,40 @@ jtb.setJelly(Jelly.ITSELF);
 |active_tremble_body_slim_jim|ACTIVE_TREMBLE_BODY_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveTrembleBodySlimJim.gif?raw=true)|
 |active_stiff_fatty|ACTIVE_STIFF_FATTY|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveStiffFatty.gif?raw=true)|
 |active_stiff_slim_jim|ACTIVE_STIFF_SLIM_JIM|![](https://github.com/Nightonke/JellyToggleButton/blob/master/img/ActiveStiffSlimJim.gif?raw=true)|
-|random|RANDOM|All Above|
+|random|RANDOM|以上所有|
 
-Notice that random type will change the jelly among the other 17 types randomly.
+注意最后一种随机类型会随机在其他17种类型之间随机切换。
 
 ## Define Your Jelly
-You can define you own jelly easily. But you need sometime to understand what happens in the source code of [Jelly enum](https://github.com/Nightonke/JellyToggleButton/tree/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes). All the jelly type are the sub types of [JellyStyle.class](https://github.com/Nightonke/JellyToggleButton/blob/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes/JellyStyle.java).  
-To extend the abstract class, you have to override 3 methods:
+JTB提供自定义果冻效果的方法。但是理解具体的实现原理需要花点时间来阅读[Jelly enum源码](https://github.com/Nightonke/JellyToggleButton/tree/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes)。所有的果冻效果都是来自于超类[JellyStyle.class](https://github.com/Nightonke/JellyToggleButton/blob/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes/JellyStyle.java)。继承这个超类的时候，你需要实现三个方法：  
 ```
 public class MyJelly extends JellyStyle {
 
     @Override
     public void changeShape(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float stretchDistance, float bezierControlValue, float bezierScaleRatioValue, float thumbRadius, float process, State state) {
-        // Change the shape of the thumb.
-        // Notice that we use 12 points to form 4 bezier lines to draw the thumb.
-        // We can control the shape of the thumb by controling the 12 points.
+        // 改变手柄的形状
+        // 注意我们用了12个点来控制4条贝塞尔曲线来绘制手柄
+        // 我们可以通过控制这12个点来控制手柄形状
     }
 
     @Override
     public void changeOffset(PointWithHorizontalPoints p1, PointWithVerticalPoints p2, PointWithHorizontalPoints p3, PointWithVerticalPoints p4, float totalLength, float extractLength, float process, State state, EaseType easeType) {
-        // Change the offset of the thumb.
+        // 改变手柄的位移
     }
 
     @Override
     public float extractLength(float stretchDistance, float bezierControlValue, float bezierScaleRatioValue, float thumbRadius) {
-        // Return the extract length.
+        // 返回在形变中额外增加的距离
     }
 }
 ```
-After this, use ```setCustomJelly()``` to set your custom jelly. Notice that if you don't want to use the custom any more, you have to use ```removeCustomJelly()``` to reset.
+继承了上述超类、实现了这三个方法之后，使用```setCustomJelly()```来激活你的自定义果冻动效。注意，如果你不再想使用你的自定义效果，要使用```removeCustomJelly()```方法来重置。
 
 ## Ease Types
-Ease types are used to set the effect of movement of the thumb.    
+缓动类型可以用来产生手柄的不同位移效果。     
 ![Ease](https://github.com/Nightonke/WoWoViewPager/blob/master/Pictures/ease.png)  
-Of course you can use linear function. 
-You can find all the ease enums [here](https://github.com/Nightonke/WoWoViewPager/blob/master/wowoviewpager/src/main/java/com/nightonke/wowoviewpager/Eases/EaseType.java).  
-It's very convenient to use ease types in xml:  
+当然还有线性效果。你可以在[这里](https://github.com/Nightonke/WoWoViewPager/blob/master/wowoviewpager/src/main/java/com/nightonke/wowoviewpager/Eases/EaseType.java)找到所有的缓动效果。  
+可以非常轻松地在xml中使用缓动类型：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -145,11 +141,11 @@ It's very convenient to use ease types in xml:
     app:jtbEaseType="ease_in_out_circ"
     />
 ```
-Or use setter:  
+或者通过JAVA代码：  
 ```
 jtb.setEaseType(EaseType.EaseInOutCirc);
 ```
-Check all the ease types below.  
+下表列出了所有的缓动效果：  
 
 |app:jtbEaseType=""|setEaseType()|
 |:---|:---|
@@ -186,79 +182,78 @@ Check all the ease types below.
 |linear|EaseType.Linear|
 
 ## SetCheck Methods
-You can control the state of the JTB of the following methods:  
-(When the thumb is to the end of right, we say the JTB is checked)
+JTB提供全面的方法来方便使用者改变JTB的状态（当手柄在右边，我们说此时开关按钮处于打开，也就是checked状态）： 
 
-1. ```isChecked()``` Whether the JTB is checked.
-2. ```setChecked(boolean checked)``` Set the JTB to checked or not with animation. If the [listener](https://github.com/Nightonke/JellyToggleButton#listener) has been set, it will be called.
-3. ```setChecked(boolean checked, boolean callListener)``` Same as above, but you can choose whether call the listener(if not null).
-4. ```setCheckedImmediately(boolean checked)``` Set the JTB to checked or not immediately without animation. This method will call the listener if it's not null.
-5. ```setCheckedImmediately(boolean checked, boolean callListener)``` Same as above, and you can choose whether call the listener.
-6. ```toggle()``` Change the JTB to another state and call the listener.
-7. ```toggle(boolean callListener)``` Same as above and you can choose whether call the listener.
-8. ```toggleImmediately()``` Toggle, without animation and call the listener.
-9. ```toggleImmediately(boolean callListener)``` Toggle, without animation and you can choose not to call the listener.
+1. ```isChecked()``` 返回当前JTB是否处于打开状态。
+2. ```setChecked(boolean checked)``` 设置JTB当前的状态，并伴以动画。如果[监听器](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#listener)被设置，那么它将会被调用。
+3. ```setChecked(boolean checked, boolean callListener)``` 同上，但是可以选择是否调用监听器（如果它不为空）。
+4. ```setCheckedImmediately(boolean checked)``` 设置JTB的状态，不伴随动画，会调用监听器。
+5. ```setCheckedImmediately(boolean checked, boolean callListener)``` 同上，但是可以选择是否调用监听器。
+6. ```toggle()``` 切换状态，有动画，会调用监听器。
+7. ```toggle(boolean callListener)``` 同上，可选择是否调用监听器。
+8. ```toggleImmediately()``` 切换状态，无动画，会调用监听器。
+9. ```toggleImmediately(boolean callListener)``` 同上，可选择是否调用监听器。
 
 ## Colors
-Let's make the JTB colorful.  
+来填涂自己的JTB。  
 
 ![Color](https://github.com/Nightonke/JellyToggleButton/blob/master/img/Color.gif?raw=true)
 
 ### Left Background Color  
-Change the background color when the thumb is to the end of left with:    
+改变当手柄滑到最左的背景颜色：    
 1. ```setLeftBackgroundColor(int color)```  
 2. ```setLeftBackgroundColor(String color)```  
 3. ```setLeftBackgroundColorRes(int res)``  
 
 ### Right Background Color 
-Change the background color when the thumb is to the end of right with:  
+改变当手柄滑到最右的背景颜色：  
 1. ```setRightBackgroundColor(int color)```  
 2. ```setRightBackgroundColor(String color)```  
 3. ```setRightBackgroundColorRes(int res)```  
 
 ### Both Left and Right Background Color
-Change left and right background color with:  
+改变背景颜色：  
 1. ```setBackgroundColor(int color)```  
 2. ```setBackgroundColor(String color)```  
 3. ```setBackgroundColorRes(int res)```  
 
 ### Left Thumb Color  
-Change the thumb color when the thumb is to the end of left with:    
+改变当手柄滑到最左的颜色：    
 1. ```setLeftThumbColor(int color)```  
 2. ```setLeftThumbColor(String color)```  
 3. ```setLeftThumbColorRes(int res)```  
 
 ### Right Thumb Color 
-Change the thumb color when the thumb is to the end of right with:  
+改变当手柄滑到最右的颜色：  
 1. ```setRightThumbColor(int color)```  
 2. ```setRightThumbColor(String color)```  
 3. ```setRightThumbColorRes(int res)```  
 
 ### Both Left and Right Thumb Color  
-Change left and right thumb color with:  
+改变当手柄的颜色：  
 1. ```setThumbColor(int color)```  
 2. ```setThumbColor(String color)```  
 3. ```setThumbColorRes(int res)```  
 
 ### Left Text Color  
-Change the left text color with:    
+改变左边字体颜色：   
 1. ```setLeftTextColor(int color)```  
 2. ```setLeftTextColor(String color)```  
 3. ```setLeftTextColorRes(int res)```  
 
 ### Right Text Color 
-Change the right text color with:  
+改变右边字体颜色：  
 1. ```setRightTextColor(int color)```  
 2. ```setRightTextColor(String color)```  
 3. ```setRightTextColorRes(int res)```  
 
 ### Both Left and Right Text Color  
-Change left and right text color with:  
+改变字体颜色：  
 1. ```setTextColor(int color)```  
 2. ```setTextColor(String color)```  
 3. ```setTextColorRes(int res)``` 
 
-Or set colors in xml:  
+或者在xml中：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -274,7 +269,7 @@ Or set colors in xml:
 
 # ColorChangeType
 
-There are 2 types to perform the color changing. Use ```setColorChangeType(ColorChangeType colorChangeType)``` to select ColorChangeType.RGB or ColorChangeType.HSV or set it in xml:  
+使用```setColorChangeType(ColorChangeType colorChangeType)```来在两种颜色变化方式（ColorChangeType.RGB or ColorChangeType.HSV）切换，又或者通过xml：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -282,12 +277,12 @@ There are 2 types to perform the color changing. Use ```setColorChangeType(Color
     app:jtbColorChangeType="hsv"
     />
 ```
-For more information, check [here](https://github.com/Nightonke/WoWoViewPager#rgb-or-hsv).
+更多有关颜色变化方式信息可在[这里](https://github.com/Nightonke/WoWoViewPager#rgb-or-hsv)找到。
 
 # Fonts
 
-Use ```setLeftTextTypeface(Typeface typeface)``` and ```setLeftTextTypeface(String typefaceString)``` to set the typeface of the left text. Notice that the ```typefaceString``` is in the assets directory.  Similarly, use ```setRightTextTypeface(Typeface typeface)``` and ```setRightTextTypeface(String typefaceString)``` to set the typeface of the right text.  
-Or in xml:  
+用```setLeftTextTypeface(Typeface typeface)```和```setLeftTextTypeface(String typefaceString)```来设置左文字字体，注意```typefaceString```是字体文件在assets文件夹下的路径。类似地，用 ```setRightTextTypeface(Typeface typeface)```和```setRightTextTypeface(String typefaceString)```来设置右文字字体。    
+在xml中：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -299,8 +294,8 @@ Or in xml:
 
 # Duration
 
-Use ```setDuration(int duration)``` to set the duration when the thumb is animating(in ms). The default value is 1000(ms).  
-Or in xml:
+用```setDuration(int duration)```来设置动画延时（毫秒），默认值是1000毫秒。    
+在xml中：
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -311,15 +306,15 @@ Or in xml:
 
 # Text, Text Size and Margins
 
-1. Use ```setLeftText(String text)``` , ```setLeftTextRes(int res)``` , ```setRightText(String text)``` , ```setRightTextRes(int res)``` , ```setText(String leftText, String rightText)``` and ```setTextRes(int leftRes, int rightRes)``` to set the text.
-2. Use ```setTextSize(int textSize)``` and ```setTextSizeRes(int res)``` to set the text size.
-3. Use ```setTextMarginLeft(float margin)``` and ```setTextMarginLeftRes(int res)``` to set the margin between the left text and the left-end of background.
-4. Use ```setTextMarginRight(float margin)``` and ```setTextMarginRightRes(int res)``` to set the margin between the right text and the right-end of background.
-5. Use ```setTextMarginTop(float margin)``` and ```setTextMarginTopRes(int res)``` to set the margin between the text and the top of background.
-6. Use ```setTextMarginBottom(float margin)``` and ```setTextMarginBottomRes(int res)``` to set the margin between the text and the bottom of background.
-7. Use ```setTextMarginCenter(float margin)``` and ```setTextMarginCenterRes(int res)``` to set the margin between the left text and the right text.
+1. 用```setLeftText(String text)```，```setLeftTextRes(int res)```，```setRightText(String text)```，```setRightTextRes(int res)```， ```setText(String leftText, String rightText)```和```setTextRes(int leftRes, int rightRes)```来设置文字。
+2. 用```setTextSize(int textSize)```和```setTextSizeRes(int res)```来设置字体大小。
+3. 用```setTextMarginLeft(float margin)```和```setTextMarginLeftRes(int res)```来设置左文字距离背景最左的距离。
+4. 用```setTextMarginRight(float margin)```和```setTextMarginRightRes(int res)```来设置右文字距离背景最右的距离。
+5. 用```setTextMarginTop(float margin)```和```setTextMarginTopRes(int res)```来设置文字距离背景顶部的距离。
+6. 用```setTextMarginBottom(float margin)```和```setTextMarginBottomRes(int res)```来设置文字距离背景底部的距离。
+7. 用```setTextMarginCenter(float margin)```和```setTextMarginCenterRes(int res)```来设置左文字和右文字之间的距离。
 
-Or in xml:  
+在xml中：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -338,8 +333,8 @@ Or in xml:
 
 # Draggable
 
-If you want to forbid user to drag the JTB, just call ```setDraggable(boolean draggable)``` to false.  
-Or in xml:  
+如果想禁止用户对JTB的拖动操作，使用```setDraggable(boolean draggable)```来置为false。  
+在xml中：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -350,19 +345,19 @@ Or in xml:
 
 # Listener
 
-JTB use ```OnStateChangeListener``` to detech all the events of itself.  
+JTB使用```OnStateChangeListener```来监听其自身的事件。  
 ```
 jtb.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
     @Override
     public void onStateChange(float process, State state, JellyToggleButton jtb) {
-        // process - current process of JTB, between [0, 1]
-        // state   - current state of JTB, it is one of State.LEFT, State.LEFT_TO_RIGHT, State.RIGHT and State.RIGHT_TO_LEFT
-        // jtb     - the JTB
+        // process - 当前动画进度，在[0, 1]之间
+        // state   - JTB的当前状态，其值为State.LEFT，State.LEFT_TO_RIGHT，State.RIGHT和State.RIGHT_TO_LEFT其中之一
+        // jtb     - JTB自身
     }
 });
 ```
 
-For example, if you want to detech when JTB is open or close(open means the thumb moves to the end of right):  
+举个例子，如果需要监听JTB的开关状态（开是指手柄达到最右）：    
 ```
 @Override
 public void onStateChange(float process, State state, JellyToggleButton jbt) {
@@ -379,8 +374,8 @@ public void onStateChange(float process, State state, JellyToggleButton jbt) {
 }
 ```
 
-When the thumb is move to same state, for instance, you drag the thumb just a little bit and then let it go and the thumb will smoothly move to it's last state(left or right). You can use ```setMoveToSameStateCallListener(boolean callListener)``` to select whether call listener when the above situation happens.  
-Or in xml:  
+当手柄移动到相同的状态，比如，当用户只是稍微移动了一下手柄，然后就松开手，那么这个时候手柄会自己移动回它上次的终点状态（最左或最右），如果希望在移动到相同的终点状态时回调监听器，可以通过```setMoveToSameStateCallListener(boolean callListener)```来设置。  
+或者在xml中：  
 ```
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
@@ -391,12 +386,12 @@ Or in xml:
 
 # Other Methods
 
-There are some methods to modify some useless values. You can use them to fine-tone the JTB.
+以下函数用处很小，如果想微调JTB可以使用：
 
-1. ```setTouchMoveRatioValue(float ratio)``` Set the ratio of distance of dragging to distance of the thumb-movement.
-2. ```setBezierControlValue(float value)``` and ```setBezierControlValueRes(int res)``` Set the Bezier control value.
-3. ```setStretchDistanceRatioValue(float value)``` Set the ratio of thumb-radius to the stretch distance.
-4. ```setBezierScaleRatioValue(float value)``` and ```setBezierScaleRatioValueRes(int res)``` Set the Bezier scale control value.
+1. ```setTouchMoveRatioValue(float ratio)``` 设置拖动和手柄实际移动距离的比值。
+2. ```setBezierControlValue(float value)```，```setBezierControlValueRes(int res)``` 设置贝塞尔控制参数。
+3. ```setStretchDistanceRatioValue(float value)``` 设置手柄半径和拉伸距离的比值。
+4. ```setBezierScaleRatioValue(float value)```，```setBezierScaleRatioValueRes(int res)``` 设置贝塞尔控制拉伸参数。
 
 # Versions
 ### [Jelly 1.0.1](https://github.com/Nightonke/JellyToggleButton/blob/master/apk/Jelly%201.0.1.apk?raw=true)
@@ -405,7 +400,7 @@ Test Version.
 First Version.
 
 # Todo
-Todo list is in my todo list.
+Todo正在被todo……
 
 # License
 
