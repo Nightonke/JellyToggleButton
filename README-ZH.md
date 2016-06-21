@@ -16,6 +16,7 @@ JellyToggleButton(JTB)是一款拥有18种果冻动态效果和30种缓动类型
 # Guide
 
 1. [English Readme](https://github.com/Nightonke/JellyToggleButton)
+2. [Note](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#note)
 2. [Gradle](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#gradle)
 3. [Demo](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#demo)
 4. [Use Guide](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#use-guide)
@@ -34,6 +35,9 @@ JellyToggleButton(JTB)是一款拥有18种果冻动态效果和30种缓动类型
 5. [Versions](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#versions)
 6. [Todo](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#todo)
 7. [License](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md#license)
+
+# Note
+1. 部分代码启发自 [SwitchButton](https:/a/github.com/kyleduo/SwitchButton)
 
 # Gradle
 
