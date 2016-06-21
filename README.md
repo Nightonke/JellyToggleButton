@@ -43,7 +43,7 @@ Maybe the gif above can not show how cute JTB is. You can click to see the video
 
 # Gradle
 
-```
+```groovy
 dependencies {
     ...
     compile 'com.nightonke:jellytogglebutton:1.0.2'
@@ -77,7 +77,7 @@ Try the demo above to see how cute JTB is. Download the apk from:
 ## 18 Jellys
 JTB provides 18 kinds of jelly types to show different effects of thumb. You can use different jelly types in xml or by ```setJelly()``` method.  
 Use in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -85,7 +85,7 @@ Use in xml:
     />
 ```
 Use in setter:  
-```
+```java
 jtb.setJelly(Jelly.ITSELF);
 ```
 |app:jtbJelly=""|setJelly()|Effect|
@@ -114,7 +114,7 @@ Notice that random type will change the jelly among the other 17 types randomly.
 ## Define Your Jelly
 You can define you own jelly easily. But you need sometime to understand what happens in the source code of [Jelly enum](https://github.com/Nightonke/JellyToggleButton/tree/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes). All the jelly type are the sub types of [JellyStyle.class](https://github.com/Nightonke/JellyToggleButton/blob/master/jellytogglebutton/src/main/java/com/nightonke/jellytogglebutton/JellyTypes/JellyStyle.java).  
 To extend the abstract class, you have to override 3 methods:
-```
+```java
 public class MyJelly extends JellyStyle {
 
     @Override
@@ -143,7 +143,7 @@ Ease types are used to set the effect of movement of the thumb.
 Of course you can use linear function. 
 You can find all the ease enums [here](https://github.com/Nightonke/WoWoViewPager/blob/master/wowoviewpager/src/main/java/com/nightonke/wowoviewpager/Eases/EaseType.java).  
 It's very convenient to use ease types in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -151,7 +151,7 @@ It's very convenient to use ease types in xml:
     />
 ```
 Or use setter:  
-```
+```java
 jtb.setEaseType(EaseType.EaseInOutCirc);
 ```
 Check all the ease types below.  
@@ -264,7 +264,7 @@ Change left and right text color with:
 3. ```setTextColorRes(int res)``` 
 
 Or set colors in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -280,7 +280,7 @@ Or set colors in xml:
 # ColorChangeType
 
 There are 2 types to perform the color changing. Use ```setColorChangeType(ColorChangeType colorChangeType)``` to select ColorChangeType.RGB or ColorChangeType.HSV or set it in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -293,7 +293,7 @@ For more information, check [here](https://github.com/Nightonke/WoWoViewPager#rg
 
 Use ```setLeftTextTypeface(Typeface typeface)``` and ```setLeftTextTypeface(String typefaceString)``` to set the typeface of the left text. Notice that the ```typefaceString``` is in the assets directory.  Similarly, use ```setRightTextTypeface(Typeface typeface)``` and ```setRightTextTypeface(String typefaceString)``` to set the typeface of the right text.  
 Or in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -306,7 +306,7 @@ Or in xml:
 
 Use ```setDuration(int duration)``` to set the duration when the thumb is animating(in ms). The default value is 1000(ms).  
 Or in xml:
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -325,7 +325,7 @@ Or in xml:
 7. Use ```setTextMarginCenter(float margin)``` and ```setTextMarginCenterRes(int res)``` to set the margin between the left text and the right text.
 
 Or in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -345,7 +345,7 @@ Or in xml:
 
 If you want to forbid user to drag the JTB, just call ```setDraggable(boolean draggable)``` to false.  
 Or in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -356,7 +356,7 @@ Or in xml:
 # Listener
 
 JTB use ```OnStateChangeListener``` to detech all the events of itself.  
-```
+```java
 jtb.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
     @Override
     public void onStateChange(float process, State state, JellyToggleButton jtb) {
@@ -368,7 +368,7 @@ jtb.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
 ```
 
 For example, if you want to detech when JTB is open or close(open means the thumb moves to the end of right):  
-```
+```java
 @Override
 public void onStateChange(float process, State state, JellyToggleButton jbt) {
     if (state.equals(State.LEFT)) {
@@ -386,7 +386,7 @@ public void onStateChange(float process, State state, JellyToggleButton jbt) {
 
 When the thumb is move to same state, for instance, you drag the thumb just a little bit and then let it go and the thumb will smoothly move to it's last state(left or right). You can use ```setMoveToSameStateCallListener(boolean callListener)``` to select whether call listener when the above situation happens.  
 Or in xml:  
-```
+```xml
 <com.nightonke.jellytogglebutton.JellyToggleButton
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
