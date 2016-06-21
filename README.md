@@ -18,6 +18,7 @@ Maybe the gif above can not show how cute JTB is. You can click to see the video
 # Guide
 
 1. [中文文档](https://github.com/Nightonke/JellyToggleButton/blob/master/README-ZH.md)
+2. [Note](https://github.com/Nightonke/JellyToggleButton#note)
 2. [Gradle](https://github.com/Nightonke/JellyToggleButton#gradle)
 3. [Demo](https://github.com/Nightonke/JellyToggleButton#demo)
 4. [Use Guide](https://github.com/Nightonke/JellyToggleButton#use-guide)
@@ -36,6 +37,9 @@ Maybe the gif above can not show how cute JTB is. You can click to see the video
 5. [Versions](https://github.com/Nightonke/JellyToggleButton#versions)
 6. [Todo](https://github.com/Nightonke/JellyToggleButton#todo)
 7. [License](https://github.com/Nightonke/JellyToggleButton#license)
+
+# Note
+1. Code inspired from [SwitchButton](https:/a/github.com/kyleduo/SwitchButton)
 
 # Gradle
 
